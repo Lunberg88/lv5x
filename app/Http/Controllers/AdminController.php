@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Candidate;
+use App\Events\onAddCandidateEvent;
+use App\Listeners\AddCandidateListener;
 use Gate;
 use Auth;
+use Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -54,6 +57,9 @@ class AdminController extends Controller
             $candidate->salary = $request->salary;
             $candidate->user_id = Auth::id();
             $candidate->save();
+
+            //Event::fire(new onAddCandidateEvent(Auth::user(), $candidate));
+            Event::fire('onAddCandidate', [Auth::user(), $candidate]);
 
             return redirect('admin')->with('message', 'Your post successfully added!');
         } else {
