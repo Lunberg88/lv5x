@@ -98,16 +98,16 @@
                                     <td class="col1">{{ $indexKey+1 }}</td>
                                     <td>{{$post->title}}</td>
                                     <td>
-                                        {{App\Post::getExcerpt($post->content)}}
+                                        {{App\Post::getExcerpt($post->text)}}
                                     </td>
                                     <td class="text-center"><input type="checkbox" class="published" id="" data-id="{{$post->id}}" @if ($post->is_published) checked @endif></td>
                                     <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $post->updated_at)->diffForHumans() }}</td>
                                     <td>
-                                        <button class="show-modal btn btn-success" data-id="{{$post->id}}" data-title="{{$post->title}}" data-content="{{$post->content}}">
+                                        <button class="show-modal btn btn-success" data-id="{{$post->id}}" data-title="{{$post->title}}" data-text="{{$post->text}}">
                                         <span class="glyphicon glyphicon-eye-open"></span> Show</button>
-                                        <button class="edit-modal btn btn-info" data-id="{{$post->id}}" data-title="{{$post->title}}" data-content="{{$post->content}}">
+                                        <button class="edit-modal btn btn-info" data-id="{{$post->id}}" data-title="{{$post->title}}" data-text="{{$post->text}}">
                                         <span class="glyphicon glyphicon-edit"></span> Edit</button>
-                                        <button class="delete-modal btn btn-danger" data-id="{{$post->id}}" data-title="{{$post->title}}" data-content="{{$post->content}}">
+                                        <button class="delete-modal btn btn-danger" data-id="{{$post->id}}" data-title="{{$post->title}}" data-text="{{$post->text}}">
                                         <span class="glyphicon glyphicon-trash"></span> Delete</button>
                                     </td>
                                 </tr>
@@ -343,7 +343,7 @@
                 data: {
                     '_token': $('input[name=_token]').val(),
                     'title': $('#title_add').val(),
-                    'content': $('#content_add').val()
+                    'text': $('#content_add').val()
                 },
                 success: function(data) {
                     $('.errorTitle').addClass('hidden');
@@ -365,7 +365,7 @@
                         }
                     } else {
                         toastr.success('Successfully added Post!', 'Success Alert', {timeOut: 5000});
-                        $('#postTable').prepend("<tr class='item" + data.id + "'><td class='col1'>" + data.id + "</td><td>" + data.title + "</td><td>" + data.content + "</td><td class='text-center'><input type='checkbox' class='new_published' data-id='" + data.id + " '></td><td>Just now!</td><td><button class='show-modal btn btn-success' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.content + "'><span class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.content + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.content + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+                        $('#postTable').prepend("<tr class='item" + data.id + "'><td class='col1'>" + data.id + "</td><td>" + data.title + "</td><td>" + data.text + "</td><td class='text-center'><input type='checkbox' class='new_published' data-id='" + data.id + " '></td><td>Just now!</td><td><button class='show-modal btn btn-success' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.text + "'><span class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.text + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.text + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
                         $('.new_published').iCheck({
                             checkboxClass: 'icheckbox_square-yellow',
                             radioClass: 'iradio_square-yellow',
@@ -401,7 +401,7 @@
             $('.modal-title').text('Show');
             $('#id_show').val($(this).data('id'));
             $('#title_show').val($(this).data('title'));
-            $('#content_show').val($(this).data('content'));
+            $('#content_show').val($(this).data('text'));
             $('#showModal').modal('show');
         });
 
@@ -411,7 +411,7 @@
             $('.modal-title').text('Edit');
             $('#id_edit').val($(this).data('id'));
             $('#title_edit').val($(this).data('title'));
-            $('#content_edit').val($(this).data('content'));
+            $('#content_edit').val($(this).data('text'));
             id = $('#id_edit').val();
             $('#editModal').modal('show');
         });
@@ -423,7 +423,7 @@
                     '_token': $('input[name=_token]').val(),
                     'id': $("#id_edit").val(),
                     'title': $('#title_edit').val(),
-                    'content': $('#content_edit').val()
+                    'text': $('#content_edit').val()
                 },
                 success: function(data) {
                     $('.errorTitle').addClass('hidden');
@@ -445,7 +445,7 @@
                         }
                     } else {
                         toastr.success('Successfully updated Post!', 'Success Alert', {timeOut: 5000});
-                        $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td class='col1'>" + data.id + "</td><td>" + data.title + "</td><td>" + data.content + "</td><td class='text-center'><input type='checkbox' class='edit_published' data-id='" + data.id + "'></td><td>Right now</td><td><button class='show-modal btn btn-success' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.content + "'><span class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.content + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.content + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+                        $('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td class='col1'>" + data.id + "</td><td>" + data.title + "</td><td>" + data.text + "</td><td class='text-center'><input type='checkbox' class='edit_published' data-id='" + data.id + "'></td><td>Right now</td><td><button class='show-modal btn btn-success' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.text + "'><span class='glyphicon glyphicon-eye-open'></span> Show</button> <button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.text + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-content='" + data.text + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
 
                         if (data.is_published) {
                             $('.edit_published').prop('checked', true);

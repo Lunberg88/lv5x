@@ -43,7 +43,9 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        &nbsp;  <li><a href="#">Home</a></li>
+                                <li><a href="{{route('admin.index')}}">Admin</a></li>
+                                <li><a href="{{route('admin.create')}}">Create</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -77,7 +79,6 @@
                 </div>
             </div>
         </nav>
-
         @yield('content')
     </div>
 
