@@ -31,7 +31,10 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        $c = new Candidate();
+        return view('admin.create', [
+            'c' => $c,
+        ]);
     }
 
     /**
@@ -44,18 +47,18 @@ class AdminController extends Controller
     {
         $candidate = new Candidate();
         if($request->user()->can('create', $candidate)){
+            $candidate->fio = $request->fio;
+            $candidate->email = $request->email;
+            $candidate->stack = $request->stack;
+            $candidate->tags = $request->tags;
+            $candidate->salary = $request->salary;
+            $candidate->user_id = Auth::id();
+            $candidate->save();
+
+            return redirect('admin')->with('message', 'Your post successfully added!');
+        } else {
             return redirect('admin')->with('error', 'Access dined for you!');
         }
-
-        $candidate->fio = $request->fio;
-        $candidate->email = $request->email;
-        $candidate->stack = $request->stack;
-        $candidate->tags = $request->tags;
-        $candidate->salary = $request->salary;
-        $candidate->user_id = Auth::id();
-        $candidate->save();
-
-        return redirect('admin')->with('message', 'Your post successfully added!');
     }
 
     /**

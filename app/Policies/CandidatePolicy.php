@@ -41,4 +41,14 @@ class CandidatePolicy
         }
         return false;
     }
+
+    public function before(User $user)
+    {
+        foreach($user->roles as $role){
+            if($role->name == "GlobalAdmin") {
+                return true;
+            }
+        }
+        return false;
+    }
 }

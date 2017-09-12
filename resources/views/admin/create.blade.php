@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        @can('create')
+        @can('create', $c)
         <div class="row">
           <div class="col-md-4">
             <form class="form-horizontal" method="POST" action="{{ route('admin.store') }}">
@@ -53,9 +53,9 @@
           </div>
         </div>
         @else
-            <div class="alert alert-danger">
-                Access dined for you!
-            </div>
-        @endcan
+        <div class="alert alert-danger">
+            Access dined for you!
+        </div>
+        @endcan()
     </div>
 @endsection()
