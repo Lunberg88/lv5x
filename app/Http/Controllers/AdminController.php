@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Gate;
 use Auth;
 use Event;
+use App\User;
 use App\Candidate;
 use App\Profile;
 use App\Events\onAddCandidateEvent;
@@ -184,5 +185,15 @@ class AdminController extends Controller
 
         return view('admin.results', ['c' => $c]);
         
+    }
+
+    public function profile($name)
+    {
+    	$name = trim(htmlspecialchars($name));
+    	if($c = User::where('name', '=', $name)->get()) {
+    		return view('admin.profile', ['c' => $c]);
+	    } else {
+    		return redirect('admin')->with('error', 'Profile not found!');
+	    }
     }
 }

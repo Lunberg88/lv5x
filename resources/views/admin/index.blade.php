@@ -51,7 +51,7 @@
                 </thead>
                 <tbody>
                     @foreach($c as $p)
-                    @include('admin.grid_tb')
+                        @include('admin.grid_tb')
                     @endforeach
                 </tbody>
             </table>
