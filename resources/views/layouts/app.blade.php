@@ -13,6 +13,18 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
 
+    <style type="text/css">
+        .doc {
+            width: 100%;
+            height: 2000px;
+            border: 0px;
+        }
+        .cv_frame {
+            width: 100%;
+            height: 2000px;
+            border: 0px;
+        }
+    </style>
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -84,5 +96,12 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#showOrHideCv').click(function() {
+                $('#res').toggle('slow');
+            })
+        });
+    </script>
 </body>
 </html>

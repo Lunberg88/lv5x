@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Candidate;
-use App\Events\onAddCandidateEvent;
-use App\Listeners\AddCandidateListener;
 use Gate;
 use Auth;
 use Event;
+use App\Candidate;
+use App\Profile;
+use App\Events\onAddCandidateEvent;
+use App\Listeners\AddCandidateListener;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -22,8 +23,24 @@ class AdminController extends Controller
     {
         $c = Candidate::get();
 
+        $tg = [
+            'HTML',
+            'JS',
+            'PHP',
+            'MySQL',
+            'JAVA',
+            'AngularJS',
+            'Angular (2.x/4.x)',
+            'ReactJS',
+            'VueJS',
+            'iOS',
+            'Android',
+            'PS'
+        ];
+
         return view('admin.index', [
             'c' => $c,
+            'tg' => $tg,
         ]);
     }
 
@@ -75,7 +92,16 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        if($c = Candidate::find($id)) {
+        $t = explode(',', $c->tags);
+        //Find Candidate Profile
+        $pr = Profile::where('candidate_id', $id)->first();
+        
+        return view('admin.show', ['c' => $c, 't' => $t, 'pr' => $pr]);
+
+        } else {
+            return redirect('admin')->with('error', 'Profile with this ID: '.$id.' not found.');
+        }
     }
 
     /**
@@ -86,11 +112,14 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $c = Candidate::findOrFail($id);
+        if($c = Candidate::find($id)) {
 
-        return view('admin.edit', [
-            'c' => $c,
-        ]);
+            return view('admin.edit', [
+                'c' => $c,
+            ]);
+        } else {
+            return redirect('admin')->with('error', 'Profile with this ID: '.$id.' not exists!');
+        }
     }
 
     /**
@@ -102,25 +131,28 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $c = Candidate::findOrFail($id);
+        if($c = Candidate::find($id)) {
 
-        if ($request->user()->can('update', $c)) {
+            if ($request->user()->can('update', $c)) {
 
-            $data = $request->except('_token');
+                $data = $request->except('_token');
 
-            $c->fio = $data['fio'];
-            $c->email = $data['email'];
-            $c->stack = $data['stack'];
-            $c->tags = $data['tags'];
-            $c->salary = $data['salary'];
-            $c->user_id = Auth::id();
+                $c->fio = $data['fio'];
+                $c->email = $data['email'];
+                $c->stack = $data['stack'];
+                $c->tags = $data['tags'];
+                $c->salary = $data['salary'];
+                $c->user_id = Auth::id();
 
-            $c->save();
+                $c->save();
 
-            return redirect()->route('admin.index');
-        }
+                return redirect('admin')->with('message', 'Profile successfully updated!');
+            }
 
         return redirect('admin')->with('error', 'Access dinied, you don\'t have such permission!');
+        } else {
+            return redirect('admin')->with('error', 'Profile with this ID: '.$id.' not exists!');
+        }
     }
 
     /**
@@ -131,6 +163,26 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if($c = Candidate::find($id)) {
+        $c->delete();
+
+        return redirect('admin')->with('message', 'The Candidate was deleted from DataBase.');
+        } else {
+            return redirect('admin')->with('error', 'This ID: '.$id.' not exists!');
+        }
+    }
+
+    public function search(Request $request)
+    {
+        $stext = $request->only('search');
+
+        foreach($stext as $key => $value) {
+             
+            $c = Candidate::where('stack', 'LIKE', '%'.$value.'%')->orWhere('tags', 'LIKE', '%'.$value.'%')->orWhere('salary', 'LIKE', '%'.$value.'%')->get();
+
+        }
+
+        return view('admin.results', ['c' => $c]);
+        
     }
 }

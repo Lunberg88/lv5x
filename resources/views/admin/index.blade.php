@@ -7,12 +7,33 @@
                 <div class="alert alert-success">
                     {{ session('message') }}
                 </div>
-            @endif()
+            @endif
             @if(session('error'))
                 <div class="alert alert-danger">
                     {{ session('error') }}
                 </div>
-            @endif()
+            @endif
+        </div>
+        <div class="row">
+              <div class="col-lg-10">
+                    {!! Form::open(['method' => 'GET', 'route' => ['search']]) !!}
+                    {{csrf_field()}}
+                    <div class="input-group">
+                      <input name="search" type="text" class="form-control" placeholder="Search for...">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><b>Go!</b></button>
+                      </span>
+                      <select class="form-control" name="stags">
+                        <option disabled="disabled" selected="selected">Choose stack</option>
+                        @if($tg)
+                            @foreach($tg as $t)
+                                 <option>{{$t}}</option>
+                            @endforeach
+                        @endif
+                      </select>
+                    </div><!-- /input-group -->
+                    {!! Form::close() !!}
+                  </div><!-- /.col-lg-6 -->
         </div>
         <div class="row">
             <h2><b>List Of Candidate's...</b></h2>
@@ -30,16 +51,8 @@
                 </thead>
                 <tbody>
                     @foreach($c as $p)
-                    <tr>
-                        <td>{{$p->id}}</td>
-                        <td>{{$p->fio}}</td>
-                        <td>{{$p->email}}</td>
-                        <td>{{$p->stack}}</td>
-                        <td>{{$p->tags}}</td>
-                        <td>{{$p->salary}}</td>
-                        <td><a href="{{route('admin.edit', $p->id)}}" class="btn btn-danger">EDIT</a></td>
-                    </tr>
-                    @endforeach()
+                    @include('admin.grid_tb')
+                    @endforeach
                 </tbody>
             </table>
         </div>
