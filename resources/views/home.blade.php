@@ -34,6 +34,11 @@
                                 {{$u->updated_at}}
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                {{$t}}
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>

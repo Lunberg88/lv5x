@@ -3,7 +3,7 @@
     <div class="container">
         @can('create', $c)
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6">
             <form class="form-horizontal" method="POST" action="{{ route('admin.store') }}">
                 {{ csrf_field() }}
                 <div class="form-group">
@@ -51,6 +51,7 @@
                 </div>
             </form>
           </div>
+          <div class="col-md-6"></div>
         </div>
         @else
         <div class="alert alert-danger">

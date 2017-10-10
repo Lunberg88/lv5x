@@ -36,7 +36,7 @@
                   </div><!-- /.col-lg-6 -->
         </div>
         <div class="row">
-            <h2><b>List Of Candidate's...</b></h2>
+            <h2><b>List of Candidate's...</b></h2>
         </div>
         <div class="row">
             <table class="table table-stripped">
