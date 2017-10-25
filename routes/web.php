@@ -30,6 +30,9 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::resource('admin', 'AdminController');
 });
 
+Route::group(['middleware' => ['auth']], function() {
+	Route::get('/battle', 'BattleController@index');
+});
 
 Route::post('posts/changeStatus', array('as' => 'changeStatus', 'uses' => 'PostsController@changeStatus'))->middleware('auth');
 
