@@ -2,16 +2,15 @@
 
 namespace App;
 
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class Chars extends Model
+class Objects extends Model
 {
-    protected $table = 'chars';
+    protected $table = 'objects';
 
     protected $fillable = [
-    	'id',
-	    'user_id',
+	    'dur_min',
+	    'dur_max',
 	    'strength',
 	    'dexterity',
 	    'intuition',
@@ -47,18 +46,8 @@ class Chars extends Model
 
     public $timestamps = false;
 
-    public function user()
+    public function chars()
     {
-    	return $this->belongsTo('App\User');
+    	return $this->belongsToMany('App\Bag');
     }
-
-    public function slots()
-    {
-    	return $this->hasOne('App\Slots','char_id','user_id');
-    }
-
-	public function objects()
-	{
-		return $this->hasManyThrough('App\Objects', 'App\Charbag','char_id','obj_id','char_id');
-	}
 }

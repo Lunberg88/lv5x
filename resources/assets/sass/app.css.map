@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "AAEQ,wEAAgE;ACAtE,uBAAmB;EACjB,KAAK,EAAE,KAAK;EAEZ,uCAAgB;IACd,MAAM,EAAE,iBAAiB;EAKzB,kDAAW;IACT,UAAU,EAAE,OAAO;IACnB,KAAK,EAAE,IAAI;IACX,OAAO,EAAE,QAAQ;IACjB,WAAW,EAAE,YAAY;IACzB,WAAW,EAAE,IAAI;;AASzB,OAAQ;EACN,KAAK,EAAE,KAAK",
-"sources": ["app.scss","_battle-main.scss"],
+"mappings": "AAEQ,wEAAgE",
+"sources": ["app.scss"],
 "names": [],
 "file": "app.css"
 }

@@ -5,7 +5,35 @@
         @foreach($chars as $char)
         <div class="row">
             <div class="col-md-4">
+                <div class="battle-char-slots">
+                    <ul class="char-slots">
+                        <li>
+                            <ul class="char-slot">
+                                <li><img src="http://imgs.neverfate.ru/items/helmet.png" alt=""></li>
+                                <li><img src="http://imgs.neverfate.ru/items/necklace.png" alt=""></li>
+                                <li><img src="http://imgs.neverfate.ru/items/armor.png" alt=""></li>
+                                <li><img src="http://imgs.neverfate.ru/items/boots.png" alt=""></li>
+                                <li><img src="http://imgs.neverfate.ru/items/gloves.png" alt=""></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="char-slot">
+                                <li><img src="http://imgs.neverfate.ru/items/gun.png" alt=""></li>
+                                <li><img src="http://imgs.neverfate.ru/items/shield.png" alt=""></li>
+                                <li><img src="http://imgs.neverfate.ru/items/pants.png" alt=""></li>
+                                <li><img src="http://imgs.neverfate.ru/items/talisman.png" alt=""></li>
+                                <li><img src="http://imgs.neverfate.ru/items/ring.png" alt=""></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li class="char-avator">
 
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="col-md-4">
                 <div class="battle-char-params">

@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::group(['middleware' => ['auth']], function() {
 	Route::get('/battle', 'BattleController@index');
+	Route::get('/bag', 'BagController@index');
 });
 
 Route::post('posts/changeStatus', array('as' => 'changeStatus', 'uses' => 'PostsController@changeStatus'))->middleware('auth');
