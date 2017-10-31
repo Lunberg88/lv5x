@@ -14,4 +14,9 @@ class Charbag extends Model
     ];
 
     public $timestamps = false;
+
+    public function objects()
+    {
+    	return $this->hasMany('App\Objects','id','obj_id');
+    }
 }

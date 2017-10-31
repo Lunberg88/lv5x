@@ -9,8 +9,10 @@ class Objects extends Model
     protected $table = 'objects';
 
     protected $fillable = [
+    	'name',
 	    'dur_min',
 	    'dur_max',
+	    'img',
 	    'strength',
 	    'dexterity',
 	    'intuition',
@@ -49,5 +51,10 @@ class Objects extends Model
     public function chars()
     {
     	return $this->belongsToMany('App\Bag');
+    }
+
+    public function charbag()
+    {
+    	return $this->belongsTo('App\Charbag');
     }
 }

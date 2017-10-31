@@ -12,26 +12,15 @@ class BagController extends Controller
 {
 	public function index()
 	{
+		if(($items = Charbag::where('char_id', '=', Auth::id())->get()) !== null) {
 
-		$item = [];
-
-		if(($clothes = Charbag::where('char_id', '=', Auth::id())->get()) !== null) {
-
-			foreach($clothes as $cloth) {
-				$items = Objects::where('id','=', $cloth->obj_id);
-				$item[] = $items;
-			}
-
-			dd($item);
-
-			return view( 'battle.bag', [
-				'clothes' => $clothes,
-				'items' => $item,
-			] );
+			return view('battle.bag', [
+				'items' => $items,
+			]);
 
 		} else {
 
-			return view('battle.bag')->with('message', 'Your bag is empty.');
+			return redirect('battle.bag')->with('message', 'Your bag is empty.');
 
 		}
 	}

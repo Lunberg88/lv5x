@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Gate;
-use App\Role;
-use Auth;
 
 class HomeController extends Controller
 {
@@ -26,11 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-    	$u = Auth::user();
-    	$t = Auth::id();
-        return view('home', [
-        	'u' => $u,
-	        't' => $t,
-        ]);
+        return view('home');
     }
 }
