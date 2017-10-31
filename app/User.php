@@ -27,8 +27,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function chars()
+    public function roles()
     {
-    	return $this->hasOne( 'App\Chars', 'user_id', 'id');
+        return $this->belongsToMany('App\Role');
+    }
+
+    public function candidates()
+    {
+        return $this->belongsTo('App\Candidate');
+    }
+
+    public function group()
+    {
+    	return $this->hasMany('App\Group','owner_id', 'id');
     }
 }

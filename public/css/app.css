@@ -1,120 +1,56 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css);@charset "UTF-8";
 
-.battle-char-params .tab-title,
-.battle-params-tab .tab-title {
-  background: #ad6506;
+.login {
+  height: auto;
+  background: url(/images/main_logo2.jpg?abcdbf6df1545ad16b7096e11b836db7) no-repeat;
+}
+
+.login .login-container {
+  position: relative;
+  margin: 340px 0 400px;
+  background: transparent;
+  border: 0;
   color: #fff;
-  padding: 4px 10px;
-  font-family: Arial;
-  font-weight: bold;
-  text-align: center;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
 }
 
-.battle-params-tab {
-  font-size: 12px;
-  color: #2e3436;
+.login .login-container input[type=email],
+.login .login-container input[type=password] {
+  background: transparent;
+  border-radius: 0;
 }
 
-.battle-params-tab td {
-  padding: 2px 0;
+.login .login-container a,
+.login .login-container a:link,
+.login .login-container a:visited {
+  color: #1da1f2;
+  text-decoration: none;
 }
 
-.battle-params-tab td > b {
-  text-align: center;
-}
-
-.battle-params-tab:hover,
-.battle-char-params:hover {
-  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.69);
-          box-shadow: 0 0 20px rgba(0, 0, 0, 0.69);
-}
-
-/*
-.battle-char-slots li {
-    display: inline-block;
-}
-*/
-
-.battle-char-slots .char-slots,
-.battle-char-slots .char-slot,
-.battle-char-slots .char-avator {
-  list-style: none;
-}
-
-.battle-char-slots .char-slots li {
-  display: inline-block;
-}
-
-.battle-char-slots .char-slot img {
-  width: 40px;
-  height: 40px;
-  border: 1px solid #d7d7d7;
-  -webkit-box-shadow: inset 10px 10px 14px 0px #a8a8a8;
-  box-shadow: inset 1px 1px 5px 0px #a8a8a8;
-  opacity: 0.4;
-}
-
-.battle-char-slots .char-slot img:hover {
-  opacity: 1;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.69);
-  -webkit-box-shadow: inset 10px 10px 14px 0px #a8a8a8;
-  box-shadow: inset 1px 1px 5px 0px #a8a8a8;
-}
-
-.battle-char-slots .char-slots li {
-  display: inline-block;
-}
-
-.char-bag .cloth-box .cl-img,
-.char-bag .cloth-box .cl-params {
-  display: inline-block;
-  margin-right: 15px;
-  font-size: 11px;
-}
-
-.char-bag .cloth-box .cl-img {
-  margin: 20px;
-}
-
-.char-bag .cloth-box .cl-img img {
-  border: 1px solid #d7d7d7;
-  max-width: 40px;
-  max-height: 40px;
-  -webkit-box-shadow: inset 10px 10px 14px 0 #a8a8a8;
-  box-shadow: inset 1px 1px 5px 0 #a8a8a8;
-}
-
-.char-bag .char-item {
-  width: 120px;
-  border: 1px solid #d7d7d7;
-  -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
-          box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
-}
-
-.char-bag .char-item .char-item-title {
-  background: #aa4a24;
+.login .login-container a:hover {
   color: #fff;
-  padding: 4px 0;
-  font-size: 12px;
-  font-weight: bold;
-  text-align: center;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+  text-decoration: none;
 }
 
-.char-bag .char-item .char-item-img {
-  padding: 0;
+.nav-wrapper {
+  padding: 0 !important;
 }
 
-.char-bag .char-item .char-item-img img {
-  max-width: 120px;
-  max-height: 120px;
-  -webkit-box-shadow: inset 10px 10px 14px 0 #a8a8a8;
-  box-shadow: inset 1px 1px 5px 0 #a8a8a8;
+.hollyday-date {
+  position: absolute;
+  width: 200px;
+  right: 280px;
+  top: 185px;
+  z-index: 15;
 }
 
-.char-bag .char-item .char-item-params {
-  padding: 8px 15px;
-  font-size: 11px;
-  color: #2e3436;
+.hollyday-datel {
+  position: absolute;
+  left: 0;
+  width: 230px;
+  top: 160px;
+  z-index: 16;
 }
 
 /*!
@@ -438,7 +374,7 @@ th {
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url(/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);
-  src: url(/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1?#iefix) format("embedded-opentype"), url(/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff2?448c34a56d699c29117adc64c43affeb) format("woff2"), url(/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760#glyphicons_halflingsregular) format("svg");
+  src: url(/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1) format("embedded-opentype"), url(/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff2?448c34a56d699c29117adc64c43affeb) format("woff2"), url(/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158) format("woff"), url(/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512) format("truetype"), url(/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760) format("svg");
 }
 
 .glyphicon {

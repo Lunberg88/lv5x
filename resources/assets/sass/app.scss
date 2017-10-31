@@ -1,11 +1,16 @@
 
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" );
 
 // Variables
 @import "variables";
-
-@import "game";
+@import "iyahr";
+//@import "bootstrap";
+//@import "fontawesome";
 
 // Bootstrap
+//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+
