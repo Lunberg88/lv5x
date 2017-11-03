@@ -7,9 +7,12 @@ Route::get('/', function () {
 */
 
 Route::get('/', 'IndexController@index')->name('main');
+Route::get('/openings', 'IndexController@openings')->name('openings');
 
 
 Route::get('/admin/search', 'AdminController@search')->name('search');
+
+Route::get('/admin/openings', 'AdminController@openings');
 
 Route::get('/profile/{name}', 'AdminController@profile')->name('profile');
 

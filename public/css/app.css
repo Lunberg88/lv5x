@@ -53,6 +53,135 @@
   z-index: 16;
 }
 
+.openings_lists {
+  margin: 45px auto;
+}
+
+.opening_box {
+  margin: 10px 15px;
+  background: #fff;
+  border: #d7d7d7;
+  padding: 15px 35px;
+  -webkit-box-shadow: 0 3px 3px rgba(110, 110, 110, 0.6);
+          box-shadow: 0 3px 3px rgba(110, 110, 110, 0.6);
+}
+
+.opening_box .opening-title {
+  font-size: 18px;
+  color: #2e3436;
+  font-family: Arial;
+  font-weight: bold;
+}
+
+.opening_box .opening-body {
+  font-size: 14px;
+}
+
+.opening_box .opening-location {
+  color: #1b6d85;
+  font-weight: bold;
+}
+
+.opening_box .opening-salary {
+  color: #ff6666;
+  font-weight: bold;
+}
+
+.opening_box .opening-status {
+  font-weight: bold;
+  padding: 3px 0;
+}
+
+.opening_box .opening-status span {
+  padding: 3px 7px;
+}
+
+.opening_box .opening-status .op-active {
+  background: #2ab27b;
+  color: #fff;
+}
+
+.opening_box .opening-status .op-disabled {
+  color: #fff;
+  background: #e74c3c;
+}
+
+.opening_box ul {
+  list-style: none;
+}
+
+.opening_box ul li {
+  display: inline-block;
+}
+
+.opening_box .controls {
+  position: relative;
+  float: right;
+  top: 0;
+  right: 10px;
+}
+
+.opening_box .controls .edit-btn,
+.opening_box .controls .del-btn {
+  border: 0;
+  font-weight: bold;
+  padding: 3px 7px;
+  text-decoration: none;
+}
+
+.opening_box .controls .edit-btn {
+  background: #00b34b;
+  color: #fff;
+}
+
+.opening_box .controls .edit-btn:hover {
+  background: #fff;
+  color: #00b34b;
+  border: 1px solid #00b34b;
+}
+
+.opening_box .controls .del-btn {
+  background: #ff3737;
+  color: #fff;
+}
+
+.opening_box .controls .del-btn:hover {
+  background: #fff;
+  color: #ff3737;
+  border: 1px solid #ff3737;
+}
+
+.opening_box:hover {
+  -webkit-box-shadow: 0 5px 5px rgba(180, 0, 20, 0.44);
+          box-shadow: 0 5px 5px rgba(180, 0, 20, 0.44);
+}
+
+.select-tags {
+  padding: 5px 15px;
+}
+
+.select-tags .op-tags,
+.select-tags .op-tags:active,
+.select-tags .op-tags:visited {
+  background: #228bb7;
+  color: #fff;
+  padding: 3px 6px;
+  text-decoration: none;
+}
+
+.select-tags .op-tags:hover {
+  background: #184260;
+  color: #fff;
+  text-decoration: none;
+}
+
+body .admin-center {
+  min-height: 240px !important;
+  height: 240px !important;
+  margin-bottom: 15px;
+  background-position-y: -200px;
+}
+
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.

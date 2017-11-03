@@ -1,0 +1,117 @@
+.openings_lists {
+  margin: 45px auto;
+}
+
+.opening_box {
+  margin: 10px 15px;
+  background: #fff;
+  border: #d7d7d7;
+  padding: 15px 35px;
+  box-shadow: 0 3px 3px rgba(110, 110, 110, 0.6);
+
+  .opening-title {
+    font-size: 18px;
+    color: #2e3436;
+    font-family: Arial;
+    font-weight: bold;
+  }
+
+  .opening-body {
+    font-size: 14px;
+  }
+
+  .opening-location {
+    color: #1b6d85;
+    font-weight: bold;
+  }
+
+  .opening-salary {
+    color: #ff6666;
+    font-weight: bold;
+  }
+
+  .opening-status {
+    font-weight: bold;
+    padding: 3px 0;
+
+    span {
+      padding: 3px 7px;
+    }
+
+    .op-active {
+
+      background: #2ab27b;
+      color: #fff;
+    }
+
+    .op-disabled {
+      color: #fff;
+      background: #e74c3c;
+    }
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      display: inline-block;
+    }
+  }
+
+  .controls {
+    position: relative;
+    float: right;
+    top: 0;
+    right: 10px;
+
+    .edit-btn, .del-btn {
+      border: 0;
+      font-weight: bold;
+      padding: 3px 7px;
+      text-decoration: none
+    }
+
+    .edit-btn {
+      background: #00b34b;
+      color: #fff;
+    }
+
+    .edit-btn:hover {
+      background: #fff;
+      color: #00b34b;
+      border: 1px solid #00b34b;
+    }
+
+    .del-btn {
+      background: #ff3737;
+      color: #fff;
+    }
+
+    .del-btn:hover {
+      background: #fff;
+      color: #ff3737;
+      border: 1px solid #ff3737;
+    }
+  }
+}
+
+.opening_box:hover {
+  box-shadow: 0 5px 5px rgba(180, 0, 20, 0.44);
+}
+
+.select-tags {
+  padding: 5px 15px;
+  
+  .op-tags, .op-tags:active, .op-tags:visited {
+    background: #228bb7;
+    color: #fff;
+    padding: 3px 6px;
+    text-decoration: none;
+  }
+  
+  .op-tags:hover {
+    background: #184260;
+    color: #fff;
+    text-decoration: none;
+  }
+}

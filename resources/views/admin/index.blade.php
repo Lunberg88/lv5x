@@ -1,6 +1,6 @@
-@extends('layouts.app')
-
+@extends('index')
 @section('content')
+@include('admin.partials.top-head')
     <div class="container">
         <div class="row">
             @if(session('message'))

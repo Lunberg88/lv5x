@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Openings;
 use Gate;
+use App\Traits\Hollidays;
 use Auth;
 use Event;
 use App\User;
@@ -22,6 +24,7 @@ class AdminController extends Controller
      */
     public function index()
     {
+	    $days = Hollidays::checkdate(date('d.m'));
         $c = Candidate::get();
 
         $tg = [
@@ -42,6 +45,7 @@ class AdminController extends Controller
         return view('admin.index', [
             'c' => $c,
             'tg' => $tg,
+	        'days' => $days,
         ]);
     }
 
@@ -195,5 +199,16 @@ class AdminController extends Controller
 	    } else {
     		return redirect('admin')->with('error', 'Profile not found!');
 	    }
+    }
+
+    public function openings()
+    {
+	    $days = Hollidays::checkdate(date('d.m'));
+    	$openings = Openings::get();
+
+    	return view('admin.openings', [
+    		'openings' => $openings,
+		    'days' => $days,
+	    ]);
     }
 }
