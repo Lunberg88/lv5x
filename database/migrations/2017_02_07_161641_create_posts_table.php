@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCharbagsTable extends Migration
+class CreatePostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateCharbagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('charbag', function (Blueprint $table) {
+        Schema::create('posts', function(Blueprint $table)
+        {
             $table->increments('id');
-            $table->integer('char_id')->unsigned();
-            $table->foreign('char_id')->references('user_id')->on('chars');
-            $table->integer('obj_id')->unsigned();
-            $table->foreign('obj_id')->references('id')->on('objects');
+            $table->string('title');
+            $table->text('content');
+            $table->boolean('is_published')->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateCharbagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('charbags');
+        Schema::drop('posts');
     }
 }
