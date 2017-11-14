@@ -10,16 +10,12 @@ Route::get('/', 'IndexController@index')->name('main');
 Route::get('/openings', 'IndexController@openings')->name('openings');
 
 
-Route::get('/admin/search', 'AdminController@search')->name('search');
-
-Route::get('/admin/openings', 'AdminController@openings');
-
-Route::get('/profile/{name}', 'AdminController@profile')->name('profile');
-
-Route::get('/admin/candidate-{id}', 'AdminController@show');
-
-Route::group(['middleware' => ['auth']], function(){
-   Route::resource('posts', 'PostsController');
+Route::group(['middleware' => ['auth', 'admin']], function() {
+	Route::resource('admin', 'AdminController');
+	Route::get('/admin/candidate/{id}', 'AdminController@show');
+	Route::get('/admin/search', 'AdminController@search')->name('search');
+	Route::get('/admin/openings', 'AdminController@openings');
+	Route::get('/admin/profile/{name}', 'AdminController@profile')->name('profile');
 });
 
 Route::group(['middleware' => ['auth']], function() {
@@ -34,8 +30,8 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::post('/group/changeowner', 'GroupController@changeowner')->name('changeowner');
 });
 
-Route::group(['middleware' => ['auth']], function() {
-	Route::resource('admin', 'AdminController');
+Route::group(['middleware' => ['auth']], function(){
+	Route::resource('posts', 'PostsController');
 });
 
 Route::post('posts/changeStatus', array('as' => 'changeStatus', 'uses' => 'PostsController@changeStatus'))->middleware('auth');
