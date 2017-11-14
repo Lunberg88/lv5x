@@ -11,11 +11,14 @@ Route::get('/openings', 'IndexController@openings')->name('openings');
 
 
 Route::group(['middleware' => ['auth', 'admin']], function() {
-	Route::resource('admin', 'AdminController');
 	Route::get('/admin/candidate/{id}', 'AdminController@show');
 	Route::get('/admin/search', 'AdminController@search')->name('search');
 	Route::get('/admin/openings', 'AdminController@openings');
 	Route::get('/admin/profile/{name}', 'AdminController@profile')->name('profile');
+});
+
+Route::group(['middleware' => ['auth', 'admin']], function() {
+        Route::resource('admin', 'AdminController');
 });
 
 Route::group(['middleware' => ['auth']], function() {

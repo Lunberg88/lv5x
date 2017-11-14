@@ -42,10 +42,13 @@ class AdminController extends Controller
             'PS'
         ];
 
-        return view('admin.index', [
+        $user = User::find(Auth::id());
+
+        return view('admin.dashboard', [
             'c' => $c,
             'tg' => $tg,
 	        'days' => $days,
+	        'user' => $user,
         ]);
     }
 

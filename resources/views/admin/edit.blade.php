@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('admin.index')
 @section('content')
     <div class="container">
         @can('update', $c)
-        <div class="row">
-            <div class="col-md-6">    
-                     {!! Form::model($c, ['route' => ['admin.update', $c->id], 'method' => 'PUT']) !!}
+            <div class="row">
+                <div class="col-md-6">
+                    {!! Form::model($c, ['route' => ['admin.update', $c->id], 'method' => 'PUT']) !!}
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="fio">First/Last Name:</label>
@@ -52,7 +52,7 @@
                     {!! Form::close() !!}
                 </div>
                 <div class="col-md-6"></div>
-        </div>
+            </div>
         @else
             <div class="alert alert-danger">
                 You don't have permission's for this operation!
