@@ -20,6 +20,8 @@ class CreateCandidateTable extends Migration
         	$table->string('stack');
         	$table->string('tags');
         	$table->integer('salary');
+        	$table->integer('user_id')->unsigned();
+        	$table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -1,24 +1,27 @@
 <?php
 
-/*
-Route::get('/', function () {
-    return view('layouts.app');
-})->middleware('auth');
-*/
-
 Route::get('/', 'IndexController@index')->name('main');
 Route::get('/openings', 'IndexController@openings')->name('openings');
 
-
 Route::group(['middleware' => ['auth', 'admin']], function() {
-	Route::get('/admin/candidate/{id}', 'AdminController@show');
+	Route::get('/admin/candidates', 'CandidateController@index')->name('admin.candidates');
+	Route::get('/admin/candidates/new', 'CandidateController@create')->name('admin.candidates.create');
+	Route::post('/admin/candidates/new', 'CandidateController@store')->name('admin.candidates.store');
+	Route::get('/admin/candidates/candidate-{id}', 'CandidateController@show')->name('admin.candidates.show.id');
+	Route::get('/admin/candidates/edit/{id}', 'CandidateController@edit')->name('admin.candidates.edit.id');
+	Route::put('/admin/candidates/update/{id}', 'CandidateController@update')->name('admin.candidates.update');
+	Route::delete('/admin/candidates/destroy/{id}', 'CandidateController@destroy')->name('admin.candidates.destroy');
+	Route::get('/admin/candidates/search', 'CandidateController@search')->name('admin.candidates.search');
+
+	Route::get('/admin', 'AdminController@index')->name('admin.index');
+
+	Route::get('/admin/candidate/{id}', 'AdminController@show')->name('admin.candidate.show');
 	Route::get('/admin/search', 'AdminController@search')->name('search');
-	Route::get('/admin/openings', 'AdminController@openings');
-	Route::get('/admin/profile/{name}', 'AdminController@profile')->name('profile');
+	Route::get('/admin/profile/{name}', 'AdminController@profile')->name('admin.profile');
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function() {
-        Route::resource('admin', 'AdminController');
+	Route::resource('/admin/openings', 'OpeningsController');
 });
 
 Route::group(['middleware' => ['auth']], function() {

@@ -16,11 +16,11 @@ class IndexController extends Controller
     {
     	$cur_day = date('d.m');
     	$days = Hollidays::checkdate($cur_day);
-
-    	//echo "<pre>".print_r($days,1)."</pre>"; die();
+    	$openings = Openings::latest()->take(3)->get();
 
     	return view('index.pages.main', [
 		    'days' => $days,
+		    'openings' => $openings,
 	    ]);
     }
 
@@ -32,15 +32,6 @@ class IndexController extends Controller
     	return view('index.pages.openings', [
     		'openings' => $openings,
 		    'days' => $days,
-	    ]);
-    }
-
-    public function test()
-    {
-	    $days = Hollidays::checkdate(date('d.m'));
-
-    	return view('index.pages.testing', [
-    		'days' => $days,
 	    ]);
     }
 }

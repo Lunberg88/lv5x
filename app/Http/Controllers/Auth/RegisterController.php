@@ -60,7 +60,7 @@ class RegisterController extends Controller {
 	 *
 	 * @return User
 	 */
-	/*
+
 	protected function create(array $data)
 	{
 		return User::create([
@@ -69,20 +69,5 @@ class RegisterController extends Controller {
 			'password' => bcrypt($data['password']),
 		]);
 	}
-	*/
 
-	protected function create(array $data)
-	{
-		$user = User::create([
-			'name'     => $data['name'],
-			'email'    => $data['email'],
-			'password' => bcrypt($data['password']),
-		]);
-
-		$user->chars()->create(['user_id' => $user->id]);
-
-		return $user;
-
-
-	}
 }

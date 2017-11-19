@@ -15,8 +15,7 @@
         </div>
         <div class="row">
             <div class="col-lg-10">
-                {!! Form::open(['method' => 'GET', 'route' => ['search']]) !!}
-                {{csrf_field()}}
+                {!! Form::open(['method' => 'GET', 'route' => ['admin.candidates.search'], 'role' => 'search']) !!}
                 <div class="input-group">
                     <input name="search" type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
@@ -24,8 +23,8 @@
                       </span>
                     <select class="form-control" name="stags">
                         <option disabled="disabled" selected="selected">Choose stack</option>
-                        @if($tg)
-                            @foreach($tg as $t)
+                        @if($tags)
+                            @foreach($tags as $t)
                                 <option>{{$t}}</option>
                             @endforeach
                         @endif
@@ -49,16 +48,11 @@
                 <th>Actions</th>
                 </thead>
                 <tbody>
-                @foreach($c as $p)
+                @foreach($candidates as $p)
                     @include('admin.grid_tb')
                 @endforeach
                 </tbody>
             </table>
         </div>
-    </div>
-    <div class="test">
-        @foreach($user->roles as $role)
-          <b>Role is:</b> - <i>{{$role->name}}</i>
-        @endforeach
     </div>
 @endsection

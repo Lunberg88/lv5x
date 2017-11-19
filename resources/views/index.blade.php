@@ -41,9 +41,11 @@
         <span class="ball"></span>
     </div>
 </div>
+{{--
 @if($days !== false)
     <img src="http://theartmad.com/wp-content/uploads/2015/10/Transparent-Halloween-Clip-Art7.png" alt="" class="hollyday-datel">
 @endif
+--}}
 <a href="#home" class="scroll scroll-up costum-bg effect response" data-speed="1600">
     <i class="fa fa-chevron-up"></i>
 </a>
@@ -56,28 +58,31 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span> </button>
-                <a class="navbar-brand" href="index-2.html">
+                <a class="navbar-brand" href="/">
                     <span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span>Iya Web-HR</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#home" class="scroll active" data-speed="800">HOME</a></li>
-                    <li><a href="#about" class="scroll" data-speed="1000">ABOUT</a></li>
-                    <!--<li><a href="#services" class="scroll" data-speed="1400">SERVICES</a></li>
-                    <li><a href="#work" class="scroll" data-speed="1400">WORK</a></li>-->
-                    <li><a href="#news" class="scroll" data-speed="1600">JOBS</a></li>
-                    <li><a href="#contact" class="scroll" data-speed="1800">CONTACT</a></li>
+                    <li><a href="./#home" class="scroll active" data-speed="800">HOME</a></li>
+                    <li><a href="./#about" class="scroll" data-speed="1000">ABOUT</a></li>
+                    <li><a href="./#contact" class="scroll" data-speed="1800">CONTACT</a></li>
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> LOGIN</a></li>
                         <li><a href="{{ url('/register') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> REGISTER</a></li>
                     @else
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PROFILE <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Status</a></li>
+                                <li><a href="#">Process</a></li>
+                            </ul>
+                        </li>
                         <li>
                             <a href="{{ url('/logout') }}"
                                onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                 <i class="fa fa-sign-out" aria-hidden="true"></i> LOGOUT ({{ Auth::user()->name }})
                             </a>
-
                             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
                             </form>
@@ -89,7 +94,6 @@
     </nav>
 </header>
 @yield('content')
-@yield('testing')
 <footer class="footer">
     <div class="container">
         <div class="row">
@@ -117,6 +121,25 @@
         </div>
     </div>
 </footer>
+@if(Auth::user())
+@foreach(Auth::user()->roles as $role)
+    @if($role->rolename === "GlobalAdmin")
+        <div class="admin-dashboard-lnk">
+            <a href="/admin" class="scroll button costum-bg-two">
+                <p>D</p>
+                <p>a</p>
+                <p>s</p>
+                <p>h</p>
+                <p>b</p>
+                <p>o</p>
+                <p>a</p>
+                <p>r</p>
+                <p>d</p>
+            </a>
+        </div>
+    @endif
+@endforeach
+@endif
 <script src="/main-theme/js/jquery.min.js"></script>
 <script src="/main-theme/js/bootstrap.min.js"></script>
 <script src="/main-theme/js/custom.js"></script>

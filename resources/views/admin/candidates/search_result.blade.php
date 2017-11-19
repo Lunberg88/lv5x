@@ -14,8 +14,8 @@
                 <th><b>Actions</b></th>
                 </thead>
                 <tbody>
-                @if($c)
-                    @foreach($c as $p)
+                @if($candidate)
+                    @foreach($candidate as $p)
                         @include('admin.grid_tb')
                     @endforeach()
                 @else

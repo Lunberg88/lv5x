@@ -7,9 +7,7 @@
     </section>
     <section class="openings_lists">
         <div class="container">
-            <div class="row">
-                @include('index.partials.opening_single')
-            </div>
+            @include('index.partials.opening_single')
         </div>
     </section>
 @endsection

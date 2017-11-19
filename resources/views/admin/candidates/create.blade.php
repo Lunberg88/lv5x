@@ -1,10 +1,10 @@
 @extends('admin.index')
 @section('content')
     <div class="container">
-        @can('create', $c)
+        @can('create', $candidate)
             <div class="row">
                 <div class="col-md-6">
-                    <form class="form-horizontal" method="POST" action="{{ route('admin.store') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('admin.candidates.store') }}">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="fio">First/Last Name:</label>

@@ -96,7 +96,7 @@
 }
 
 .opening_box:hover {
-  box-shadow: 0 5px 5px rgba(180, 0, 20, 0.44);
+  box-shadow: 0 5px 5px rgba(74, 156, 226, 0.53);
 }
 
 .select-tags {
@@ -114,4 +114,10 @@
     color: #fff;
     text-decoration: none;
   }
+}
+
+.selected-tags > a, .select-tags a:active, .select-tags a:link, .select-tags a:visited {
+  padding: 4px 12px;
+  border-radius: 12px;
+  line-height: 25px;
 }

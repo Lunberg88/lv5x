@@ -53,3 +53,18 @@
 @media (max-width: 1440px) {
 
 }
+
+///// Dashboard link-button //////
+.admin-dashboard-lnk {
+  position: fixed;
+  top: 40%;
+  right: 0;
+  padding: 5px 10px;
+  z-index: 99;
+}
+
+////////
+
+.user-profile {
+  margin: 35px auto 45px;
+}

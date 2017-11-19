@@ -20,6 +20,8 @@ class CreateOpeningsTable extends Migration
             $table->integer('salary');
             $table->text('description');
             $table->integer('status');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

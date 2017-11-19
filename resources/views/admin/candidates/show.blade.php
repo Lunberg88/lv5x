@@ -4,17 +4,17 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                @if($c)
+                @if($candidate)
                     <div class="row">
-                        <div class="group-control">id: <b>{{$c->id}}</b></div>
-                        <div class="group-control">fio: <b>{{$c->fio}}</b></div>
-                        <div class="group-control">fio: <b>{{$c->email}}</b></div>
-                        <div class="group-control">stack: <b>{{$c->stack}}</b></div>
-                        <div class="group-control">tags: {{$c->tags}}</div>
-                        <div class="group-control">salary: <b>{{$c->salary}}</b></div>
+                        <div class="group-control">id: <b>{{$candidate->id}}</b></div>
+                        <div class="group-control">fio: <b>{{$candidate->fio}}</b></div>
+                        <div class="group-control">fio: <b>{{$candidate->email}}</b></div>
+                        <div class="group-control">stack: <b>{{$candidate->stack}}</b></div>
+                        <div class="group-control">tags: {{$candidate->tags}}</div>
+                        <div class="group-control">salary: <b>{{$candidate->salary}}</b></div>
                         <div class="group-control">
-                            @if($t)
-                                @foreach($t as $tag)
+                            @if($tags)
+                                @foreach($tags as $tag)
                                     <a href="{{route('search')}}?search={{$tag}}" title="{{$tag}}" class="label label-primary">{{$tag}}</a>&nbsp;
                                 @endforeach()
                             @endif()
@@ -26,7 +26,7 @@
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
-                                    @if($pr)
+                                    @if($profile)
                                         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Show CV</a></li>
                                     @endif()
                                 </ul>
@@ -36,7 +36,7 @@
                                     <div role="tabpanel" class="tab-pane fade in active" id="home">
                                         Some text info about this candidate...
                                     </div>
-                                    @if($pr)
+                                    @if($profile)
                                         <div role="tabpanel" class="tab-pane" id="profile">
                                             <iframe src="https://docs.google.com/gview?url=http://lunberg.hol.es/j.doc&embedded=true" class="cv_frame"></iframe>
                                         </div>
