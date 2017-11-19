@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Openings;
 use App\Policies\CandidatePolicy;
+use App\Policies\OpeningsPolicy;
 use App\User;
 use App\Candidate;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
@@ -19,6 +21,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         //'App\Model' => 'App\Policies\ModelPolicy',
         Candidate::class => CandidatePolicy::class,
+	    Openings::class => OpeningsPolicy::class,
     ];
 
     /**

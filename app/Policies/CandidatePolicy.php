@@ -23,7 +23,7 @@ class CandidatePolicy
     public function create(User $user)
     {
         foreach($user->roles as $role){
-            if($role->name == "GlobalAdmin") {
+            if($role->rolename == "GlobalAdmin") {
                 return true;
             }
         }
@@ -33,7 +33,7 @@ class CandidatePolicy
     public function update(User $user, Candidate $candidate)
     {
         foreach($user->roles as $role){
-            if($role->name == "GlobalAdmin") {
+            if($role->rolename == "GlobalAdmin") {
                 if ($user->id == $candidate->user_id) {
                     return true;
                 }
@@ -45,7 +45,7 @@ class CandidatePolicy
     public function before(User $user)
     {
         foreach($user->roles as $role){
-            if($role->name == "GlobalAdmin") {
+            if($role->rolename == "GlobalAdmin") {
                 return true;
             }
         }

@@ -2,6 +2,18 @@
 @section('content')
     <div class="container">
         <div class="row">
+            @if(session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div>
+        <div class="row">
             <div class="col-xs-2">
                 <div class="select-tags">
                     <a href="/admin/search?search=PHP" class="op-tags">PHP</a> <a href="/admin/search?search=JS" class="op-tags">JS</a>
@@ -12,8 +24,12 @@
                 @foreach($openings as $open)
                     <div class="opening_box">
                         <ul class="controls">
-                            <li><button class="btn btn-success">Edit</button></li>
-                            <li><button class="btn btn-danger">Delete</button></li>
+                            <li><a href="{{route('admin.openings.edit.id', $open->id)}}" class="btn btn-success">Edit</a></li>
+                            <li>
+                                {!! Form::open(['method' => 'DELETE', 'route' => ['admin.openings.destroy', $open->id]]) !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-danger', 'onClick' => 'return confirm("Are You sure Delete this Opening?");']) !!}
+                                {!! Form::close() !!}
+                            </li>
                         </ul>
                         <div class="opening-title">{{$open->title}}</div>
                         <div class="opening-body">{{$open->description}}</div>

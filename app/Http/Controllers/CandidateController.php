@@ -148,7 +148,7 @@ class CandidateController extends Controller
 			    return redirect('admin/candidates')->with('message', 'Profile successfully updated!');
 		    }
 
-		    return redirect('admin/candidates')->with('error', 'Access dinied, you don\'t have such permission!');
+		    return redirect('admin/candidates')->with('error', 'Access denied, you don\'t have such permission!');
 	    } else {
 		    return redirect('admin/candidates')->with('error', 'Profile with this ID: '.$id.' not exists!');
 	    }
