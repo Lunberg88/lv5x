@@ -77,9 +77,9 @@ class CandidateController extends Controller
 		    //Event::fire(new onAddCandidateEvent(Auth::user(), $candidate));
 		    Event::fire('onAddCandidate', [Auth::user(), $candidate]);
 
-		    return redirect('admin')->with('message', 'New candidate successfully added!');
+		    return redirect('admin/candidate')->with('message', 'New candidate successfully added!');
 	    } else {
-		    return redirect('admin')->with('error', 'Access dined for you!');
+		    return redirect('admin/candidate')->with('error', 'Access dined for you!');
 	    }
     }
 
@@ -93,10 +93,8 @@ class CandidateController extends Controller
     {
 	    if($candidate = Candidate::find($id)) {
 		    $tags = explode(',', $candidate->tags);
-		    //Find Candidate Profile
-		    $profile = Profile::where('candidate_id', $id)->first();
 
-		    return view('admin.candidates.show', ['candidate' => $candidate, 'tags' => $tags, 'profile' => $profile]);
+		    return view('admin.candidates.show', ['candidate' => $candidate, 'tags' => $tags]);
 
 	    } else {
 		    return redirect('admin/candidates')->with('error', 'Profile with this ID: '.$id.' not found.');

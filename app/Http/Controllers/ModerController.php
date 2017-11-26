@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Candidate;
 use App\Profile;
 use Illuminate\Http\Request;
@@ -23,8 +24,9 @@ class ModerController extends Controller
 
     public function store(Request $request)
     {
+    	//$my = $request->only('fio', 'email', 'salary', 'upload');
         $load = $request->file('upload')->store('doc');
-        //echo "<pre>".print_r($load,1)."</pre>"; exit();
+        //echo "<pre>".print_r($my,1)."</pre>"; exit();
 
         $candidate = new Candidate();
         $candidate->fio = $request->fio;
@@ -32,6 +34,7 @@ class ModerController extends Controller
         $candidate->stack = $request->stack;
         $candidate->tags = $request->tags;
         $candidate->salary = $request->salary;
+        $candidate->user_id = Auth::id();
         $candidate->save();
 
         $profile = new Profile();
@@ -39,7 +42,17 @@ class ModerController extends Controller
         $profile->info = $load;
         $profile->save();
 
-        return Redirect::route('moder');
+        return Redirect::route('index.moder.index');
+    }
+
+    public function add(Request $request)
+    {
+    	$load = $request->file('upload');
+    	$x = $load->getClientMimeType();
+
+
+    	echo "<pre>".print_r($x,1)."</pre>"; die();
+
     }
 
     public function show_id(Request $request, $id)

@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook' => [
+      'client_id' => '1513755038708092',
+      'client_secret' => '164c21639bbfde7955cb2e89ab7c3388',
+      'redirect' => 'http://localhost:8000',
+    ],
+
 ];

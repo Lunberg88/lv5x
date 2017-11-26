@@ -15,14 +15,14 @@
                         <div class="group-control">
                             @if($tags)
                                 @foreach($tags as $tag)
-                                    <a href="{{route('search')}}?search={{$tag}}" title="{{$tag}}" class="label label-primary">{{$tag}}</a>&nbsp;
+                                    <a href="{{route('admin.candidates.search')}}?search={{$tag}}" title="{{$tag}}" class="label label-primary">{{$tag}}</a>&nbsp;
                                 @endforeach()
                             @endif()
                         </div>
                         <br />
+                        {{--
                         <div class="row">
                             <div>
-
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Info</a></li>
@@ -42,8 +42,8 @@
                                         </div>
                                     @endif()
                                 </div>
-
                             </div>
+                          --}}
                         </div>
                     </div>
                 @else

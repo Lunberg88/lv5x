@@ -8,10 +8,10 @@
                         <i class="fa fa-calendar costum-color"></i> 25 April 2017
                     </p>
                     <h4 class="effect">
-                        <a href="{{route('openings')}}">{{$open->title}}</a>
+                        <a href="{{route('index.openings')}}">{{$open->title}}</a>
                     </h4>
                     <p>{{$open->description}}</p>
-                    <a href="{{route('openings')}}" class="button costum-bg">Read more</a>
+                    <a href="{{route('index.openings')}}" class="button costum-bg">Read more</a>
                 </div>
             </div>
         </div>

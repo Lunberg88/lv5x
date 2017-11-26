@@ -499,7 +499,7 @@
     border: 1px solid #ff3737;
 }
 .opening_box:hover {
-    box-shadow: 0 5px 5px rgba(180, 0, 20, 0.44);
+    box-shadow: 0 5px 5px rgba(74, 156, 226, 0.53);
 }
 .select-tags {
     padding: 5px 15px;

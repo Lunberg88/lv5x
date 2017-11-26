@@ -8,8 +8,9 @@
                             <h4 class="modal-title">Add new candidate</h4>
                         </div>
                         <div class="modal-body">
-                            <form class="form-horizontal" method="POST" action="{{ route('store') }}" enctype="multipart/form-data">
+                            <form class="form-horizontal" method="POST" action="{{ route('index.moder.add') }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
+                                <!--
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="fio">First/Last Name:</label>
                                     <div class="col-sm-10">
@@ -50,6 +51,7 @@
                                         <p class="errorContent text-center alert alert-danger hidden"></p>
                                     </div>
                                 </div>
+                                -->
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="upload">Upload File:</label>
                                     <div class="col-sm-10">

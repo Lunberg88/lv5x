@@ -48,6 +48,9 @@ Route::group(['middleware' => ['auth']], function(){
 Route::post('posts/changeStatus', array('as' => 'changeStatus', 'uses' => 'PostsController@changeStatus'))->middleware('auth');
 
 Auth::routes();
+
+Route::get('auth/fb', 'FbController@redirectToProvider');
+Route::get('auth/fb/callback', 'FbController@handleProviderCallback');
 /*
 Route::get('login', 'Auth\LoginController@showLoginForm');
 Route::post('login', 'Auth\LoginController@login');
@@ -55,6 +58,15 @@ Route::post('logout', 'Auth\LoginController@logout');
 */
 
 Route::get('/home', 'HomeController@index');
+
+Route::group(['middleware' => ['auth']], function() {
+	Route::get('/test', 'ModerController@index')->name('index.moder.index');
+	Route::get('/test/add', 'ModerController@create')->name('index.moder.add');
+	Route::post('/test/add', 'ModerController@add')->name('index.moder.store');
+});
+
+
+
 
 
 
