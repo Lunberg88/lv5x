@@ -11,5 +11,6 @@
 <div class="col-md-6 col-xs-12">
     <div class="about-image">
         <img src="http://www.vlance.vn/tro-giup/wp-content/uploads/thue-freelancer-lap-trinh.jpg" alt="about-img" class="about-img effect">
+        <!--<img src="https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAJNAAAAJDdhZTAxN2U3LWQ2ZTItNGU0OS1iM2YyLWYwOGEzMDFkOWFkMQ.jpg" alt="About me" class="about-img" style="opacity: 1;">-->
     </div>
 </div>

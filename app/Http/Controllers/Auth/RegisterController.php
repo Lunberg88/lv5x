@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Candidate;
 use App\User;
-use App\Chars;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -60,7 +60,7 @@ class RegisterController extends Controller {
 	 *
 	 * @return User
 	 */
-
+	/*
 	protected function create(array $data)
 	{
 		return User::create([
@@ -68,6 +68,34 @@ class RegisterController extends Controller {
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
 		]);
+	}
+	*/
+
+	protected function create(array $data)
+	{
+		//echo "<pre>".print_r($cv,1)."</pre>"; die();
+
+		$user = User::create([
+			'name' => $data['name'],
+			'email' => $data['email'],
+			'password' => bcrypt($data['password']),
+		]);
+
+		$new_candidate = Candidate::create([
+			'fio' => $user->name,
+			'email' => $user->email,
+			'stack' => $data['stack'],
+			'tags' => $data['tags'],
+			'salary' => $data['salary'],
+			'cvs' => $data['cv'],
+			'status' => '1',
+			'viewed' => '0',
+			'user_id' => '0',
+		]);
+
+
+
+		return $user;
 	}
 
 }

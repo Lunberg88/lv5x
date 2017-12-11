@@ -18,6 +18,18 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
+        Candidate::created(function(Candidate $candidate) {
+        	Log::info('Created new candidate: ', [
+        		'#id' => $candidate->id,
+        		'Fio:' => $candidate->fio,
+		        'Stack' => $candidate->stack,
+		        'Salary' => $candidate->salary,
+		        'cvs' => $candidate->cvs,
+		        'Created at:' => $candidate->created_at,
+		        'Added by:' => $candidate->user_id,
+	        ]);
+        });
+
         Candidate::updated(function(Candidate $candidate) {
            Log::info('Updated candidate-info: ', [$candidate->user->name => $candidate->fio]);
         });

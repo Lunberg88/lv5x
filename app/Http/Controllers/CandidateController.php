@@ -13,6 +13,16 @@ use Illuminate\Http\Request;
 
 class CandidateController extends Controller
 {
+	/**
+	 * Statuses:
+	 * 0 - inactive
+	 * 1 - pending
+	 * 2 - viewed
+	 * 3 - skype interview
+	 * 4 - client review
+	 * 5 - hired
+	 */
+
     /**
      * Display a listing of the resource.
      *
@@ -71,15 +81,18 @@ class CandidateController extends Controller
 		    $candidate->stack = $request->stack;
 		    $candidate->tags = $request->tags;
 		    $candidate->salary = $request->salary;
+		    $candidate->cvs = $request->cvs;
+		    $candidate->status = '2';
+		    $candidate->viewed = '1';
 		    $candidate->user_id = Auth::id();
 		    $candidate->save();
 
 		    //Event::fire(new onAddCandidateEvent(Auth::user(), $candidate));
 		    Event::fire('onAddCandidate', [Auth::user(), $candidate]);
 
-		    return redirect('admin/candidate')->with('message', 'New candidate successfully added!');
+		    return redirect('admin/candidates')->with('message', 'New candidate successfully added!');
 	    } else {
-		    return redirect('admin/candidate')->with('error', 'Access dined for you!');
+		    return redirect('admin/candidates')->with('error', 'Access dined for you!');
 	    }
     }
 
@@ -92,6 +105,11 @@ class CandidateController extends Controller
     public function show($id)
     {
 	    if($candidate = Candidate::find($id)) {
+	    	if($candidate->viewed != 1) {
+			    $candidate->viewed = 1;
+			    $candidate->save();
+		    }
+
 		    $tags = explode(',', $candidate->tags);
 
 		    return view('admin.candidates.show', ['candidate' => $candidate, 'tags' => $tags]);

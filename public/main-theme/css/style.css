@@ -1,7 +1,3 @@
-a[href="https://www.000webhost.com/?utm_source=000webhostapp&utm_campaign=000_logo&utm_medium=website_dahim&utm_content=footer_img"] {
-    display: none;
-}
-
 body, html, ol, ul {
     margin: 0;
     padding: 0;
@@ -232,7 +228,6 @@ span.ball:nth-child(2) {
     position: fixed;
     top: 0;
     z-index: 33;
-    background: linear-gradient(to bottom, transparent 10%, #1f1f1f 90%);
 }
 .nav-wrapper .navbar-toggle .icon-bar {
     background-color: #fff;
@@ -244,10 +239,8 @@ span.ball:nth-child(2) {
 
 .home-1, .home-2 {
     height: 360px;
-    /*background-image: url('../img/logo/main_logo2.jpg');*/
     background-image: linear-gradient(to top, transparent 5%, #1f1f1f 100%), url('http://jobcareer.chimpgroup.com/nextjob/wp-content/uploads/revslider/homepage2/Slide10.jpg');
     background-size: cover;
-    /*../img/logo/main_logo2.jpg  */
 }
 
 .nav-wrapper .navbar-brand {
@@ -284,7 +277,7 @@ span.ball:nth-child(2) {
 }
 
 .nav-sticky {
-    background-color: black !important;
+    background-color: #fff !important;
     padding: 6px 0;
     color: white;
     -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
@@ -292,25 +285,20 @@ span.ball:nth-child(2) {
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
 }
 .nav-sticky .navbar-brand {
-    /*color: #232323;*/
-    color: white;
+    color: #232323;
 }
 .nav-sticky .navbar-toggle .icon-bar {
-    /*background-color: #232323;*/
-    color: white;
+    background-color: #232323;
 }
 .nav-sticky .nav > li {
-    /*color: #585858;*/
-    color: white;
+    color: #585858;
 }
 .nav-sticky .nav > li > a:active, .nav-sticky .nav > li > a:focus, .nav-sticky .nav > li > a:hover {
-    /*color: #232323;*/
-    color: white;
+    color: #232323;
 }
 
 .nav-wrapper .nav li a.active {
-    /*color: #e74c3c;*/
-    color: #ac2925;
+    color: #e74c3c;
 }
 
 @media screen and (max-width: 768px) {
@@ -926,7 +914,8 @@ span.ball:nth-child(2) {
 }
 
 .footer {
-    background: #222328;
+    background: #f7f7f7;
+    border-top: 2px solid #ebebeb;
     padding: 60px 0;
 }
 
@@ -941,8 +930,8 @@ span.ball:nth-child(2) {
     line-height: 38px;
     font-size: 18px;
     text-align: center;
-    color: #c7c7c7;
-    border: 1px solid #c7c7c7;
+    color: #2e3436;
+    border: 1px solid #cecece;
 }
 .social-icons .fa:hover {
     color: #fff;
@@ -974,7 +963,7 @@ span.ball:nth-child(2) {
 .footer p {
     margin-bottom: 0;
     margin-top: 10px;
-    color: #ddd;
+    color: #232323;
 }
 
 .work-modal .modal-content {

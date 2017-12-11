@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Candidate extends Model
 {
     protected $table = "candidate";
-    protected $fillable = ['fio', 'email', 'stack', 'tags', 'salary'];
+    protected $fillable = ['fio', 'email', 'stack', 'tags', 'salary', 'cvs', 'status', 'viewed', 'user_id'];
 
     public function user()
     {

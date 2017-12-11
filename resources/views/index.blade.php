@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Iya Web-HR</title>
-    <link href="/css/app.css" rel="stylesheet">
+    <!--<link href="/css/app.css" rel="stylesheet">-->
     <link rel="stylesheet" href="/main-theme/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
     <link rel="stylesheet" href="/main-theme/css/style.css">
@@ -63,9 +63,10 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="./#home" class="scroll active" data-speed="800">HOME</a></li>
-                    <li><a href="./#about" class="scroll" data-speed="1000">ABOUT</a></li>
-                    <li><a href="./#contact" class="scroll" data-speed="1800">CONTACT</a></li>
+                    <li><a href="#home" class="scroll active" data-speed="800">HOME</a></li>
+                    <li><a href="#about" class="scroll" data-speed="1000">ABOUT</a></li>
+                    <li><a href="#contact" class="scroll" data-speed="1800">CONTACT</a></li>
+
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> LOGIN</a></li>
                         <li><a href="{{ url('/register') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> REGISTER</a></li>
@@ -74,7 +75,17 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PROFILE <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Status</a></li>
-                                <li><a href="#">Process</a></li>
+                                <li>
+                                    <p>
+                                        <span style="color: red; font-size: 11px; padding-left: 10px;">
+                                            @if($user_profile !== null)
+                                                @foreach($user_profile as $user)
+                                                    CV status: <span class="label label-danger"><b>Client review</b></span>
+                                                @endforeach
+                                            @endif
+                                        </span>
+                                    </p>
+                                </li>
                             </ul>
                         </li>
                         <li>
@@ -93,6 +104,7 @@
         </div>
     </nav>
 </header>
+@yield('profile-status')
 @yield('content')
 <footer class="footer">
     <div class="container">

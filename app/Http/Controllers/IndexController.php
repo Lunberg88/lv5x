@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Candidate;
 use App\Openings;
 use App\User;
 use Auth;
@@ -15,13 +16,21 @@ class IndexController extends Controller
     public function index()
     {
     	$cur_day = date('d.m');
-    	$days = Hollidays::checkdate($cur_day);
+    	//$days = Hollidays::checkdate($cur_day);
     	$openings = Openings::latest()->take(3)->get();
 
-    	return view('index.pages.main', [
-		    'days' => $days,
-		    'openings' => $openings,
-	    ]);
+    	if(Auth::check()) {
+    		$user_profile = Candidate::where('email', '=', Auth::user()->email)->get();
+
+		    return view('index.pages.main', [
+			    'openings' => $openings,
+			    'user_profile' => $user_profile,
+		    ]);
+	    } else {
+    		return view('index.pages.main', [
+    			'openings' => $openings,
+		    ]);
+	    }
     }
 
     public function openings()
