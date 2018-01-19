@@ -78,7 +78,7 @@
                                 <li>
                                     <p>
                                         <span style="color: red; font-size: 11px; padding-left: 10px;">
-                                            @if($user_profile !== null)
+                                            @if(isset($user_profile) && $user_profile !== null)
                                                 @foreach($user_profile as $user)
                                                     CV status: <span class="label label-danger"><b>Client review</b></span>
                                                 @endforeach
