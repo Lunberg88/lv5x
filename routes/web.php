@@ -33,8 +33,13 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 	Route::get('/admin/blog', 'BlogController@dashboard')->name('admin.blog.dashboard');
 	Route::get('/admin/blog/create', 'BlogController@create')->name('admin.blog.create');
 	Route::post('/admin/blog/create', 'BlogController@store')->name('admin.blog.store');
-	Route::put('/admin/blog/edit', 'BlogController@update')->name('admin.blog.update');
+	Route::get('/admin/blog/edit/{?id}', 'BlogController@edit')->name('admin.blog.edit');
+	Route::put('/admin/blog/update/{?id}', 'BlogController@update')->name('admin.blog.update');
+	Route::get('/admin/blog/view-{?id}', 'BlogController@view')->name('admin.blog.view');
 	Route::delete('/admin/blog/destroy/{id}', 'BlogController@destroy')->name('admin.blog.destroy');
+
+	Route::post('/openings/addfav', 'OpeningsController@addfav');
+	Route::get('/myfavs', 'IndexController@myfavourites')->name('index.profile.favs');
 });
 
 Route::group(['middleware' => ['auth']], function() {

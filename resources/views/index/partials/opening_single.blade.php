@@ -46,6 +46,17 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <p class="favs">
+                            <span id="{{$open->id}}" onclick="addToFav(this)">
+                                <i class="@php
+                                    $fav = \App\UserFavs::where([
+                                        ['user_id', '=', Auth::id()],
+                                        ['opening_id', '=', $open->id],
+                                    ])->get();
+                                    echo $fav->isEmpty() ? "fa fa-star-o" : "fa fa-star";
+                                @endphp"></i> <small>Favourites</small>
+                            </span>
+                        </p>
                     </div>
                 </div>
 

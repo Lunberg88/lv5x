@@ -15,6 +15,7 @@
                 <li><a href="#about" class="scroll" data-speed="1000">ABOUT</a></li>
                 <!--<li><a href="#services" class="scroll" data-speed="1400">SERVICES</a></li>
                 <li><a href="#work" class="scroll" data-speed="1400">WORK</a></li>-->
+                <li><a href="/blog" class="scroll" data-speed="1400">BLOG</a></li>
                 <li><a href="#news" class="scroll" data-speed="1600">JOBS</a></li>
                 <li><a href="#contact" class="scroll" data-speed="1800">CONTACT</a></li>
                 @if (Auth::guest())

@@ -13,7 +13,9 @@
                     <br>
                     {{$news->slug}}
                     <br>
-                    {{$news->full}}
+                    {!! $news->short !!}
+                    <br>
+                    {!! $news->full !!}
                 </div>
             </div>
         </div>

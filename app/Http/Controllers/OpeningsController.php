@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Auth;
 use Gate;
 use Event;
+use Log;
+use App\UserFavs;
 use App\Events\onAddCandidateEvent;
 use App\Listeners\AddCandidateListener;
 use App\Openings;
@@ -174,4 +176,41 @@ class OpeningsController extends Controller
 		    ]);
 	    }
     }
+
+	public function addfav(Request $request)
+	{
+		if($request->id == null || empty($request->id)) {
+			return ['error' => 'id does not set!'];
+		}
+
+		if(Auth::user() !== false) {
+		   $ifexist = UserFavs::where([
+		   	['user_id', '=', Auth::id()],
+		    ['opening_id', '=', $request->id],
+		   ])->get();
+		   if($ifexist->isEmpty()) {
+			   $fav = new UserFavs();
+			   $fav->user_id = Auth::id();
+			   $fav->opening_id = $request->id;
+			   $fav->save();
+
+			   return response()->json(['message' => 'Successfully added!']);
+		   } else {
+			   foreach($ifexist as $item) {
+
+				   if($item->opening_id != $request->id) {
+
+					   $fav = new UserFavs();
+					   $fav->user_id = Auth::id();
+					   $fav->opening_id = $request->id;
+					   $fav->save();
+
+					   return response()->json(['message' => 'Successfully added!']);
+				   } else {
+					   return response()->json(['message' => 'Error, duplicate opening id']);
+				   }
+			   }
+		   }
+		}
+	}
 }

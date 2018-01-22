@@ -8,7 +8,8 @@
     <title>Iya Web-HR</title>
     <!--<link href="/css/app.css" rel="stylesheet">-->
     <link rel="stylesheet" href="/main-theme/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/main-theme/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link rel="stylesheet" href="/main-theme/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:700%7cRaleway:400,700" rel="stylesheet">
     <style type="text/css">
@@ -21,6 +22,10 @@
             width: 100%;
             height: 2000px;
             border: 0px;
+        }
+
+        .favs > * {
+            cursor: pointer;
         }
     </style>
     <!--[if lt IE 9]>
@@ -66,7 +71,7 @@
                     <li><a href="#home" class="scroll active" data-speed="800">HOME</a></li>
                     <li><a href="#about" class="scroll" data-speed="1000">ABOUT</a></li>
                     <li><a href="#contact" class="scroll" data-speed="1800">CONTACT</a></li>
-
+                    <li><a href="/blog" class="scroll">BLOG</a></li>
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> LOGIN</a></li>
                         <li><a href="{{ url('/register') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> REGISTER</a></li>
@@ -84,6 +89,22 @@
                                                 @endforeach
                                             @endif
                                         </span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <b><a href="{{route('index.profile.favs')}}">Favourites</a></b>
+                                        @if(isset($user_favs) && $user_favs !== null)
+                                            @foreach($user_favs as $favs)
+                                                <p>
+                                                    <a href="/openings-{{$favs->opening_id}}">
+                                                        {{$favs->title}}
+                                                    </a>
+                                                </p>
+                                            @endforeach
+                                        @else
+                                            <small>Empty...</small>
+                                        @endif
                                     </p>
                                 </li>
                             </ul>
@@ -155,5 +176,22 @@
 <script src="/main-theme/js/jquery.min.js"></script>
 <script src="/main-theme/js/bootstrap.min.js"></script>
 <script src="/main-theme/js/custom.js"></script>
+<script>
+        //Add to favourite
+        var url = 'http://ajax_lv/openings/addfav';
+
+        function addToFav(val) {
+            $.post(url, {
+                '_token': $('meta[name="csrf-token"]').attr('content'),
+                'id': val.id
+            }).done(function(data) {
+                var selId = $('#' + val.id + ' > i');
+                var text = $('#' + val.id + ' > small');
+                selId.removeClass('fa-star-o');
+                //text.text('Remove from favourites');
+                selId.addClass('fa-star');
+            })
+        }
+</script>
 </body>
 </html>

@@ -12,8 +12,12 @@
                 <h4 class="effect">
                     <a href="#">{{$blog->title}}</a>
                 </h4>
-                <p>{{$blog->short}}</p>
+                <p>{!! str_limit($blog->short, 55) !!}</p>
                 <a href="/blog/{{$blog->slug}}" class="button costum-bg">Read more</a>
+                @if(Auth::user())
+                <p class="favs">
+                </p>
+                @endif
             </div>
         </div>
     </div>
