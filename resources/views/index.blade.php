@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Iya Web-HR</title>
-    <!--<link href="/css/app.css" rel="stylesheet">-->
+    <link href="/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="/main-theme/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/main-theme/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -156,7 +156,7 @@
 </footer>
 @if(Auth::user())
 @foreach(Auth::user()->roles as $role)
-    @if($role->rolename === "GlobalAdmin")
+    @if($role->rolename === "globaladmin")
         <div class="admin-dashboard-lnk">
             <a href="/admin" class="scroll button costum-bg-two">
                 <p>D</p>
@@ -181,6 +181,7 @@
         var url = 'http://ajax_lv/openings/addfav';
 
         function addToFav(val) {
+
             $.post(url, {
                 '_token': $('meta[name="csrf-token"]').attr('content'),
                 'id': val.id
@@ -188,7 +189,6 @@
                 var selId = $('#' + val.id + ' > i');
                 var text = $('#' + val.id + ' > small');
                 selId.removeClass('fa-star-o');
-                //text.text('Remove from favourites');
                 selId.addClass('fa-star');
             })
         }

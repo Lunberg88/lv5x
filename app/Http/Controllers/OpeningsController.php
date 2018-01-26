@@ -21,7 +21,7 @@ class OpeningsController extends Controller
      */
 	public function index()
 	{
-		$openings = Openings::get();
+		$openings = Openings::paginate(8);
 
 		return view('admin.openings', [
 			'openings' => $openings,

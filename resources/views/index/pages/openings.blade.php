@@ -8,6 +8,9 @@
     <section class="openings_lists">
         <div class="container">
             @include('index.partials.opening_single')
+            <div class="row">
+                {{$openings->links()}}
+            </div>
         </div>
     </section>
 @endsection

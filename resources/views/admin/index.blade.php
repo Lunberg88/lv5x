@@ -165,6 +165,12 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <a href="{{route('admin.history')}}">
+                        <i class="fa fa-history"></i>
+                        <p>History</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -197,29 +203,26 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="material-icons">notifications</i>
-                                <span class="notification">5</span>
+                        @if($newCandidates !== null)
+                                <span class="notification">{{count($newCandidates)}}</span>
                                 <p class="hidden-lg hidden-md">
                                     Notifications
                                     <b class="caret"></b>
                                 </p>
                             </a>
+
                             <ul class="dropdown-menu">
+                                @foreach($newCandidates as $new)
                                 <li>
-                                    <a href="#">Mike John responded to your email</a>
+                                    <a href="{{route('admin.candidates.show.id', $new->id)}}">
+                                        {!! $new->fio !!}<br>
+                                        <small>({!! $new->email !!})</small>
+                                    </a>
+
                                 </li>
-                                <li>
-                                    <a href="#">You have 5 new tasks</a>
-                                </li>
-                                <li>
-                                    <a href="#">You're now friend with Andrew</a>
-                                </li>
-                                <li>
-                                    <a href="#">Another Notification</a>
-                                </li>
-                                <li>
-                                    <a href="#">Another One</a>
-                                </li>
+                                @endforeach
                             </ul>
+                        @endif
                         </li>
                         <li>
                             <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">

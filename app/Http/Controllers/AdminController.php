@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\History;
 use App\Openings;
 use Gate;
 use App\Traits\Hollidays;
@@ -43,11 +44,14 @@ class AdminController extends Controller
         ];
 
         $user = User::find(Auth::id());
+        $newCandidates = Candidate::where('viewed', '=', '0')->get();
+
         return view('admin.index', [
             'c' => $c,
             'tg' => $tg,
 	        'days' => $days,
 	        'user' => $user,
+	        'newCandidates' => $newCandidates,
         ]);
     }
 
@@ -61,5 +65,12 @@ class AdminController extends Controller
     		$result = Candidate::leftJoin('openings','')->get();
 	    }
 
+    }
+
+    public function history()
+    {
+    	$history = History::orderBy('id', 'DESC')->paginate(20);
+
+    	return view('admin.history.history', compact('history'));
     }
 }

@@ -1,6 +1,5 @@
 @extends('admin.index')
 @section('content')
-    <div class="container">
         <div class="row">
             @if(session('message'))
                 <div class="alert alert-success">
@@ -46,5 +45,11 @@
                 @endforeach
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div align="center">
+                    {{$openings->links()}}
+                </div>
+            </div>
+        </div>
 @endsection

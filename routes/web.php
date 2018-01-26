@@ -40,6 +40,8 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 
 	Route::post('/openings/addfav', 'OpeningsController@addfav');
 	Route::get('/myfavs', 'IndexController@myfavourites')->name('index.profile.favs');
+
+	Route::get('/admin/history', 'AdminController@history')->name('admin.history');
 });
 
 Route::group(['middleware' => ['auth']], function() {

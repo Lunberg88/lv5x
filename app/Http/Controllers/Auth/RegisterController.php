@@ -60,20 +60,9 @@ class RegisterController extends Controller {
 	 *
 	 * @return User
 	 */
-	/*
-	protected function create(array $data)
-	{
-		return User::create([
-			'name' => $data['name'],
-			'email' => $data['email'],
-			'password' => bcrypt($data['password']),
-		]);
-	}
-	*/
 
 	protected function create(array $data)
 	{
-		//echo "<pre>".print_r($cv,1)."</pre>"; die();
 
 		$user = User::create([
 			'name' => $data['name'],
@@ -88,12 +77,10 @@ class RegisterController extends Controller {
 			'tags' => $data['tags'],
 			'salary' => $data['salary'],
 			'cvs' => $data['cv'],
-			'status' => '1',
-			'viewed' => '0',
-			'user_id' => '0',
+			'status' => 1,
+			'viewed' => 0,
+			'user_id' => 3,
 		]);
-
-
 
 		return $user;
 	}

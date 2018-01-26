@@ -23,6 +23,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="control-label col-sm-2" for="cvs">Shared CV link:</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="cvs" class="form-control" id="cvs" autofocus placeholder="http://example.com/cv.pdf">
+                                <p class="errorTitle text-center alert alert-danger hidden"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="control-label col-sm-2" for="stack">Stack:</label>
                             <div class="col-sm-10">
                                 <input type="text" name="stack" class="form-control" id="stack" autofocus placeholder="Stack...">

@@ -40,7 +40,7 @@ class IndexController extends Controller
 
     public function openings()
     {
-    	$openings = Openings::where('status', '=', '1')->get();
+    	$openings = Openings::where('status', '=', '1')->paginate(9);
 	    $days = Hollidays::checkdate(date('d.m'));
 
     	return view('index.pages.openings', [

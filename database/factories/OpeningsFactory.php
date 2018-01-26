@@ -2,13 +2,14 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use Faker\Generator as Faker;
 
-$factory->define(App\Openings::class, function (Faker\Generator $faker) {
+$factory->define(App\Openings::class, function (Faker $faker) {
 
 	return [
-		'title' => str_random(25),
+		'title' => $faker->sentence($nbWords = 6, $variableNbWords = true),
 		'location' => $faker->country,
 		'salary' => $faker->numberBetween(600,3500),
-		'description' => str_random(50),
+		'description' => $faker->text($maxNbChars = 200),
 		'status' => $faker->numberBetween(0,1),
+		'user_id' => '3',
 	];
 });
