@@ -2,6 +2,20 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
+            @if(session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <button id="ref" class="btn btn-default">Refresh</button>
         </div>
     </div>
@@ -23,11 +37,21 @@
                         <td>{!! str_limit($post->title, 30) !!}</td>
                         <td>{{$post->created_at}}</td>
                         <td>
-                            <a href="{{route('admin.blog.edit', $post->id)}}" class="btn btn-warning btn-sm">edit</a>
-                            <a href="{{route('admin.blog.view', $post->id)}}" class="btn btn-info btn-sm">view</a>
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['admin.blog.destroy', $post->id]]) !!}
-                            {!! Form::submit('delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                            {!! Form::close() !!}
+                            <a href="{{route('admin.blog.edit', $post->id)}}">
+                                <i class="fa fa-eye btn btn-info" aria-hidden="true"></i>
+                            </a>
+                            <a href="{{route('admin.blog.view', $post->id)}}">
+                                <i class="fa fa-edit btn btn-warning" aria-hidden="true"></i>
+                            </a>
+                            <a href="{{route('admin.blog.destroy', $post->id)}}"
+                                        onclick="event.preventDefault();
+                                        document.getElementById('delete').submit();">
+                                <i class="fa fa-trash-o btn btn-danger" aria-hidden="true"></i>
+                            </a>
+                            <form id="delete" action="{{route('admin.blog.destroy', $post->id)}}" method="post">
+                                <input name="_method" type="hidden" value="DELETE">
+                                {{csrf_field()}}
+                            </form>
                         </td>
                     </tr>
                 @endforeach

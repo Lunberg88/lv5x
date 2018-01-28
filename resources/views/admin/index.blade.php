@@ -7,14 +7,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="canonical" href="http://iya-webhr.site" />
     <title>Iya Web-HR :: Dashboard</title>
-    <!-- Bootstrap core CSS     -->
-    <link rel="stylesheet" href="/css/app.css">
-    <link href="/dashboard/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <!--  Material Dashboard CSS    -->
+    <!--<link rel="stylesheet" href="/css/app.css">-->
+    <!--<link href="/dashboard/assets/css/bootstrap.min.css" rel="stylesheet" />-->
+
     <link href="/dashboard/assets/css/material-dashboard.css?v=1.2.0" rel="stylesheet" />
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="/dashboard/assets/css/demo.css" rel="stylesheet" />
-    <!--     Fonts and icons     -->
+
+    <!--<link href="/dashboard/assets/css/demo.css" rel="stylesheet" />-->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -28,6 +29,10 @@
             width: 100%;
             height: 2000px;
             border: 0px;
+        }
+        a > i.btn {
+            margin: 0 !important;
+            padding: 4px 6px !important;
         }
     </style>
     <!--[if lt IE 9]>
@@ -171,6 +176,12 @@
                         <p>History</p>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin.msg.list')}}">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <p>Messages</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -194,16 +205,11 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="material-icons">dashboard</i>
-                                <p class="hidden-lg hidden-md">Dashboard</p>
-                            </a>
-                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="material-icons">notifications</i>
-                        @if($newCandidates !== null)
+                        @if(isset($newCandidates) && $newCandidates !== null)
+                            @if(count($newCandidates) > 0)
                                 <span class="notification">{{count($newCandidates)}}</span>
                                 <p class="hidden-lg hidden-md">
                                     Notifications
@@ -222,6 +228,7 @@
                                 </li>
                                 @endforeach
                             </ul>
+                            @endif
                         @endif
                         </li>
                         <li>
@@ -233,7 +240,7 @@
                         <li class="separator hidden-lg hidden-md"></li>
                     </ul>
                     <!--<form class="navbar-form navbar-right" role="search">-->
-                    {!! Form::open(['method' => 'GET', 'route' => ['search'], 'class' => 'navbar-form navbar-right']) !!}
+                    {!! Form::open(['method' => 'GET', 'route' => ['admin.search'], 'class' => 'navbar-form navbar-right']) !!}
                         <div class="form-group form-search is-empty">
                             <input type="text" class="form-control" placeholder="Search">
                             <span class="material-input"></span>

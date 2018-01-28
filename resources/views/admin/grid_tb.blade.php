@@ -1,4 +1,8 @@
+@if($p->viewed !== 0)
+<tr style="background: #fff;">
+@else
 <tr>
+@endif
     <td>{{$p->id}}</td>
     <td>{{$p->fio}}</td>
     <td>{{$p->email}}</td>
@@ -14,10 +18,21 @@
         @endif
     </td>
     <td>{{$p->salary}}</td>
-    <td><a href="{{route('admin.candidates.edit.id', $p->id)}}" class="btn btn-warning">EDIT</a>
-        <a href="{{route('admin.candidates.show.id', $p->id)}}" class="btn btn-info">VIEW</a>
-        {!! Form::open(['method' => 'DELETE', 'route' => ['admin.candidates.destroy', $p->id]]) !!}
-        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-        {!! Form::close() !!}
+    <td>
+        <a href="{{route('admin.candidates.edit.id', $p->id)}}">
+            <i class="fa fa-eye  btn btn-info" aria-hidden="true"></i>
+        </a>
+        <a href="{{route('admin.candidates.show.id', $p->id)}}">
+            <i class="fa fa-edit btn btn-warning" aria-hidden="true"></i>
+        </a>
+        <a href="{{route('admin.candidates.destroy', $p->id)}}" onclick="event.preventDefault();
+                                                                document.getElementById('delete').submit();
+                                                                ">
+            <i class="fa fa-trash-o btn btn-danger" aria-hidden="true"></i>
+        </a>
+        <form id="delete" action="{{route('admin.candidates.destroy', $p->id)}}" method="post">
+            {{csrf_field()}}
+            <input name="_method" type="hidden" value="DELETE">
+        </form>
     </td>
 </tr>

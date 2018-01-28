@@ -1,6 +1,5 @@
 @extends('admin.index')
 @section('content')
-    <div class="container">
         @can('updateO', $openings)
             <div class="row">
                 <div class="col-md-6">
@@ -58,5 +57,4 @@
                 You don't have permission's for this operation!
             </div>
         @endcan()
-    </div>
 @endsection()

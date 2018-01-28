@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Iya Web-HR</title>
-    <link href="/css/app.css" rel="stylesheet">
-    <link rel="stylesheet" href="/main-theme/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/main-theme/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link rel="stylesheet" href="/main-theme/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:700%7cRaleway:400,700" rel="stylesheet">
@@ -79,13 +78,25 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PROFILE <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Status</a></li>
                                 <li>
                                     <p>
-                                        <span style="color: red; font-size: 11px; padding-left: 10px;">
+                                        <span style="color: #232323; font-size: 11px; padding-left: 5px;">
                                             @if(isset($user_profile) && $user_profile !== null)
                                                 @foreach($user_profile as $user)
-                                                    CV status: <span class="label label-danger"><b>Client review</b></span>
+                                                    CV status:
+                                                            @if($user->status === 1)
+                                                                <span class="label label-warning"><b>Pending</b></span>
+                                                                @elseif($user->status === 2)
+                                                                <span class="label label-success"><b>Viewed</b></span>
+                                                                @elseif($user->status === 3)
+                                                                <span class="label label-info"><b style="font-size: 8px;">Skype interview</b></span>
+                                                                @elseif($user->status === 4)
+                                                                <span class="label label-primary"><b>Client review</b></span>
+                                                                @elseif($user->status === 5)
+                                                                <span class="label label-danger"><b>Hired</b></span>
+                                                                @else
+                                                                Inactive
+                                                            @endif
                                                 @endforeach
                                             @endif
                                         </span>
@@ -93,7 +104,9 @@
                                 </li>
                                 <li>
                                     <p>
-                                        <b><a href="{{route('index.profile.favs')}}">Favourites</a></b>
+                                        <b style="color: #232323; font-size: 11px; padding-left: 5px;">
+                                            <a href="{{route('index.profile.favs')}}">Favourites</a>
+                                        </b>
                                         @if(isset($user_favs) && $user_favs !== null)
                                             @foreach($user_favs as $favs)
                                                 <p>

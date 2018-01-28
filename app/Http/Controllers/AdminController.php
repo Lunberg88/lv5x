@@ -11,6 +11,7 @@ use Event;
 use App\User;
 use App\Candidate;
 use App\Profile;
+use App\Messages;
 use App\Events\onAddCandidateEvent;
 use App\Listeners\AddCandidateListener;
 use Illuminate\Http\Request;
@@ -72,5 +73,12 @@ class AdminController extends Controller
     	$history = History::orderBy('id', 'DESC')->paginate(20);
 
     	return view('admin.history.history', compact('history'));
+    }
+
+    public function msg()
+    {
+    	$messages = Messages::paginate(20);
+
+    	return view('admin.messages', compact('messages'));
     }
 }

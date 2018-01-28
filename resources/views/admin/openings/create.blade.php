@@ -1,6 +1,5 @@
 @extends('admin.index')
 @section('content')
-    <div class="container">
         @can('createO', $openings)
             <div class="row">
                 <div class="col-md-6">
@@ -58,5 +57,4 @@
                 Access dined for you!
             </div>
         @endcan()
-    </div>
 @endsection()

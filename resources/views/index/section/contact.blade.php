@@ -11,26 +11,29 @@
 <div class="row">
     <div class="col-md-offset-2 col-md-8 col-md-offset-2">
         <div class="contact-form-box">
-            <form id="contact-form" action="mail/contact_us.php" method="post">
+            <form name="send_message" action="{{route('index.send.msg')}}" method="post">
+                {{ csrf_field() }}
                 <div class="row">
                     <div class="col-xs-12">
                         <div id="form-message" class="text-danger text-center"><b></b>
                         </div>
                     </div>
                 </div>
+                @if(!Auth::check())
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Name" required="required">
+                        <input type="text" name="name" class="form-control" placeholder="Name" required="required">
                     </div>
                     <div class="col-md-6">
-                        <input type="email" name="email" id="email" class="form-control" placeholder="Email" required="required">
+                        <input type="email" name="email" class="form-control" placeholder="Email" required="required">
                     </div>
                 </div>
+                @endif
                 <div class="row">
                     <div class="col-md-12">
-                                    <textarea name="message" id="message" class="form-control" placeholder="Your message" required="required">
+                        <textarea name="message" class="form-control" placeholder="Your message" required="required">
 
-                                    </textarea>
+                        </textarea>
                         <button type="submit" class="button costum-bg contact-submit">Send Message</button>
                         <div class="result"></div>
                     </div>

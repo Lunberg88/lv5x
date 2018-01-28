@@ -2,8 +2,14 @@
 
 Route::get('/', 'IndexController@index')->name('main');
 Route::get('/openings', 'IndexController@openings')->name('index.openings');
-Route::get('/blog', 'BlogController@index')->name('index.blog');
-Route::get('/blog/{slug}', 'BlogController@show')->name('index.blog.show');
+Route::get('/blog', 'IndexController@blog')->name('index.blog');
+Route::get('/blog/{slug}', 'IndexController@showblog')->name('index.blog.show');
+Route::post('/send-msg', 'IndexController@sendMessage')->name('index.send.msg');
+
+Route::group(['middleware' => 'auth'], function() {
+	Route::post('/openings/addfav', 'OpeningsController@addfav');
+	Route::get('/myfavs', 'IndexController@myfavourites')->name('index.profile.favs');
+});
 
 Route::group(['middleware' => ['auth', 'admin']], function() {
 	Route::get('/admin/candidates', 'CandidateController@index')->name('admin.candidates');
@@ -27,7 +33,7 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 	Route::get('/admin', 'AdminController@index')->name('admin.index');
 
 	Route::get('/admin/candidate/{id}', 'AdminController@show')->name('admin.candidate.show');
-	Route::get('/admin/search', 'AdminController@search')->name('search');
+	Route::get('/admin/search', 'AdminController@search')->name('admin.search');
 	Route::get('/admin/profile/{name}', 'AdminController@profile')->name('admin.profile');
 
 	Route::get('/admin/blog', 'BlogController@dashboard')->name('admin.blog.dashboard');
@@ -38,10 +44,9 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 	Route::get('/admin/blog/view-{?id}', 'BlogController@view')->name('admin.blog.view');
 	Route::delete('/admin/blog/destroy/{id}', 'BlogController@destroy')->name('admin.blog.destroy');
 
-	Route::post('/openings/addfav', 'OpeningsController@addfav');
-	Route::get('/myfavs', 'IndexController@myfavourites')->name('index.profile.favs');
-
 	Route::get('/admin/history', 'AdminController@history')->name('admin.history');
+
+	Route::get('/admin/msg', 'AdminController@msg')->name('admin.msg.list');
 });
 
 Route::group(['middleware' => ['auth']], function() {
