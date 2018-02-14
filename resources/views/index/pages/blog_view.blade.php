@@ -8,8 +8,8 @@
     <section class="blogs_lists">
         <div class="container">
             <div class="row">
-                <div class="col-md-offset-4 col-md-8">
-                    {{$news->title}}
+                <div class="col-md-9">
+                    <h2>{{$news->title}}</h2>
                     <br>
                     {{$news->slug}}
                     <br>

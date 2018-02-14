@@ -11,15 +11,15 @@
     @endif
         <div class="col-xs-12 col-sm-4">
             <div class="blog-box effect">
-                <img src="@php echo $rnd[rand(0,2)]; @endphp" alt="blog-1">
+                <img src="@php echo $rnd[rand(0,2)]; @endphp" width="360" alt="blog-1">
                 <div class="blog-box-content">
                     <p class="blog-date">
                         <i class="fa fa-calendar costum-color"></i> 25 April 2017
                     </p>
                     <h4 class="effect">
-                        <a href="#">{{$open->title}}</a>
+                        <a href="#">{!! str_limit($open->title, 15) !!}</a>
                     </h4>
-                    <p>{{$open->description}}</p>
+                    <p>{!! str_limit($open->description, 85) !!}</p>
                     <a href="#" class="button costum-bg" data-toggle="modal" data-target="#myModal-{{$open->id}}">Read more</a>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <p class="favs">
+                        <span class="favs pull-left">
                             <span id="{{$open->id}}" onclick="addToFav(this)">
                                 <i class="@php
                                     $fav = \App\UserFavs::where([
@@ -56,7 +56,7 @@
                                     echo $fav->isEmpty() ? "fa fa-star-o" : "fa fa-star";
                                 @endphp"></i> <small>Favourites</small>
                             </span>
-                        </p>
+                        </span>
                     </div>
                 </div>
 

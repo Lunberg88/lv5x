@@ -10,6 +10,7 @@ $factory->define(App\Openings::class, function (Faker $faker) {
 		'salary' => $faker->numberBetween(600,3500),
 		'description' => $faker->text($maxNbChars = 200),
 		'status' => $faker->numberBetween(0,1),
+		'img' => 'image_placeholder.jpg',
 		'user_id' => '3',
 	];
 });

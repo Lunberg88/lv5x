@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CoreSettings;
 use App\History;
 use App\Openings;
 use Gate;
@@ -80,5 +81,25 @@ class AdminController extends Controller
     	$messages = Messages::paginate(20);
 
     	return view('admin.messages', compact('messages'));
+    }
+
+    public function settings()
+    {
+    	$settings = CoreSettings::get();
+
+    	return view('admin.settings', compact('settings'));
+    }
+
+    public function settingsUpdate(Request $request)
+    {
+        $newrequest = $this->validate($request->only('name', 'val'));
+    	$settings = CoreSettings::find(1);
+    	if(!$settings->isEmpty()) {
+    		$settings->name = $newrequest->newValName;
+    		$settings->value = $newrequest->newValVal;
+    		$settings->save();
+	    }
+
+	    return redirect('/admin/settings')->with('message', 'Settings updated!');
     }
 }

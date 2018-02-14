@@ -1133,6 +1133,25 @@ span.ball:nth-child(2) {
     border: none;
 }
 
+section.blogs_lists, section.openings_lists {
+    padding: 40px 10px;
+}
+
+.modal-content .modal-body .blog-box:hover {
+    box-shadow: none !important;
+}
+
+.modal-content .modal-footer span.favs {
+    text-align: left !important;
+    color: #00a5bb;
+}
+
+.admin-dashboard-lnk {
+    position: absolute;
+    top: 55%;
+    right: 0;
+}
+
 @-webkit-keyframes juggler {
     0% {
         -webkit-transform: translateX(0) translateY(0);

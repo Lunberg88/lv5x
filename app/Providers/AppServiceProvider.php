@@ -46,6 +46,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         //Openings history mode
+
 	    Openings::created(function(Openings $openings) {
 	    	$addToHistory = new History();
 	    	$addToHistory->name = 'Created new Opening';
@@ -67,6 +68,7 @@ class AppServiceProvider extends ServiceProvider
 		    $addToHistory->type = 3;
 		    $addToHistory->save();
 	    });
+
     }
 
     /**

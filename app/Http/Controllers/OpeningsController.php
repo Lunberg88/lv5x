@@ -6,6 +6,7 @@ use Auth;
 use Gate;
 use Event;
 use Log;
+use Intervention\Image\Facades\Image;
 use App\UserFavs;
 use App\Events\onAddCandidateEvent;
 use App\Listeners\AddCandidateListener;
@@ -21,7 +22,7 @@ class OpeningsController extends Controller
      */
 	public function index()
 	{
-		$openings = Openings::paginate(8);
+		$openings = Openings::orderBy('id','DESC')->paginate(8);
 
 		return view('admin.openings', [
 			'openings' => $openings,
@@ -50,6 +51,13 @@ class OpeningsController extends Controller
      */
     public function store(Request $request)
     {
+    	/*
+    	if($request->file('imgFile')) {
+    		echo "<pre>".print_r($request->file('imgFile'),1)."</pre>"; die();
+	    }
+	    */
+
+
 	    $openings = new Openings();
 	    if($request->user()->can('createO', $openings)){
 		    $openings->title = $request->title;
@@ -58,7 +66,31 @@ class OpeningsController extends Controller
 		    $openings->description = $request->description;
 		    $openings->status = $request->status;
 		    $openings->user_id = Auth::id();
+		    if($request->file('imgFile')) {
+		    	$image = $request->file('imgFile');
+		    	$filename = time().'.'.$image->getClientOriginalExtension();
+		    	$path = public_path('images/openings/'.$filename);
+		    	$imgPoster = Image::make($image->getRealPath())->resize(320, 180)->save($path);
+		    	$openings->img = $filename;
+		    }
 		    $openings->save();
+
+		    /** To do... **/
+		    /*
+		    if($request->file()) {
+
+		        $image = $request->file('imgFile');
+			    //$image = Input::file('image');
+			    $filename  = time() . '.' . $image->getClientOriginalExtension();
+
+			    $path = public_path('images/openings/' . $filename);
+
+
+			    Image::make($image->getRealPath())->resize(200, 200)->save($path);
+			    //$user->image = $filename;
+			    //$user->save();
+		    }
+		    */
 
 		    //Event::fire(new onAddCandidateEvent(Auth::user(), $candidate));
 		    Event::fire('onAddCandidate', [Auth::user(), $openings]);

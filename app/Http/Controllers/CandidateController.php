@@ -195,7 +195,7 @@ class CandidateController extends Controller
 	 */
 	public function search(Request $request, $stext = null)
 	{
-		$stext = $request->only('search');
+		$stext = $request->only('search', 'stags');
 
 		if($stext == null) {
 			return view('admin.search-empty');

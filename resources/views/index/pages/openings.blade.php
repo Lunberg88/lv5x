@@ -9,7 +9,9 @@
         <div class="container">
             @include('index.partials.opening_single')
             <div class="row">
-                {{$openings->links()}}
+                <div class="col-md-12">
+                    <div align="center">{{$openings->links()}}</div>
+                </div>
             </div>
         </div>
     </section>

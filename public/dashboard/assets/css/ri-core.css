@@ -1,45 +1,3 @@
-/*! =========================================================
- *
- Material Dashboard PRO - V1.2.0
-*
-* =========================================================
-*
-* Copyright 2016 Creative Tim (http://www.creative-tim.com/product/material-dashboard-pro)
- *
- *                       _oo0oo_
- *                      o8888888o
- *                      88" . "88
- *                      (| -_- |)
- *                      0\  =  /0
- *                    ___/`---'\___
- *                  .' \|     |// '.
- *                 / \|||  :  |||// \
- *                / _||||| -:- |||||- \
- *               |   | \  -  /// |   |
- *               | \_|  ''\---/''  |_/ |
- *               \  .-\__  '-'  ___/-. /
- *             ___'. .'  /--.--\  `. .'___
- *          ."" '<  `.___\_<|>_/___.' >' "".
- *         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
- *         \  \ `_.   \_ __\ /__ _/   .-` /  /
- *     =====`-.____`.___ \_____/___.-`___.-'=====
- *                       `=---='
- *
- *     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *
- *               Buddha Bless:  "No Bugs"
- *
- * ========================================================= */
-
-
-/*! nouislider - 10.0.0 - 2016-12-10 16:00:32 */
-
-
-/* Functional styling;
- * These styles are required for noUiSlider to function.
- * You don't need to change these rules to apply your design.
- */
-
 .noUi-target,
 .noUi-target * {
     -webkit-touch-callout: none;
@@ -4606,7 +4564,7 @@ be a descendant of the grid when it is being dragged.
 }
 
 .wizard-card .tab-content {
-    min-height: 340px;
+    /*min-height: 340px;*/
     padding: 20px 15px;
 }
 
@@ -4624,7 +4582,7 @@ be a descendant of the grid when it is being dragged.
 
 .wizard-card .wizard-header {
     text-align: center;
-    padding: 25px 0 35px;
+    padding: 25px 0 10px;
 }
 
 .wizard-card .wizard-header h5 {
@@ -6726,9 +6684,9 @@ h2.title {
 }
 
 .main-panel>.content {
-    margin-top: 70px;
-    padding: 30px 15px;
-    min-height: calc(100vh - 123px);
+    margin-top: 0px;
+    padding: 10px 15px;
+    /*min-height: calc(100vh - 123px);*/
 }
 
 .main-panel>.footer {
@@ -13832,5 +13790,136 @@ footer .btn {
 @media screen and (max-width: 470px) {
     .fc-toolbar .fc-left {
         margin-bottom: 15px;
+    }
+}
+
+.card-section {
+    margin: 10px auto 15px;
+}
+
+.card-section .card-img, .card-section .card-body {
+    display: inline-block;
+}
+
+/****** ***********/
+.openings_lists {
+    margin: 45px auto;
+}
+.opening_box {
+    margin: 10px 15px;
+    background: #fff;
+    border: #d7d7d7;
+    padding: 15px 35px;
+    box-shadow: 0 3px 3px rgba(110, 110, 110, 0.6);
+}
+.opening_box .opening-title {
+    font-size: 18px;
+    color: #2e3436;
+    font-family: Arial;
+    font-weight: bold;
+}
+.opening_box .opening-body {
+    font-size: 14px;
+}
+.opening_box .opening-location {
+    color: #1b6d85;
+    font-weight: bold;
+}
+.opening_box .opening-salary {
+    color: #f66;
+    font-weight: bold;
+}
+.opening_box .opening-status {
+    font-weight: bold;
+    padding: 3px 0;
+}
+.opening_box .opening-status span {
+    padding: 3px 7px;
+}
+.opening_box .opening-status .op-active {
+    background: #2ab27b;
+    color: #fff;
+}
+.opening_box .opening-status .op-disabled {
+    color: #fff;
+    background: #e74c3c;
+}
+.opening_box ul {
+    list-style: none;
+}
+.opening_box ul li {
+    display: inline-block;
+}
+.opening_box .controls {
+    position: relative;
+    float: right;
+    top: 0;
+    right: 10px;
+}
+.opening_box .controls .edit-btn, .opening_box .controls .del-btn {
+    border: 0;
+    font-weight: bold;
+    padding: 3px 7px;
+    text-decoration: none;
+}
+.opening_box .controls .edit-btn {
+    background: #00b34b;
+    color: #fff;
+}
+.opening_box .controls .edit-btn:hover {
+    background: #fff;
+    color: #00b34b;
+    border: 1px solid #00b34b;
+}
+.opening_box .controls .del-btn {
+    background: #ff3737;
+    color: #fff;
+}
+.opening_box .controls .del-btn:hover {
+    background: #fff;
+    color: #ff3737;
+    border: 1px solid #ff3737;
+}
+.opening_box:hover {
+    box-shadow: 0 5px 5px rgba(74, 156, 226, 0.53);
+}
+.select-tags {
+    padding: 5px 15px;
+}
+.select-tags .op-tags, .select-tags .op-tags:active, .select-tags .op-tags:visited {
+    background: #228bb7;
+    color: #fff;
+    padding: 3px 6px;
+    text-decoration: none;
+}
+.select-tags .op-tags:hover {
+    background: #184260;
+    color: #fff;
+    text-decoration: none;
+}
+
+.card-inline-box {
+    display: inline-block;
+}
+
+.card-inline-box:nth-child(2) {
+    padding-left: 12px;
+    vertical-align: top;
+}
+
+.candidate-preview {
+    cursor: default !important;
+}
+
+.notif-mini {
+    width: 15px !important;
+    height: 15px !important;
+    min-width: 15px !important;
+    font-size: 12px !important;
+}
+
+@media (min-width: 992px) {
+    nav.nav-admin {
+        display: none;
     }
 }

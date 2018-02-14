@@ -5,17 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="canonical" href="http://iya-webhr.site" />
-    <title>Iya Web-HR :: Dashboard</title>
-    <!--<link rel="stylesheet" href="/css/app.css">-->
-    <!--<link href="/dashboard/assets/css/bootstrap.min.css" rel="stylesheet" />-->
-
-    <link href="/dashboard/assets/css/material-dashboard.css?v=1.2.0" rel="stylesheet" />
-
-    <!--<link href="/dashboard/assets/css/demo.css" rel="stylesheet" />-->
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="canonical" href="http://recruiter-iia.net" />
+    <title>Recruiter-Iia :: Dashboard</title>
+    <link href="/dashboard/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/dashboard/assets/css/ri-core.css" rel="stylesheet" />
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -47,13 +40,13 @@
 </head>
 <body>
 <div class="wrapper">
-    <div class="sidebar" data-active-color="rose" data-background-color="black" data-image="/dashboard/assets/img/sidebar-2.jpg">
+    <div class="sidebar" data-active-color="green" data-background-color="black" data-image="/dashboard/assets/img/sidebar-2.jpg">
         <div class="logo">
-            <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-                CT
+            <a href="#" class="simple-text logo-mini">
+                RI
             </a>
-            <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-                Creative Tim
+            <a href="#" class="simple-text logo-normal">
+                recuiter-iia
             </a>
         </div>
         <div class="sidebar-wrapper">
@@ -185,77 +178,73 @@
             </ul>
         </div>
     </div>
-    <div class="main-panel">
-        <nav class="navbar navbar-transparent navbar-absolute">
-            <div class="container-fluid">
-                <div class="navbar-minimize">
-                    <button id="minimizeSidebar" class="btn btn-round btn-white btn-fill btn-just-icon">
-                        <i class="material-icons visible-on-sidebar-regular">more_vert</i>
-                        <i class="material-icons visible-on-sidebar-mini">view_list</i>
-                    </button>
-                </div>
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#"> Dashboard </a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="material-icons">notifications</i>
-                        @if(isset($newCandidates) && $newCandidates !== null)
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                @php
+                use App\Candidate;
+                    $newCandidates = Candidate::where('viewed', '=', '0')->get();
+                @endphp
+                @if(isset($newCandidates) && $newCandidates !== null)
+                    @if(count($newCandidates) > 0)
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
+                            Notifications
                             @if(count($newCandidates) > 0)
-                                <span class="notification">{{count($newCandidates)}}</span>
-                                <p class="hidden-lg hidden-md">
-                                    Notifications
-                                    <b class="caret"></b>
-                                </p>
-                            </a>
+                                <span class="btn btn-danger btn-round btn-fab btn-fab-mini notif-mini">{{count($newCandidates)}}</span>
 
-                            <ul class="dropdown-menu">
-                                @foreach($newCandidates as $new)
+                                <i class="material-icons">notifications</i>
+                                <b class="caret"></b>
+                                <div class="ripple-container"></div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                            @foreach($newCandidates as $new)
                                 <li>
                                     <a href="{{route('admin.candidates.show.id', $new->id)}}">
                                         {!! $new->fio !!}<br>
                                         <small>({!! $new->email !!})</small>
                                     </a>
-
                                 </li>
-                                @endforeach
-                            </ul>
+                            @endforeach
+                        </ul>
                             @endif
+                    </div>
                         @endif
+                @endif
+            </div>
+        </div>
+    </div>
+    <div class="main-panel">
+
+        <nav class="navbar navbar-inverse navbar-fixed-top nav-admin">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Project name</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Action</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
-                            <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="material-icons">person</i>
-                                <p class="hidden-lg hidden-md">Profile</p>
-                            </a>
-                        </li>
-                        <li class="separator hidden-lg hidden-md"></li>
                     </ul>
-                    <!--<form class="navbar-form navbar-right" role="search">-->
-                    {!! Form::open(['method' => 'GET', 'route' => ['admin.search'], 'class' => 'navbar-form navbar-right']) !!}
-                        <div class="form-group form-search is-empty">
-                            <input type="text" class="form-control" placeholder="Search">
-                            <span class="material-input"></span>
-                        </div>
-                        <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                            <i class="material-icons">search</i>
-                            <div class="ripple-container"></div>
-                        </button>
-                    {!! Form::close() !!}
-                    <!--</form>-->
                 </div>
             </div>
         </nav>
+
         <div class="content">
             <div class="container-fluid">
+
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
                         @yield('content')
@@ -313,7 +302,7 @@
     var editor_config = {
         //path_absolute : "{{ URL::to('/') }}/",
         path_absolute: "/",
-        selector : "textarea",
+        selector : "textarea.blog-field",
         plugins: [
             "advlist autolink lists link image charmap print preview hr anchor pagebreak",
             "searchreplace wordcount visualblocks visualchars code fullscreen",
@@ -347,9 +336,17 @@
 </script>﻿
 <script>
     $(function() {
-       $('#ref').click(function(e) {
-           window.location.reload();
-       })
+        $('#toggle').css('cursor', 'pointer');
+        $('#hide').click(function() {
+            $('#toggle').toggle();
+        });
+
+        $('div.sidebar-wrapper ul.nav > li div.collapse nav > li').click(function() {
+            $('div.sidebar-wrapper ul.nav > li').removeClass('active');
+            //$('div.sidebar-wrapper ul.nav > li ')
+            $(this).addClass('active');
+            $()
+        });
     });
 </script>
 </html>

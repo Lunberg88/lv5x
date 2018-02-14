@@ -8,9 +8,9 @@
                         <i class="fa fa-calendar costum-color"></i> 25 April 2017
                     </p>
                     <h4 class="effect">
-                        <a href="{{route('index.openings')}}">{{$open->title}}</a>
+                        <a href="{{route('index.openings')}}">{!! str_limit($open->title, 30) !!}</a>
                     </h4>
-                    <p>{{$open->description}}</p>
+                    <p>{!! str_limit($open->description, 100) !!}</p>
                     <a href="{{route('index.openings')}}" class="button costum-bg">Read more</a>
                 </div>
             </div>

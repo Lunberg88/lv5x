@@ -21,13 +21,13 @@
                     <div class="form-group">
                         <label for="blog_short" class="col-md-2 control-label">Short story</label>
                         <div class="col-md-10">
-                            <textarea cols="8" rows="15" class="form-control" name="short" placeholder="News short story"></textarea>
+                            <textarea cols="8" rows="7" class="form-control blog-field" name="short" placeholder="News short story"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="blog_full" class="col-md-2 control-label">Full story</label>
                         <div class="col-md-10">
-                            <textarea cols="8" rows="15" class="form-control" name="full" placeholder="News full story"></textarea>
+                            <textarea cols="8" rows="7" class="form-control blog-field" name="full" placeholder="News full story"></textarea>
                         </div>
                     </div>
                     <div class="form-group">

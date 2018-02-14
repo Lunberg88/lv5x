@@ -10,7 +10,7 @@
                     <i class="fa fa-calendar costum-color"></i> {{$blog->created_at}}
                 </p>
                 <h4 class="effect">
-                    <a href="#">{{$blog->title}}</a>
+                    <a href="#">{!! str_limit($blog->title, 15) !!}</a>
                 </h4>
                 <p>{!! str_limit($blog->short, 55) !!}</p>
                 <a href="/blog/{{$blog->slug}}" class="button costum-bg">Read more</a>

@@ -17,9 +17,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="title-box text-center">
-                    <h2>The New Openings</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elitsed ation Lorem ipsum
-                        <br>dolor sit amet.Veniam quis notru exercit.</p>
+                    <h2>New Openings</h2>
                 </div>
             </div>
         </div>

@@ -67,9 +67,10 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#home" class="scroll active" data-speed="800">HOME</a></li>
-                    <li><a href="#about" class="scroll" data-speed="1000">ABOUT</a></li>
-                    <li><a href="#contact" class="scroll" data-speed="1800">CONTACT</a></li>
+                    <li><a href="/#home" class="scroll active" data-speed="800">HOME</a></li>
+                    <li><a href="./#about" class="scroll" data-speed="1000">ABOUT</a></li>
+                    <li><a href="./#contact" class="scroll" data-speed="1800">CONTACT</a></li>
+                    <li><a href="/openings" class="scroll">OPENINGS</a></li>
                     <li><a href="/blog" class="scroll">BLOG</a></li>
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> LOGIN</a></li>
@@ -187,6 +188,9 @@
 @endforeach
 @endif
 <script src="/main-theme/js/jquery.min.js"></script>
+<!--
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+-->
 <script src="/main-theme/js/bootstrap.min.js"></script>
 <script src="/main-theme/js/custom.js"></script>
 <script>

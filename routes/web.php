@@ -47,6 +47,9 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 	Route::get('/admin/history', 'AdminController@history')->name('admin.history');
 
 	Route::get('/admin/msg', 'AdminController@msg')->name('admin.msg.list');
+
+	Route::get('/admin/settings', 'AdminController@settings')->name('admin.settings');
+	Route::put('/admin/settings/update', 'AdminController@settingsUpdate')->name('admin.settings.update');
 });
 
 Route::group(['middleware' => ['auth']], function() {
