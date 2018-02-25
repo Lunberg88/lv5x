@@ -1,4 +1,5 @@
 @extends('admin.index')
+@section('title', ':: Create Opening')
 @section('content')
         @can('createO', $openings)
             <div class="row">
@@ -71,36 +72,44 @@
                                                 Status
                                                 <small>*</small>
                                             </label>
-                                            <input class="form-control" name="status" type="text" required="true" aria-required="true">
-                                            <span class="material-input"></span>
+                                            <div class="checkbox-radios">
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="status" value="1" checked="true"><span class="circle"></span><span class="check"></span>Active
+                                                    </label>
+                                                </div>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="status" value="0"><span class="circle"></span><span class="check"></span>Closed
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div>
-                                            <span class="btn btn-rose btn-round btn-file">
-                                                <span class="fileinput-new">Select image</span>
-                                                <span class="fileinput-exists">Change</span>
-                                                <input type="file" name="imgFile" id="imgFile">
-                                                <div class="ripple-container"></div>
-                                            </span>
-                                            <a href="#pablo" class="btn btn-info btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                        <div class="fileinput text-center fileinput-new" data-provides="fileinput">
+                                            <div class="fileinput-new thumbnail">
+                                                <img src="/dashboard/assets/img/placeholder.jpg" style="width:80px;" alt="Upload File">
+                                            </div>
+                                            <div class="fileinput-preview fileinput-exists thumbnail" style=" padding: 10px 15px;"></div>
+                                            <div>
+                                                    <span class="btn btn-rose btn-round btn-file">
+                                                        <span class="fileinput-new">Select image</span>
+                                                        <span class="fileinput-exists">Change</span>
+                                                        <input type="hidden" value="" name="imgFile">
+                                                        <input type="file" name="imgFile" id="imgFile">
+                                                        <div class="ripple-container"></div>
+                                                    </span>
+                                                <a href="#" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove<div class="ripple-container"><div class="ripple ripple-on ripple-out" style="left: 48.5781px; top: 21.4531px; background-color: rgb(255, 255, 255); transform: scale(15.5489);"></div><div class="ripple ripple-on ripple-out" style="left: 26.75px; top: 18px; background-color: rgb(255, 255, 255); transform: scale(15.5489);"></div></div></a>
+                                            </div>
                                         </div>
-                                        <!--
-                                        <div class="form-group label-floating is-empty">
-                                            <label class="control-label">
-                                                Image
-                                                <small>*</small>
-                                            </label>
-                                            <input class="form-control" name="imgFile" id="imgFile" type="file" required="true" aria-required="true">
-                                            <span class="material-input"></span>
-                                        </div>
-                                        -->
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
+                                        <a href="{{route('admin.openings')}}" class="btn btn-default pull-left">Back</a>
                                         <div class="form-footer text-right">
                                             <button name="add" type="submit" class="btn btn-success btn-fill">Create...</button>
                                         </div>
@@ -110,62 +119,7 @@
                         </form>
                     </div>
                     <!-- //-->
-                    {{--
-                    <form class="form-horizontal" method="POST" action="{{ route('admin.openings.store') }}" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="title">Opening Title:</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="title" class="form-control" id="title" autofocus placeholder="Title...">
-                                <small>Min: 10, Max: 100, only text</small>
-                                <p class="errorTitle text-center alert alert-danger hidden"></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="location">Location:</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="location" class="form-control" id="location" autofocus placeholder="Location...">
-                                <small>Min: 10, Max: 50, only text</small>
-                                <p class="errorTitle text-center alert alert-danger hidden"></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="salary">Salary:</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="salary" class="form-control" id="salary" autofocus placeholder="Salary...">
-                                <small>Min: 3, Max: 5, only digits</small>
-                                <p class="errorTitle text-center alert alert-danger hidden"></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="description">Description:</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="description" class="form-control" id="description" autofocus placeholder="Description...">
-                                <small>Min: 5, Max: 255, only text</small>
-                                <p class="errorTitle text-center alert alert-danger hidden"></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="status">Status:</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="status" class="form-control" id="status" autofocus placeholder="Status...">
-                                <small>Select status-type</small>
-                                <p class="errorContent text-center alert alert-danger hidden"></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="imgFile" class="control-label col-sm-2">Image poster:</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control" id="imgFile" name="imgFile">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <input type="submit" name="add" value="Create..." class="btn btn-primary">
-                        </div>
-                    </form>
-                    --}}
                 </div>
-                <div class="col-md-6"></div>
             </div>
         @else
             <div class="alert alert-danger">

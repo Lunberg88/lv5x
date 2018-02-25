@@ -1,4 +1,5 @@
 @extends('admin.index')
+@section('title', ':: Messages')
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -9,7 +10,7 @@
                         <i class="material-icons">mail</i>
                     </div>
                     <div class="card-inline-box">
-                        <h4 class="card-title"><strong>Messages for you</strong></h4>
+                        <h4 class="card-title">Messages for you</h4>
                     </div>
                 </div>
                 <div class="card-content">

@@ -1,4 +1,5 @@
 @extends('admin.index')
+@section('title', ':: History')
 @section('content')
 <div class="row">
     <div class="col-md-12">

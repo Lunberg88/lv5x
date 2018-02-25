@@ -5,13 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="canonical" href="http://recruiter-iia.net" />
-    <title>Recruiter-Iia :: Dashboard</title>
+    <link rel="canonical" href="http://recruiter-iia.net<?php echo $_SERVER['REQUEST_URI']; ?>" />
+    <title>Recruiter-Iia @yield('title')</title>
     <link href="/dashboard/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/dashboard/assets/css/ri-core.css" rel="stylesheet" />
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/dashboard/assets/css/toastr.css">
     <style type="text/css">
         .doc {
             width: 100%;
@@ -180,7 +181,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-3 pull-right">
+            <div class="col-md-3 col-md-offset-2 col-sm-offset-2 notification-button-devices pull-left">
                 @php
                 use App\Candidate;
                     $newCandidates = Candidate::where('viewed', '=', '0')->get();
@@ -288,8 +289,32 @@
 <!-- Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
 <script src="/dashboard/assets/js/jquery.tagsinput.js"></script>
 <!-- Material Dashboard javascript methods -->
-<script src="/dashboard/assets/js/material-dashboard.js?v=1.2.0"></script>
+<script src="/dashboard/assets/js/material-dashboard.js"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
+<script src="/dashboard/assets/js/custom.js"></script>
+<script src="/dashboard/assets/js/toastr.min.js"></script>
+<script>
+    @if(Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}";
+    switch(type){
+        case 'info':
+            toastr.info("{{ Session::get('message') }}");
+            break;
+
+        case 'warning':
+            toastr.warning("{{ Session::get('message') }}");
+            break;
+
+        case 'success':
+            toastr.success("{{ Session::get('message') }}");
+            break;
+
+        case 'error':
+            toastr.error("{{ Session::get('message') }}");
+            break;
+    }
+    @endif
+</script>
 <script type="text/javascript">
     $(function() {
         $('#showOrHideCv').click(function() {
@@ -343,9 +368,21 @@
 
         $('div.sidebar-wrapper ul.nav > li div.collapse nav > li').click(function() {
             $('div.sidebar-wrapper ul.nav > li').removeClass('active');
-            //$('div.sidebar-wrapper ul.nav > li ')
             $(this).addClass('active');
             $()
+        });
+
+        $('button[data-original-title="Edit"]').click(function(e) {
+            e.preventDefault();
+            $('div[data-info="upload_cvs"]').fadeOut('slider');
+            $('div[ data-info="edit_upload_cvs"]').fadeIn('slider');
+            $('div#edit-upload-cvs').removeClass('hidden');
+            $('div#edit-upload-cvs').addClass('visible');
+            $('div.opening-edit-tbs').addClass('hidden');
+        });
+
+        $('button[data-original-title="Remove"]').click(function() {
+            $(this).val('true');
         });
     });
 </script>

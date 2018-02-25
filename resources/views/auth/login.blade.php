@@ -1,52 +1,12 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Iya Web-HR</title>
-    <link href="/css/app.css" rel="stylesheet">
-    <link rel="stylesheet" href="main-theme/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="main-theme/css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:700%7cRaleway:400,700" rel="stylesheet">
-    <style type="text/css">
-        .doc {
-            width: 100%;
-            height: 2000px;
-            border: 0px;
-        }
-        .cv_frame {
-            width: 100%;
-            height: 2000px;
-            border: 0px;
-        }
-    </style>
-    <!--[if lt IE 9]>
-    <script src="js/ie/html5shiv.min.js"></script>
-    <script src="js/ie/respond.min.js"></script>
-    <![endif]-->
-    <script>
-        window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-        ]) !!};
-    </script>
-</head>
-<body>
-<div class="preloader-con">
-    <div class="preloader center">
-        <span class="ball"></span>
-        <span class="ball"></span>
-        <span class="ball"></span>
-    </div>
-</div>
+@extends('frontend.auth')
+@section('content')
+{{--
 <section class="login">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default login-container">
-                    <!--<div class="panel-heading">Login</div>-->
+
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                             {{ csrf_field() }}
@@ -107,8 +67,67 @@
         </div>
     </div>
 </section>
-<script src="main-theme/js/jquery.min.js"></script>
-<script src="main-theme/js/bootstrap.min.js"></script>
-<script src="main-theme/js/custom.js"></script>
-</body>
-</html>
+--}}
+<header>
+    <section class="view intro-2 hm-stylish-strong">
+        <div class="full-bg-img flex-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-lg-5">
+
+                        <!--Form with header-->
+                        <div class="card wow fadeIn login-form" data-wow-delay="0.3s">
+                            <div class="card-body">
+
+                                <!--Header-->
+                                    <div class="form-header btn-header-info">
+                                        <h3><i class="fa fa-user mt-2 mb-2"></i> Log in:</h3>
+                                    </div>
+
+                                <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                                {{ csrf_field() }}
+                                    <!--Body-->
+                                    <div class="md-form">
+                                        <i class="fa fa-envelope prefix white-text"></i>
+                                        <input type="email" id="email" name="email" class="form-control{{ $errors->has('email') ? ' validation invalid' : '' }}" value="{{ old('email') }}" required>
+                                        <label for="email">Your email</label>
+                                        @if ($errors->has('email'))
+                                            <small class="pull-right">{{ $errors->first('email') }}</small>
+                                        @endif
+                                    </div>
+
+                                    <div class="md-form">
+                                        <i class="fa fa-lock prefix white-text"></i>
+                                        <input type="password" id="password" name="password" class="form-control{{ $errors->has('password') ? ' validation invalid' : '' }}"  required>
+                                        <label for="password">Your password</label>
+                                        @if ($errors->has('password'))
+                                            <small class="pull-right">{{ $errors->first('password') }}</small>
+                                        @endif
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="remember" id="defaultCheckbox1" {{ old('remember') ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="defaultCheckbox1">
+                                            Remember Me
+                                        </label>
+                                        <a class="btn btn-link" href="{{ url('/password/reset') }}">
+                                            Forgot Your Password?
+                                        </a>
+                                    </div>
+                                    <div class="text-center">
+                                        <button class="btn btn-info btn-lg">Sign up</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!--/Form with header-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>
+
+
+@endsection
+

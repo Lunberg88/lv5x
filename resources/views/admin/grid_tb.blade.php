@@ -13,7 +13,7 @@
                 $tags = explode(',', $p->tags)
             @endphp
             @foreach($tags as $tag)
-                <a href="{{route('admin.candidates.search')}}?search={{$tag}}" title="{{$tag}}" class="label label-info">{{$tag}}</a>
+                <a href="{{route('admin.candidates.search')}}?search=&stags={{trim($tag)}}" name="{{trim($tag)}}" title="{{trim($tag)}}" class="label label-info">{{$tag}}</a>
             @endforeach
         @endif
     </td>

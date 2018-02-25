@@ -31,6 +31,7 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <a href="{{route('admin.blog.dashboard')}}" class="btn btn-default pull-left">Back</a>
                         <button class="col-md-offset-4 col-md-4 btn btn-primary">Create News</button>
                     </div>
                 </form>

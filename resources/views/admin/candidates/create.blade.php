@@ -1,4 +1,5 @@
 @extends('admin.index')
+@section('title', ':: Add new candidate')
 @section('content')
         @can('create', $candidate)
             <div class="row">
@@ -17,7 +18,7 @@
                             <div class="row"><div class="col-md-12"><br></div></div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form class="form-horizontal" method="POST" action="{{ route('admin.candidates.store') }}" novalidate="novalidate">
+                                    <form class="form-horizontal" method="POST" action="{{ route('admin.candidates.store') }}" novalidate="novalidate" enctype="multipart/form-data">
                                         {{ csrf_field() }}
                                         <div class="form-group label-floating is-empty">
                                             <label class="control-label">
@@ -38,9 +39,32 @@
                                         <div class="form-group label-floating is-empty">
                                             <label class="control-label">
                                                 Shared CV Link
-                                                <small>*</small>
+                                                <small>* Optional</small>
                                             </label>
-                                            <input class="form-control" name="cvs" type="text" required="true" aria-required="true">
+                                            <input class="form-control" name="cvs" type="text">
+                                            <span class="material-input"></span>
+                                        </div>
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">
+                                                <small>Upload CV from storage</small>
+                                                <small>* Optional</small>
+                                            </label><br/>
+                                            <div class="fileinput text-center fileinput-new" data-provides="fileinput">
+                                                <div class="fileinput-new thumbnail">
+                                                    <img src="/dashboard/assets/img/placeholder.jpg" style="width:80px;" alt="Upload File">
+                                                </div>
+                                                <div class="fileinput-preview fileinput-exists thumbnail" style=" padding: 10px 15px;"></div>
+                                                <div>
+                                                    <span class="btn btn-rose btn-round btn-file">
+                                                        <span class="fileinput-new">Select image</span>
+                                                        <span class="fileinput-exists">Change</span>
+                                                        <input type="hidden" value="" name="upload_cvs">
+                                                        <input type="file" name="upload_cvs" id="upload_cvs">
+                                                        <div class="ripple-container"></div>
+                                                    </span>
+                                                    <a href="#" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove<div class="ripple-container"><div class="ripple ripple-on ripple-out" style="left: 48.5781px; top: 21.4531px; background-color: rgb(255, 255, 255); transform: scale(15.5489);"></div><div class="ripple ripple-on ripple-out" style="left: 26.75px; top: 18px; background-color: rgb(255, 255, 255); transform: scale(15.5489);"></div></div></a>
+                                                </div>
+                                            </div>
                                             <span class="material-input"></span>
                                         </div>
                                         <div class="form-group label-floating is-empty">
@@ -56,18 +80,37 @@
                                                 Tags
                                                 <small>*</small>
                                             </label>
+                                            <div class="col-md-10">
+                                                <div class="bootstrap-tagsinput">
+                                                    <input type="text" placeholder="" size="1">
+                                                </div>
+                                                <input type="text" name="tags" class="tagsinput" data-role="tagsinput" data-color="rose" style="display: none;" placeholder="tags...">
+                                            </div>
+                                            <!--
                                             <input class="form-control" name="tags" type="text" required="true" aria-required="true">
                                             <span class="material-input"></span>
+                                            -->
                                         </div>
                                         <div class="form-group label-floating is-empty">
-                                            <label class="control-label">
-                                                Salary
-                                                <small>*</small>
-                                            </label>
-                                            <input class="form-control" name="salary" type="text" required="true" aria-required="true">
-                                            <span class="material-input"></span>
+                                            <div class="col-md-4">
+                                                <label class="control-label">
+                                                    Salary
+                                                    <small>*</small>
+                                                </label>
+                                                <input class="form-control" name="salary" type="text" required="true" aria-required="true">
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <select name="" id="" class="form-control">
+                                                    <option value="1">&dollar;</option>
+                                                    <option value="2">&euro;</option>
+                                                    <option value="3">руб.</option>
+                                                    <option value="4">грн.</option>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class="form-footer text-right">
+                                            <a href="{{route('admin.candidates')}}" class="btn btn-default pull-left">Back</a>
                                             <button name="add" type="submit" class="btn btn-success btn-fill">Create...</button>
                                         </div>
                                     </form>

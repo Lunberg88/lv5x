@@ -29,7 +29,7 @@ class IndexController extends Controller
 	                        ->take(3)
 	                        ->get();
 
-		    return view('index.pages.main', [
+		    return view('frontend.main', [
 		    	'openings' => $openings,
 			    'user_favs' => UserProfileInfo::userFavs(),
 			    'user_profile' => UserProfileInfo::userProfile(),
@@ -129,6 +129,6 @@ class IndexController extends Controller
 	    $send->message = $request->message;
 	    $send->save();
 
-	    return redirect('/')->with('message', 'Your message successfully send!');
+	    return redirect('/')->with(['message' => 'Your message successfully send!', 'alert-type' => 'success']);
     }
 }

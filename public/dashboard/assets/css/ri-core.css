@@ -12583,11 +12583,11 @@ footer .btn {
     -o-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    -webkit-transition: all 300ms cubic-bezier(0.34, 1.61, 0.7, 1);
-    -moz-transition: all 300ms cubic-bezier(0.34, 1.61, 0.7, 1);
-    -o-transition: all 300ms cubic-bezier(0.34, 1.61, 0.7, 1);
-    -ms-transition: all 300ms cubic-bezier(0.34, 1.61, 0.7, 1);
-    transition: all 300ms cubic-bezier(0.34, 1.61, 0.7, 1);
+    -webkit-transition: all 1.5s cubic-bezier(0.34, 1.61, 0.7, 1);
+    -moz-transition: all 1.5s cubic-bezier(0.34, 1.61, 0.7, 1);
+    -o-transition: all 1.5s cubic-bezier(0.34, 1.61, 0.7, 1);
+    -ms-transition: all 1.5s cubic-bezier(0.34, 1.61, 0.7, 1);
+    transition: all 1.5s cubic-bezier(0.34, 1.61, 0.7, 1);
 }
 
 .card:hover [data-header-animation="true"] {
@@ -13918,8 +13918,39 @@ footer .btn {
     font-size: 12px !important;
 }
 
+.candidate-edit {
+    padding-top: 2.5% !important;
+    padding-bottom: 5px !important;
+}
+
+.form-horizontal .checkbox-radios div.radio label.op-status input[type=radio]:checked + label.op-status > * {
+    color: #01d36b !important;
+}
+
+.form-horizontal .checkbox-radios div.radio label.op-status input[type=radio]:checked + label.op-status > * {
+    color: #ff0000 !important;
+}
+
 @media (min-width: 992px) {
     nav.nav-admin {
         display: none;
+    }
+}
+
+@media (max-width: 599px) {
+    .notification-button-devices {
+        padding-top: 17%;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 768px) {
+    .notification-button-devices {
+        padding-top: 12%;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1300px) {
+    .notification-button-devices {
+        padding-left: 85px;
     }
 }

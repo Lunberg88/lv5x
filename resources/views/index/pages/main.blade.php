@@ -1,4 +1,5 @@
 @extends('index')
+@section('title', ':: Homepage')
 @section('content')
 <section id="home" class="home-2">
     <div class="container">

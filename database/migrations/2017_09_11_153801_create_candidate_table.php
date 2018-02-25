@@ -20,7 +20,9 @@ class CreateCandidateTable extends Migration
         	$table->string('stack');
         	$table->string('tags');
         	$table->integer('salary');
+        	$table->string('currency')->default('$');
         	$table->string('cvs');
+        	$table->string('upload_cvs')->nullable();
         	$table->integer('status')->default('0');
         	$table->integer('viewed')->default('0');
         	$table->integer('user_id')->unsigned();

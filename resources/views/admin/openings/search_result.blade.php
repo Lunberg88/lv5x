@@ -1,4 +1,5 @@
 @extends('admin.index')
+@section('title', ':: Search Results for Openings')
 @section('content')
     <div class="row">
         <table class="table table-stripped">

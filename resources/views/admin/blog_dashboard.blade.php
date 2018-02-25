@@ -1,26 +1,17 @@
 @extends('admin.index')
+@section('title', ':: Blog List')
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            @if(session('message'))
-                <div class="alert alert-success">
-                    {{ session('message') }}
-                </div>
-            @endif
-            @if(session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-
             <div class="card">
                 <div class="card-header card-header-text" data-background-color="blue">
-                    <h4 class="card-title">Blog Stats</h4>
-                    <p class="category">List of all available blogs</p>
+                    <div class="card-inline-box">
+                        <i class="material-icons">content_paste</i>
+                    </div>
+                    <div class="card-inline-box">
+                        <h4 class="card-title">Blog Stats</h4>
+                        <p class="category">List of all available blogs</p>
+                    </div>
                 </div>
                 <div class="card-content table-responsive">
                     <table class="table table-hover">

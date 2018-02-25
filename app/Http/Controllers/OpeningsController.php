@@ -22,7 +22,7 @@ class OpeningsController extends Controller
      */
 	public function index()
 	{
-		$openings = Openings::orderBy('id','DESC')->paginate(8);
+		$openings = Openings::orderByDesc('id')->paginate(16);
 
 		return view('admin.openings', [
 			'openings' => $openings,
@@ -51,13 +51,6 @@ class OpeningsController extends Controller
      */
     public function store(Request $request)
     {
-    	/*
-    	if($request->file('imgFile')) {
-    		echo "<pre>".print_r($request->file('imgFile'),1)."</pre>"; die();
-	    }
-	    */
-
-
 	    $openings = new Openings();
 	    if($request->user()->can('createO', $openings)){
 		    $openings->title = $request->title;
@@ -95,9 +88,9 @@ class OpeningsController extends Controller
 		    //Event::fire(new onAddCandidateEvent(Auth::user(), $candidate));
 		    Event::fire('onAddCandidate', [Auth::user(), $openings]);
 
-		    return redirect('admin/openings')->with('message', 'New candidate successfully added!');
+		    return redirect('admin/openings')->with(['message' => 'New candidate successfully added!', 'alert-type' => 'success']);
 	    } else {
-		    return redirect('admin/openings')->with('error', 'Access dined for you!');
+		    return redirect('admin/openings')->with(['error' => 'Access dined for you!', 'alert-type' => 'danger']);
 	    }
     }
 
@@ -114,7 +107,7 @@ class OpeningsController extends Controller
 		    return view('admin.openings.show', ['openings' => $openings,]);
 
 	    } else {
-		    return redirect('admin/openings')->with('error', 'Opening with this ID: '.$id.' not found.');
+		    return redirect('admin/openings')->with(['message' => 'Opening with this ID: '.$id.' not found.', 'alert-type' => 'danger']);
 	    }
     }
 
@@ -132,7 +125,7 @@ class OpeningsController extends Controller
 			    'openings' => $openings,
 		    ]);
 	    } else {
-		    return redirect('admin/openings')->with('error', 'Opening with this ID: '.$id.' not exists!');
+		    return redirect('admin/openings')->with(['message' => 'Opening with this ID: '.$id.' not exists!', 'alert-type' => 'danger']);
 	    }
     }
 
@@ -157,15 +150,22 @@ class OpeningsController extends Controller
 			    $openings->description = $data['description'];
 			    $openings->status = $data['status'];
 			    $openings->user_id = Auth::id();
+			    if($request->file('editImgFile') && $request->file('editImgFile') != '') {
+				    $image = $request->file('editImgFile');
+				    $filename = time().'-'.$openings->id.'.'.$image->getClientOriginalExtension();
+				    $path = public_path('images/openings/'.$filename);
+				    $imgPoster = Image::make($image->getRealPath())->resize(320, 180)->save($path);
+				    $openings->img = $filename;
+			    }
 
 			    $openings->save();
 
-			    return redirect('admin/openings')->with('message', 'Opening successfully updated!');
+			    return redirect('admin/openings')->with(['message' => 'Opening successfully updated!', 'alert-type' => 'info']);
 		    }
 
-		    return redirect('admin/openings')->with('error', 'Access denied, you don\'t have such permission!');
+		    return redirect('admin/openings')->with(['message' => 'Access denied, you don\'t have such permission!', 'alert-type' => 'danger']);
 	    } else {
-		    return redirect('admin/openings')->with('error', 'Opening with this ID: '.$id.' not exists!');
+		    return redirect('admin/openings')->with(['message' => 'Opening with this ID: '.$id.' not exists!', 'alert-type' => 'danger']);
 	    }
     }
 
@@ -180,9 +180,9 @@ class OpeningsController extends Controller
 	    if($openings = Openings::find($id)) {
 		    $openings->delete();
 
-		    return redirect('admin/openings')->with('message', 'The Opening was deleted from DataBase.');
+		    return redirect('admin/openings')->with(['message' => 'The Opening was deleted from DataBase.', 'alert-type' => 'success']);
 	    } else {
-		    return redirect('admin/openings')->with('error', 'This ID: '.$id.' not exists!');
+		    return redirect('admin/openings')->with(['message' => 'This ID: '.$id.' not exists!', 'alert-type' => 'danger']);
 	    }
     }
 

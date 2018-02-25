@@ -1,18 +1,7 @@
 @extends('admin.index')
+@section('title', ':: Candidates')
 @section('content')
     <div class="main-dashboard">
-        <div class="row">
-            @if(session('message'))
-                <div class="alert alert-success">
-                    {{ session('message') }}
-                </div>
-            @endif
-            @if(session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
-        </div>
         <div class="row">
             <div class="col-lg-12">
                 {!! Form::open(['method' => 'GET', 'route' => ['admin.candidates.search'], 'role' => 'search']) !!}
@@ -29,14 +18,14 @@
                             @endforeach
                         @endif
                     </select>
-                </div><!-- /input-group -->
+                </div>
                 {!! Form::close() !!}
-            </div><!-- /.col-lg-6 -->
+            </div>
         </div>
         <div class="row">
 
             <div class="card">
-                <div class="card-header card-header-text" data-background-color="green">
+                <div class="card-header card-header-text" data-background-color="blue">
                     <h4 class="card-title">Candidate Stats</h4>
                     <p class="category">List of all available candidates - 2018</p>
                 </div>

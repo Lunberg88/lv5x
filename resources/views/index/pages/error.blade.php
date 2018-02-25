@@ -1,4 +1,5 @@
 @extends('index')
+@section('title', ':: Error')
 @section('content')
     <div class="container">
         <div class="row">

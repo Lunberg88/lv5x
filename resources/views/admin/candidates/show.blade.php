@@ -1,5 +1,5 @@
 @extends('admin.index')
-
+@section('title', ':: '.$candidate->fio)
 @section('content')
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
@@ -26,7 +26,7 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="about">
                                         <div class="row">
-                                            <div class="col-md-10 col-lg-offset-1">
+                                            <div class="col-md-10 col-md-offset-1">
                                                 <div class="group-control">id: <b>{{$candidate->id}}</b></div>
                                                 <div class="group-control">fio: <b>{{$candidate->fio}}</b></div>
                                                 <div class="group-control">fio: <b>{{$candidate->email}}</b></div>
@@ -36,10 +36,18 @@
                                                 <div class="group-control">
                                                     @if($tags)
                                                         @foreach($tags as $tag)
-                                                            <a href="{{route('admin.candidates.search')}}?search={{$tag}}" title="{{$tag}}" class="label label-info">{{$tag}}</a>&nbsp;
+                                                            <a href="{{route('admin.candidates.search')}}?search=&stags={{trim($tag)}}" title="{{$tag}}" class="label label-info">{{$tag}}</a>&nbsp;
                                                         @endforeach()
                                                     @endif()
                                                 </div>
+                                                <div class="group-control">
+                                                    <legend>CV</legend>
+                                                    <span>{{$candidate->upload_cvs}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-10 col-md-offset-1">
                                             </div>
                                         </div>
                                     </div>

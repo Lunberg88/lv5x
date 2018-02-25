@@ -100,6 +100,6 @@ class AdminController extends Controller
     		$settings->save();
 	    }
 
-	    return redirect('/admin/settings')->with('message', 'Settings updated!');
+	    return redirect('/admin/settings')->with(['message' => 'Settings updated!', 'alert-type' => 'info']);
     }
 }

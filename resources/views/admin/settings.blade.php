@@ -1,4 +1,5 @@
 @extends('admin.index')
+@section('title', ':: Settings')
 @section('content')
     <div class="row">
         <div class="col-md-offset-2 col-md-10">
@@ -10,7 +11,7 @@
                         <h3>Header text message</h3>
                     </div>
                     <div class="panel-body">
-                        <input name="header-text" id="header-text" class="form-control">
+                        <textarea rows="4" name="header-text" id="header-text" class="form-control"></textarea>
                     </div>
                 </div>
                 <div class="panel panel-info">
@@ -18,7 +19,7 @@
                         <h3>Header description</h3>
                     </div>
                     <div class="panel-body">
-                        <input name="header-description" id="header-description" class="form-control">
+                        <textarea rows="4" name="header-description" id="header-description" class="form-control"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
