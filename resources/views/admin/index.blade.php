@@ -176,6 +176,12 @@
                         <p>Messages</p>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin.settings')}}">
+                        <i class="fa fa-cogs" aria-hidden="true"></i>
+                        <p>Settings</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

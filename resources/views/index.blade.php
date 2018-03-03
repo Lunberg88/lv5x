@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Recruiteriia @yield('title')</title>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:700%7cRaleway:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700|Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/core-md.min.css" rel="stylesheet">
@@ -27,12 +27,13 @@
 </a>
 @yield('content')
 <!-- JS -->
-<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="js/popper.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/mdb.min.js"></script>
-<script type="text/javascript" src="js/scroll.js"></script>
-<script type="text/javascript" src="js/toastr.min.js"></script>
+<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/js/popper.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/mdb.min.js"></script>
+<script type="text/javascript" src="/js/scroll.js"></script>
+<script type="text/javascript" src="/js/share.js"></script>
+<script type="text/javascript" src="/js/toastr.min.js"></script>
 <script>
     @if(Session::has('message'))
     var type = "{{ Session::get('alert-type', 'info') }}";
@@ -55,6 +56,7 @@
     }
     @endif
 </script>
+<script type="text/javascript" src="/js/custom.js"></script>
 <script>
     new WOW().init();
 </script>

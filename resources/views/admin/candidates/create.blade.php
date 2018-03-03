@@ -86,13 +86,9 @@
                                                 </div>
                                                 <input type="text" name="tags" class="tagsinput" data-role="tagsinput" data-color="rose" style="display: none;" placeholder="tags...">
                                             </div>
-                                            <!--
-                                            <input class="form-control" name="tags" type="text" required="true" aria-required="true">
-                                            <span class="material-input"></span>
-                                            -->
                                         </div>
                                         <div class="form-group label-floating is-empty">
-                                            <div class="col-md-4">
+                                            <div class="col-md-2 col-sm-2">
                                                 <label class="control-label">
                                                     Salary
                                                     <small>*</small>
@@ -100,8 +96,8 @@
                                                 <input class="form-control" name="salary" type="text" required="true" aria-required="true">
                                                 <span class="material-input"></span>
                                             </div>
-                                            <div class="col-md-2">
-                                                <select name="" id="" class="form-control">
+                                            <div class="col-md-2 col-sm-2">
+                                                <select name="currency" class="form-control">
                                                     <option value="1">&dollar;</option>
                                                     <option value="2">&euro;</option>
                                                     <option value="3">руб.</option>

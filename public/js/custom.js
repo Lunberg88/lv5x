@@ -1,24 +1,30 @@
-function sh(event,t,d,u,p,g){
-    var h=document.getElementById('hint1');
+; var url = 'http://ajax_lv/openings/addfav';
 
-    h.className="hint";
+function addToFav(val) {
 
-    var s='<table style="font-size:11px;" cellpadding=2 cellspacing=0><tr><td align=center><b>'+t+'</b></td></tr>';
-    if(u!='') s+='<tr><td><small>Удар: '+u+'</small></td></tr>';
-    if(p.length!=''){
-        st=p.split(',');
-        if(p.indexOf('•')>0) s+='<tr><td><small><b>Действие предмета:</b><br>';
-        else s+='<tr><td><small><b>Параметры:</b><br>';
-        for(i=1;i<st.length;i++) s+='&nbsp;'+st[i]+'<br>';
-        s+='</small></td></tr>';
-    }
-    if(d!='') s+='<tr><td><small>Долговечность: '+d+'</small></td></tr>';
-    if(g!='') s+='<tr><td><small>Гравировка: <font color=red>'+g+'</font></small></td></tr>';
-    s+='</table>';
+    $.post(url, {
+        '_token': $('meta[name="csrf-token"]').attr('content'),
+        'id': val.id
+    }).done(function (data) {
+        var selId = $('#' + val.id + ' > i');
+        var text = $('#' + val.id + ' > small');
+        selId.hasClass('fa-star') ? selId.removeClass('fa-star').addClass('fa-star-o') + toastr.error("Removed") : selId.removeClass('fa-star-o').addClass('fa-star') + toastr.success("Success");
+    })
+};
 
-    h.innerHTML=s;
-    setpos(event);
-    h.style.visibility='visible';
-}
+$('button#get_openings').click(function() {
+    var url = '/openings/get_openings';
+   $.post(url, {
+       '_token': $('meta[name="csrf-token"]').attr('content'),
+       'type': $('input[type=radio]').val()
+   }).done(function(data) {
+       console.log(data);
+   })
+});
 
-function hh(){document.getElementById('hint1').style.visibility='hidden';}
+$("#more-tags").on("hide.bs.collapse", function(){
+    $("div.more-tags").html('<span class="fa fa-chevron-down"></span> More');
+});
+$("#more-tags").on("show.bs.collapse", function(){
+    $("div.more-tags").html('<span class="fa fa-chevron-up"></span> Hide');
+});

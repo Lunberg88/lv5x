@@ -209,6 +209,11 @@ class OpeningsController extends Controller
 	    }
     }
 
+	/**
+	 * @param Request $request
+	 *
+	 * @return array|\Illuminate\Http\JsonResponse
+	 */
 	public function addfav(Request $request)
 	{
 		if($request->id == null || empty($request->id)) {
@@ -239,10 +244,27 @@ class OpeningsController extends Controller
 
 					   return response()->json(['message' => 'Successfully added!']);
 				   } else {
-					   return response()->json(['message' => 'Error, duplicate opening id']);
+				   	   $deleted_fav = UserFavs::where('opening_id','=',$request->id)->first()->delete();
+					   return response()->json(['message' => 'Fav removed!']);
 				   }
 			   }
 		   }
 		}
+	}
+
+	public function removeFav(Request $request)
+	{
+		$delete = UserFavs::where('user_id', '=', Auth::user()->id)
+		                  ->andWhere('opening_id', '=', $request->id)
+		                  ->get();
+		if($delete->isEmpty()) {
+			return response()->json(['status' => 'error', 'message' => 'opening with this id not found'], 200);
+		} else {
+			foreach($delete as $item) {
+				UserFavs::delete($item->opening_id);
+				return response()->json(['status' => 'success', 'message' => 'opening was successfully removed']);
+			}
+		}
+
 	}
 }

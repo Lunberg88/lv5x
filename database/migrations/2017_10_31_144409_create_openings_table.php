@@ -17,6 +17,8 @@ class CreateOpeningsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('location');
+            $table->integer('type');
+            $table->string('tags');
             $table->integer('salary');
             $table->text('description');
             $table->integer('status');

@@ -2,6 +2,8 @@
 
 Route::get('/', 'IndexController@index')->name('main');
 Route::get('/openings', 'IndexController@openings')->name('index.openings');
+Route::get('/openings/{id}', 'IndexController@showOpening')->name('index.show.opening');
+Route::post('/openings/get_openings', 'IndexController@sortOpening')->name('index.sort.opening');
 Route::get('/blog', 'IndexController@blog')->name('index.blog');
 Route::get('/blog/{slug}', 'IndexController@showblog')->name('index.blog.show');
 Route::post('/send-msg', 'IndexController@sendMessage')->name('index.send.msg');
@@ -39,9 +41,9 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 	Route::get('/admin/blog', 'BlogController@dashboard')->name('admin.blog.dashboard');
 	Route::get('/admin/blog/create', 'BlogController@create')->name('admin.blog.create');
 	Route::post('/admin/blog/create', 'BlogController@store')->name('admin.blog.store');
-	Route::get('/admin/blog/edit/{?id}', 'BlogController@edit')->name('admin.blog.edit');
-	Route::put('/admin/blog/update/{?id}', 'BlogController@update')->name('admin.blog.update');
-	Route::get('/admin/blog/view-{?id}', 'BlogController@view')->name('admin.blog.view');
+	Route::get('/admin/blog/edit/{id}', 'BlogController@edit')->name('admin.blog.edit');
+	Route::put('/admin/blog/update/{id}', 'BlogController@update')->name('admin.blog.update');
+	Route::get('/admin/blog/view-{id}', 'BlogController@view')->name('admin.blog.view');
 	Route::delete('/admin/blog/destroy/{id}', 'BlogController@destroy')->name('admin.blog.destroy');
 
 	Route::get('/admin/history', 'AdminController@history')->name('admin.history');
@@ -87,6 +89,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('/test/add', 'ModerController@create')->name('index.moder.add');
 	Route::post('/test/add', 'ModerController@add')->name('index.moder.store');
 });
+
 
 
 

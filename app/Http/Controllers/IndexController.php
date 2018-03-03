@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Candidate;
+use App\CoreSettings;
 use App\Messages;
 use App\Openings;
 use App\Traits\UserProfileInfo;
@@ -12,6 +13,7 @@ use Auth;
 use App\Blog;
 use App\Traits\Hollidays;
 use Illuminate\Http\Request;
+use Jorenvh\Share\Share;
 
 class IndexController extends Controller
 {
@@ -43,16 +45,49 @@ class IndexController extends Controller
 	 */
     public function openings()
     {
-    	$openings = Openings::where('status', '=', '1')
+    	$openings = Openings::orderByDesc('id')
 	                        ->paginate(9);
-	    $days = Hollidays::checkdate(date('d.m'));
+	    $socials = new Share();
+	    $social_links = $socials->page('http://www.recuiter-iia.tk', 'Opening')
+	                            ->facebook('Shared Opening')
+	                            ->googlePlus()
+	                            ->linkedin();
 
-    	return view('index.pages.openings', [
+    	return view('frontend.pages.openings', [
     		'openings' => $openings,
-		    'days' => $days,
 		    'user_profile' => UserProfileInfo::userProfile(),
-		    'user_favs' => UserProfileInfo::userFavs(),
+		    'social_links' => $social_links,
+		    //'user_favs' => UserProfileInfo::userFavs(),
 	    ]);
+    }
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+    public function sortOpening(Request $request)
+    {
+    	if($request->has('type') && $request->type != '') {
+    		$openings = Openings::where('type', '=', $request->type)->get();
+    		return response()->json($openings, 200);
+	    } else {
+    		return response()->json(['status' => 'Error'], 200);
+	    }
+    }
+
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
+	 */
+    public function showOpening(Request $request, $id)
+    {
+    	if(!$opening = Openings::find($id)) {
+		    return abort(403, 'Unauthorized');
+	    } else {
+		    return view('frontend.pages.opening', ['opening' => $opening]);
+	    }
     }
 
 	/**

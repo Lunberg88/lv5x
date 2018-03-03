@@ -15,6 +15,4 @@ class Openings extends Model
 	    'description',
 	    'status',
     ];
-
-    public $timestamps = false;
 }

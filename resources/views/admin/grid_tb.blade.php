@@ -17,7 +17,11 @@
             @endforeach
         @endif
     </td>
-    <td>{{$p->salary}}</td>
+    <td>{{$p->salary}}
+    <b>
+    @php switch($p->currency) { case 1: echo "&dollar;"; break; case 2: echo "&euro;"; break; case 3: echo "руб."; break; case 4: echo "грн."; break; default: echo "&dollar;"; } @endphp
+    </b>
+    </td>
     <td>
         <a href="{{route('admin.candidates.show.id', $p->id)}}">
             <i class="fa fa-eye  btn btn-info" aria-hidden="true"></i>

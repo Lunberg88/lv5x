@@ -184,6 +184,7 @@ return [
 
 	    Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
 	    Intervention\Image\ImageServiceProvider::class,
+	    Jorenvh\Share\Providers\ShareServiceProvider::class,
 
     ],
 
@@ -240,6 +241,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
         'Image' => Intervention\Image\Facades\Image::class,
+        'Share' => Jorenvh\Share\ShareFacade::class,
 
     ],
 

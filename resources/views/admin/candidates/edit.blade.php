@@ -73,12 +73,22 @@
                                     </div>
                                     <div class="row">
                                         <label class="col-sm-2 label-on-left candidate-edit">Salary</label>
-                                        <div class="col-md-10">
+                                        <div class="col-md-2 col-sm-2">
                                             <div class="form-group label-floating is-empty">
                                                 <label class="control-label"></label>
                                                 <input class="form-control" name="salary" type="text" value="{{$candidate->salary}}">
                                                 <span class="material-input"></span>
                                             </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2">
+                                            <select name="currency" class="form-control">
+                                                @php
+                                                    $curr = [1 =>'&dollar;', 2 =>'&euro;', 3=> 'руб.', 4=> 'грн.'];
+                                                    for($i = 1; $i<5; $i++) {
+                                                        echo '<option value='.$i.' '.($candidate->currency == $i ? "selected": "").'>'.$curr[$i].'</option>';
+                                                    }
+                                                @endphp
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row" data-info="upload_cvs">
