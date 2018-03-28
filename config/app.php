@@ -164,6 +164,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 	    Barryvdh\Cors\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+	    Laravel\Passport\PassportServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -242,6 +243,7 @@ return [
 
         'Image' => Intervention\Image\Facades\Image::class,
         'Share' => Jorenvh\Share\ShareFacade::class,
+
 
     ],
 

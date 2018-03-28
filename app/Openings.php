@@ -12,6 +12,7 @@ class Openings extends Model
     	'title',
 	    'location',
 	    'salary',
+	    'type',
 	    'description',
 	    'status',
     ];

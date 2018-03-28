@@ -13931,6 +13931,22 @@ footer .btn {
     color: #ff0000 !important;
 }
 
+div.card-content table.table tbody > tr:hover {
+    cursor: pointer;
+}
+
+table.candidate-info-table tbody > tr > td {
+    border: 0 !important;
+}
+
+table.candidate-info-table tbody > tr > td:nth-child(2) {
+    padding-left: 20px;
+}
+
+table.candidate-info-table tbody > tr > td:nth-child(1) {
+    width: calc(100% - 100px) !important;
+}
+
 @media (min-width: 992px) {
     nav.nav-admin {
         display: none;

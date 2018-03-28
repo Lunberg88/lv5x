@@ -3,7 +3,7 @@
 Route::get('/', 'IndexController@index')->name('main');
 Route::get('/openings', 'IndexController@openings')->name('index.openings');
 Route::get('/openings/{id}', 'IndexController@showOpening')->name('index.show.opening');
-Route::post('/openings/get_openings', 'IndexController@sortOpening')->name('index.sort.opening');
+Route::post('/openings', 'IndexController@openings')->name('index.sort.opening');
 Route::get('/blog', 'IndexController@blog')->name('index.blog');
 Route::get('/blog/{slug}', 'IndexController@showblog')->name('index.blog.show');
 Route::post('/send-msg', 'IndexController@sendMessage')->name('index.send.msg');
@@ -66,21 +66,24 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::post('/group/changeowner', 'GroupController@changeowner')->name('changeowner');
 });
 
+/*
 Route::group(['middleware' => ['auth']], function(){
 	Route::resource('posts', 'PostsController');
 });
 
 Route::post('posts/changeStatus', array('as' => 'changeStatus', 'uses' => 'PostsController@changeStatus'))->middleware('auth');
 
-Auth::routes();
-
-Route::get('auth/fb', 'FbController@redirectToProvider');
-Route::get('auth/fb/callback', 'FbController@handleProviderCallback');
+*/
 /*
 Route::get('login', 'Auth\LoginController@showLoginForm');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');
 */
+
+Route::get('auth/fb', 'FbController@redirectToProvider');
+Route::get('auth/fb/callback', 'FbController@handleProviderCallback');
+
+Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 

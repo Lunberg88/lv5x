@@ -17,15 +17,15 @@ class CreateCandidateTable extends Migration
         	$table->increments('id');
         	$table->string('fio');
         	$table->string('email')->unique();
-        	$table->string('stack');
-        	$table->string('tags');
-        	$table->integer('salary');
+        	$table->string('stack')->nullable();
+        	$table->string('tags')->nullable();
+        	$table->integer('salary')->default(0);
         	$table->string('currency')->default('$');
-        	$table->string('cvs');
+        	$table->string('cvs')->default('http://');
         	$table->string('upload_cvs')->nullable();
-        	$table->integer('status')->default('0');
-        	$table->integer('viewed')->default('0');
-        	$table->integer('user_id')->unsigned();
+        	$table->integer('status')->default(0);
+        	$table->integer('viewed')->default(0);
+        	$table->integer('user_id')->unsigned()->default(1);
         	$table->foreign('user_id')->references('id')->on('users');
         });
     }

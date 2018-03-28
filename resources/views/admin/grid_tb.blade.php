@@ -1,7 +1,7 @@
 @if($p->viewed === 0)
 <tr style="background: #eee;">
 @else
-<tr>
+<tr onclick="window.location.href='{{route('admin.candidates.show.id', $p->id)}}';">
 @endif
     <td>{{$p->id}}</td>
     <td>{{$p->fio}}</td>

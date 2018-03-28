@@ -9,16 +9,19 @@ function addToFav(val) {
         var selId = $('#' + val.id + ' > i');
         var text = $('#' + val.id + ' > small');
         selId.hasClass('fa-star') ? selId.removeClass('fa-star').addClass('fa-star-o') + toastr.error("Removed") : selId.removeClass('fa-star-o').addClass('fa-star') + toastr.success("Success");
+    }).fail(function(data) {
+        toastr.error(data.statusText);
     })
 };
 
-$('button#get_openings').click(function() {
+$('button#get_openings1').click(function() {
     var url = '/openings/get_openings';
    $.post(url, {
        '_token': $('meta[name="csrf-token"]').attr('content'),
-       'type': $('input[type=radio]').val()
-   }).done(function(data) {
-       console.log(data);
+       'type': $('input[type=radio]:checked').val()
+   }).done(function() {})
+   .fail(function(data) {
+       console.log('Error message: ' + data.statusText);
    })
 });
 

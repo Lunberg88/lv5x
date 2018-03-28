@@ -25,8 +25,6 @@ class IndexController extends Controller
 	 */
     public function index()
     {
-    	//$cur_day = date('d.m');
-    	//$days = Hollidays::checkdate($cur_day);
     	$openings = Openings::latest()
 	                        ->take(3)
 	                        ->get();
@@ -43,7 +41,7 @@ class IndexController extends Controller
 	 * Display openings for auth, guests
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-    public function openings()
+    public function openings(Request $request)
     {
     	$openings = Openings::orderByDesc('id')
 	                        ->paginate(9);
@@ -52,6 +50,12 @@ class IndexController extends Controller
 	                            ->facebook('Shared Opening')
 	                            ->googlePlus()
 	                            ->linkedin();
+	    if($request->has('type') && $request->type != '') {
+	    	$openings = Openings::where('type','=', $request->type)->orderByDesc('id')->paginate(9);
+	    }
+	    if($request->has('status') && $request->status != '') {
+	    	$openings = Openings::where('status', '=', $request->status)->orderByDesc('id')->paginate(9);
+	    }
 
     	return view('frontend.pages.openings', [
     		'openings' => $openings,

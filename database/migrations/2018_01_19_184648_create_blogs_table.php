@@ -17,10 +17,10 @@ class CreateBlogsTable extends Migration
             $table->increments('id');
 	        $table->string('title');
 	        $table->string('slug');
-	        $table->string('img_bg');
+	        $table->string('img_bg')->nullable();
 	        $table->longText('short');
-	        $table->longText('full');
-	        $table->integer('user_id')->unsigned();
+	        $table->longText('full')->nullable();
+	        $table->integer('user_id')->unsigned()->default(1);
 	        $table->foreign('user_id')->references('id')->on('users');
 	        $table->integer('tags')->unsigned();
             $table->timestamps();

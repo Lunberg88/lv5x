@@ -16,10 +16,10 @@
                     <a class="nav-link scroll waves-effect waves-light" href="/"> Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link scroll effect waves-effect waves-light" href="#about" data-speed="1200"> About</a>
+                    <a class="nav-link scroll effect waves-effect waves-light" href="/#about" data-speed="1200"> About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link scroll waves-effect waves-light" href="#contact"> Contact</a>
+                    <a class="nav-link scroll waves-effect waves-light" href="/#contact"> Contact</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link waves-effect waves-light" href="/openings"> Openings</a>
@@ -109,28 +109,75 @@
             </h2>
         </div>
         <section class="section-about">
-            <span class="about-btns">
-                <a class="btn btn-info waves-effect waves-light btn-md"><b>upload cv</b></a>
-                <a class="btn btn-danger waves-effect waves-light scroll btn-md" href="#contact" data-speed="1600"><b>contact me</b></a>
-            </span>
-            <p class="px-5 mb-5 pb-3 lead text-center">Lorem ipsum ly LY lymo dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                aliqua. Ut enim ad minim veniam.</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <!--
+                    <span class="about-btns">
+                        <a class="btn btn-info waves-effect waves-light btn-md"><b>upload cv</b></a>
+                        <a class="btn btn-danger waves-effect waves-light scroll btn-md" href="#contact" data-speed="1600"><b>contact me</b></a>
+                    </span>
+                    -->
+                        <p class="px-5 mb-5 pb-3 lead text-center">Lorem ipsum ly LY lymo dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                        aliqua. Ut enim ad minim veniam.</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-cascade narrower mb-r hp-card-form">
+                        <form class="hp-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="md-form">
+                                        <div class="md-form">
+                                            <input type="text" id="contact-name" class="form-control">
+                                            <label for="contact-name" class="">Your name</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="md-form">
+                                        <div class="md-form">
+                                            <input type="text" id="contact-email" class="form-control">
+                                            <label for="contact-email" class="">Your email</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="md-form">
+                                        <textarea type="text" id="contact-message" rows="10" class="md-textarea"></textarea>
+                                        <label for="contact-message">Your message</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="center-on-small-only">
+                                        <button class="btn btn-primary waves-effect waves-light">Send
+                                            <i class="fa fa-send ml-2"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </section>
         <section class="section-about-graph">
             <h2 id="about" class="text-center h1 my-5 section-title">
                 <span>how it works</span>
             </h2>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="info info-skype">
+                <div class="col-md-3">
+                    <div class="info info-seo">
                         <div class="icon icon-circle ">
-                            <i class="fa fa-skype hp-rec-process ico ico-skype"></i>
+                            <i class="fa fa-volume-control-phone hp-rec-process ico ico-seo"></i>
                         </div>
                         <h4 class="info-title">first interview</h4>
                         <p class="description">Cross-account dashboards provide sophisticated reporting for enterprise.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="info info-file">
                         <div class="icon icon-circle">
                             <i class="fa fa-file-code-o hp-rec-process ico ico-file"></i>
@@ -139,12 +186,21 @@
                         <p class="description">CloudCheckr provides summary and detailed usage statistics for resources.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="info info-seo">
+                <div class="col-md-3">
+                    <div class="info info-skype">
                         <div class="icon icon-circle">
-                            <i class="fa fa-star hp-rec-process ico ico-seo"></i>
+                            <i class="fa fa-skype hp-rec-process ico ico-skype"></i>
                         </div>
                         <h4 class="info-title">second interview</h4>
+                        <p class="description">CloudCheckr enables users to save money, time, and effort.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info info-client">
+                        <div class="icon icon-circle">
+                            <i class="fa fa-user-circle hp-rec-process ico ico-client"></i>
+                        </div>
+                        <h4 class="info-title">client interview</h4>
                         <p class="description">CloudCheckr enables users to save money, time, and effort.</p>
                     </div>
                 </div>
@@ -209,6 +265,7 @@
         </div>
     </div>
 </div>
+<!--
 <div class="contact-form-section">
     <div class="container">
         <div class="row">
@@ -218,6 +275,7 @@
             <div class="col-12 col-sm-12 offset-md-1 col-md-10">
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-12">
+
                         <div class="card card-cascade narrower mb-r hp-card-form">
                             <form class="hp-form">
                                 <div class="row">
@@ -257,6 +315,7 @@
                                 </div>
                             </form>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -272,6 +331,7 @@
         </div>
     </div>
 </div>
+-->
 <footer class="page-footer new-foot stylish-color-dark">
     <div class="container">
         <div class="row py-3 d-flex align-items-center">

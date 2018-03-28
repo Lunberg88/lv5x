@@ -3,11 +3,12 @@
     @parent
     <style>
         .intro-2 {
-            background: url("{{asset('dashboard/assets/img/sidebar-2.jpg')}}")no-repeat center center;
+            background: url("{{asset('/images/main_logo2.jpg')}}")no-repeat center center;
             background-size: cover;
         }
         .card {
             background-color: rgba(229, 228, 255, 0.2);
+            width: 100%;
         }
 
         .btn-header-info {
@@ -32,12 +33,14 @@
         }
 
         .md-form input[type=email]:focus:not([readonly]),
-        .md-form input[type=password]:focus:not([readonly]) {
+        .md-form input[type=password]:focus:not([readonly]),
+        .md-form input[type=text]:focus:not([readonly]) {
             border-bottom: 1px solid #8EDEF8;
             box-shadow: 0 1px 0 0 #8EDEF8;
         }
         .md-form input[type=email]:focus:not([readonly])+label,
-        .md-form input[type=password]:focus:not([readonly])+label {
+        .md-form input[type=password]:focus:not([readonly])+label,
+        .md-form input[type=text]:focus:not([readonly])+label {
             color: #8EDEF8;
         }
 

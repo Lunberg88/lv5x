@@ -35,6 +35,7 @@ $(function() {
             }, a))
         }
     });
+
     var i = $("section"),
         l = o.height();
     a.on("scroll", function() {

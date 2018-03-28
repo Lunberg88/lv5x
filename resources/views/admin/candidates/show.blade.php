@@ -8,12 +8,15 @@
                         <div class="wizard-container">
                             <div class="card wizard-card active" data-color="blue" id="wizardProfile">
                                 <div class="wizard-header">
+                                    <!--
                                     <div class="picture-container candidate-preview">
                                         <div class="picture">
                                             <img src="http://demos.creative-tim.com/material-dashboard-pro/assets/img/default-avatar.png" class="picture-src" id="wizardPicturePreview" title="">
                                         </div>
                                     </div>
+
                                     <h3 class="wizard-title">Info</h3>
+                                    -->
                                     <h2>{{$candidate->fio}}</h2>
                                 </div>
                                 <div class="wizard-navigation">
@@ -27,23 +30,50 @@
                                     <div class="tab-pane active" id="about">
                                         <div class="row">
                                             <div class="col-md-10 col-md-offset-1">
-                                                <div class="group-control">id: <b>{{$candidate->id}}</b></div>
-                                                <div class="group-control">fio: <b>{{$candidate->fio}}</b></div>
-                                                <div class="group-control">fio: <b>{{$candidate->email}}</b></div>
-                                                <div class="group-control">stack: <b>{{$candidate->stack}}</b></div>
-                                                <div class="group-control">tags: {{$candidate->tags}}</div>
-                                                <div class="group-control">salary: <b>{{$candidate->salary}}</b></div>
-                                                <div class="group-control">
-                                                    @if($tags)
-                                                        @foreach($tags as $tag)
-                                                            <a href="{{route('admin.candidates.search')}}?search=&stags={{trim($tag)}}" title="{{$tag}}" class="label label-info">{{$tag}}</a>&nbsp;
-                                                        @endforeach()
-                                                    @endif()
-                                                </div>
-                                                <div class="group-control">
-                                                    <legend>CV</legend>
-                                                    <span>{{$candidate->upload_cvs}}</span>
-                                                </div>
+                                                <table class="table candidate-info-table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><b>Name:</b></td>
+                                                            <td>{{$candidate->fio}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Email:</b></td>
+                                                            <td>{{$candidate->email}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Stack:</b></td>
+                                                            <td>{{$candidate->stack}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Skills:</b></td>
+                                                            <td>
+                                                                @if($tags)
+                                                                    @foreach($tags as $tag)
+                                                                        <a href="{{route('admin.candidates.search')}}?search=&stags={{trim($tag)}}" title="{{$tag}}" class="label label-success">{{$tag}}</a>&nbsp;
+                                                                    @endforeach()
+                                                                @endif()
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Salary/Rate:</b></td>
+                                                            <td><b>
+                                                                    @if($candidate->salary !== null)
+                                                                        {{ $candidate->salary }} {{ $candidate->currency }}
+                                                                    @else
+                                                                        {{ $candidate->currency }}
+                                                                    @endif
+                                                                </b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>CV file:</b></td>
+                                                            <td>{{ $candidate->cvs !== null ? '<a href=\"'.$candidate->cvs.'\" target=\"_blank\">'.$candidate->cvs.'</a>' : 'Not matched yest...' }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Uploaded CV:</b></td>
+                                                            <td>{{ $candidate->upload_cvs ? $candidate->upload_cvs : 'Not uploaded yet...' }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                         <div class="row">

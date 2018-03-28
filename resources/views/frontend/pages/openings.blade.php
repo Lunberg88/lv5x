@@ -16,10 +16,10 @@
                     <a class="nav-link scroll waves-effect waves-light" href="/"> Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link scroll effect waves-effect waves-light" href="#about" data-speed="1200"> About</a>
+                    <a class="nav-link scroll effect waves-effect waves-light" href="/#about" data-speed="1200"> About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link scroll waves-effect waves-light" href="#contact"> Contact</a>
+                    <a class="nav-link scroll waves-effect waves-light" href="/#contact"> Contact</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link waves-effect waves-light" href="/openings"> Openings</a>
@@ -95,7 +95,6 @@
     </div>
 </div>
     <div class="container">
-
         <div class="row">
             <div class="col-md-10">
                 <div class="row">
@@ -105,108 +104,121 @@
                         </section>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="card-deck">
                 @foreach($openings as $i => $open)
-                    @if($i++%3 == 0)
-                        <div class="row">
-                            <div class="card-deck">
-                                @endif
-
-                                <div class="mb-4 col-sm-12 col-md-4">
-                                    <div class="view overlay rounded z-depth-2 mb-2">
-                                        <img class="img-fluid opening-list-img" src="{{route('main')}}/images/openings/{{$open->img}}" alt="Card image cap">
-                                        <a data-target="#opening-{{ $open->id }}" data-toggle="modal">
-                                            <div class="mask rgba-white-slight waves-effect waves-light"></div>
-                                        </a>
+                        <div class="mb-4 col-sm-12 col-md-4">
+                            <div class="view overlay rounded z-depth-2 mb-2">
+                                <img class="img-fluid opening-list-img" src="{{route('main')}}/images/openings/{{$open->img}}" alt="Card image cap">
+                                <a data-target="#opening-{{ $open->id }}" data-toggle="modal">
+                                    <div class="mask rgba-white-slight waves-effect waves-light"></div>
+                                </a>
+                            </div>
+                            <h4 class="mb-3 font-weight-bold dark-grey-text">
+                                <strong>
+                                    {!! str_limit($open->title, 15) !!}
+                                </strong>
+                            </h4>
+                            <span class="btn-sm" style="display: block; padding-top: 10px;">
+                                <span class="
+                                {{ $open->type == 1 ? 'badge badge-warning' : 'badge badge-success' }}
+                                        ">{{ $open->type == 1 ? 'relocate' : 'remote' }}
+                                </span>
+                            </span>
+                            <p class="normal-text">
+                                {!! str_limit($open->description, 85) !!}
+                            </p>
+                            <button type="button" data-toggle="modal" data-target="#opening-{{ $open->id }}" class="btn btn-info btn-sm waves-effect waves-light">view opening</button>
+                            <span class="pull-right">
+                                <span class="badge indigo"><i class="fa fa-facebook"></i></span>
+                                <span class="badge badge-danger"><i class="fa fa-google-plus"></i></span>
+                                <span class="badge badge-info"><i class="fa fa-linkedin"></i></span>
+                            </span>
+                           {{-- {!! $social_links !!} --}}
+                        </div>
+                        <!-- modal -->
+                        <div class="modal fade" id="opening-{{ $open->id }}" tabindex="-1" role="dialog" aria-labelledby="opening-{{ $open->id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title modal-opening-title" id="opening-{{ $open->id }}">{!! $open->title !!}</h5>
                                     </div>
-                                    <h4 class="mb-3 font-weight-bold dark-grey-text">
-                                        <strong>
-                                            {!! str_limit($open->title, 15) !!}
-                                        </strong>
-                                    </h4>
-                                    <span class="btn-sm" style="display: block; padding-top: 10px;">
-                                        <span class="
-                                        {{ $open->type == 1 ? 'badge badge-warning' : 'badge badge-success' }}
-                                                ">{{ $open->type == 1 ? 'relocate' : 'remote' }}
-                                        </span>
+                                    <div class="row modal-body modal-opening-body">
+                                        <div class="col-md-4">
+                                            <img class="img-fluid hp-img" src="{{route('main')}}/images/openings/{{$open->img}}" alt="Card image cap">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <span class="opening-list-date">{{ (explode(' ', $open->created_at))[0] }}</span>
+                                            <span class="opening-list-status pull-right">
+                                        <label class="{{ $open->status == 1 ? 'green-text' : 'red-text' }}">{{ $open->status == 1 ? 'active' : 'closed' }}</label>
                                     </span>
-                                    <p class="normal-text">
-                                        {!! str_limit($open->description, 85) !!}
-                                    </p>
-                                    <button type="button" data-toggle="modal" data-target="#opening-{{ $open->id }}" class="btn btn-info btn-sm waves-effect waves-light">view opening</button>
-                                    <span class="pull-right">
-                                        <span class="badge indigo"><i class="fa fa-facebook"></i></span>
-                                        <span class="badge badge-danger"><i class="fa fa-google-plus"></i></span>
-                                        <span class="badge badge-info"><i class="fa fa-linkedin"></i></span>
-                                    </span>
-                                   {{-- {!! $social_links !!} --}}
-                                </div>
-
-                                <!-- modal -->
-                                <div class="modal fade" id="opening-{{ $open->id }}" tabindex="-1" role="dialog" aria-labelledby="opening-{{ $open->id }}" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title modal-opening-title" id="opening-{{ $open->id }}">{!! $open->title !!}</h5>
-                                            </div>
-                                            <div class="row modal-body modal-opening-body">
-                                                <div class="col-md-4">
-                                                    <img class="img-fluid hp-img" src="{{route('main')}}/images/openings/{{$open->img}}" alt="Card image cap">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <span class="opening-list-date">{{ (explode(' ', $open->created_at))[0] }}</span>
-                                                    <span class="opening-list-status pull-right">
-                                                <label class="{{ $open->status == 1 ? 'green-text' : 'red-text' }}">{{ $open->status == 1 ? 'active' : 'closed' }}</label>
-                                            </span>
-                                                    <p>{!! $open->description !!}</p>
-                                                    <span class="opening-list-salary pull-left">Rate:  <b>&dollar;{{ $open->salary }}</b></span>
-                                                    <span class="opening-list-location pull-right">Location: <i class="fa fa-map-marker"></i> <b>{{ $open->location }}</b></span>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer modal-footer-btns">
-                                                <button type="button" class="btn btn-warning waves-effect btn-sm pull-left">Apply Now</button>
-                                                <button type="button" class="btn btn-outline-elegant waves-effect save-op btn-sm pull-left" id="{{ $open->id }}" onclick="addToFav(this);">
-                                                    <i class="@php
-                                                        $fav = \App\UserFavs::where([
-                                                            ['user_id', '=', Auth::id()],
-                                                            ['opening_id', '=', $open->id],
-                                                        ])->get();
-                                                        echo $fav->isEmpty() ? "fa fa-star-o" : "fa fa-star";
-                                                    @endphp"></i>
-                                                    Save</button>
-                                                <button type="button" class="btn btn-danger modal-close-btn waves-effect btn-sm pull-right" data-dismiss="modal">Close</button>
-                                            </div>
+                                            <p>{!! $open->description !!}</p>
+                                            <span class="opening-list-salary pull-left">Rate:  <b>&dollar;{{ $open->salary }}</b></span>
+                                            <span class="opening-list-location pull-right">Location: <i class="fa fa-map-marker"></i> <b>{{ $open->location }}</b></span>
                                         </div>
                                     </div>
+                                    <div class="modal-footer modal-footer-btns">
+                                        <button type="button" class="btn btn-warning waves-effect btn-sm pull-left">Apply Now</button>
+                                        <button type="button" class="btn btn-outline-elegant waves-effect save-op btn-sm pull-left" id="{{ $open->id }}" onclick="addToFav(this);">
+                                            <i class="@php
+                                                $fav = \App\UserFavs::where([
+                                                    ['user_id', '=', Auth::id()],
+                                                    ['opening_id', '=', $open->id],
+                                                ])->get();
+                                                echo $fav->isEmpty() ? "fa fa-star-o" : "fa fa-star";
+                                            @endphp"></i>
+                                            Save</button>
+                                        <button type="button" class="btn btn-danger modal-close-btn waves-effect btn-sm pull-right" data-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
-
-                                @if($i++%3 == 0 || $i == count($open))
                             </div>
                         </div>
-                    @endif
                 @endforeach
+                    </div>
+                </div>
+                <div class="row hidden">
+                    <div id="get_openings" class="card-deck">
+
+                    </div>
+                </div>
             </div>
             <div class="col-md-2 justify-content-center">
                 <div class="center-block form-group openings-tools-bar">
-                    <h4 style="font-family: Roboto, sans-serif; font-size: 18px;">Openings type</h4>
+                    <h4 style="font-family: Roboto, sans-serif; font-size: 18px;">type</h4>
                     <hr>
+                    <form method="post">
+                        {{csrf_field()}}
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="type" value="0" id="type-1">
+                        <input class="form-check-input" type="radio" name="type[]" value="0" id="type-1">
                         <label class="form-check-label" for="type-1">
                             remote
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="type" value="1" id="type-2">
+                        <input class="form-check-input" type="radio" name="type[]" value="1" id="type-2">
                         <label class="form-check-label" for="type-2">
                             relocate
                         </label>
                     </div>
-                    <button type="button" id="get_openings" class="btn btn-teal waves-effect waves-light pull-right btn-sm">search</button>
+                    <h4 style="font-family: Roboto, sans-serif; font-size: 18px;">status</h4>
+                    <hr>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status[]" value="0" id="status-1">
+                        <label class="form-check-label" for="status-1">
+                            closed
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status[]" value="1" id="status-2">
+                        <label class="form-check-label" for="status-2">
+                            active
+                        </label>
+                    </div>
+                    <button type="submit" id="get_openings" class="btn btn-teal waves-effect waves-light pull-right btn-sm">search</button>
+                    </form>
                 </div>
             </div>
         </div>
-
-
         <div class="row">
             <div class="col-sm-12 col-md-12">
                 <div align="center" class="opening-pagination">{{$openings->links()}}</div>
