@@ -1,4 +1,4 @@
-@if($p->viewed === 0)
+@if($p->viewed == 0)
 <tr style="background: #eee;">
 @else
 <tr onclick="window.location.href='{{route('admin.candidates.show.id', $p->id)}}';">
@@ -6,7 +6,11 @@
     <td>{{$p->id}}</td>
     <td>{{$p->fio}}</td>
     <td>{{$p->email}}</td>
-    <td>{{$p->stack}}</td>
+    <td>
+        @php
+            echo \App\Traits\CandidatesHelper::convertTypes($p->stack, 'stack');
+        @endphp
+    </td>
     <td>
         @if($p->tags)
             @php
@@ -18,9 +22,11 @@
         @endif
     </td>
     <td>{{$p->salary}}
-    <b>
-    @php switch($p->currency) { case 1: echo "&dollar;"; break; case 2: echo "&euro;"; break; case 3: echo "руб."; break; case 4: echo "грн."; break; default: echo "&dollar;"; } @endphp
-    </b>
+        <b>
+            @php
+                echo \App\Traits\CandidatesHelper::convertTypes($p->currency, 'currency');
+            @endphp
+        </b>
     </td>
     <td>
         <a href="{{route('admin.candidates.show.id', $p->id)}}">

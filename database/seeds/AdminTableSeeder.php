@@ -15,6 +15,7 @@ class AdminTableSeeder extends Seeder
 	        'name' => 'Lexx',
             'email' => 'lunberg88@gmail.com',
             'password' => bcrypt('280388'),
+            'admin' => 1,
             'remember_token' => str_random(10),
         ]);
     }

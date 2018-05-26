@@ -13,8 +13,8 @@
                     <select class="form-control" name="stags">
                         <option disabled="disabled" selected="selected">Choose stack</option>
                         @if($tags)
-                            @foreach($tags as $t)
-                                <option>{{$t}}</option>
+                            @foreach($tags as $i => $t)
+                                <option value="{{$i + 1}}">{{$t}}</option>
                             @endforeach
                         @endif
                     </select>
@@ -46,6 +46,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="card-footer">
+                    {{$candidates->links()}}
                 </div>
             </div>
 

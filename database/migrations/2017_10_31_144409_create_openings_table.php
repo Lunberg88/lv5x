@@ -16,11 +16,13 @@ class CreateOpeningsTable extends Migration
         Schema::create('openings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->string('slug');
             $table->string('location')->nullable();
-            $table->string('img')->nullable();
+            $table->string('img')->default('image_placeholder.jpg');
             $table->integer('type')->default(0);
             $table->string('tags')->nullable();
             $table->integer('salary')->default(0);
+            $table->string('rate')->nullable();
             $table->text('description')->nullable();
             $table->integer('status')->default(0);
             $table->integer('user_id')->unsigned()->default(1);

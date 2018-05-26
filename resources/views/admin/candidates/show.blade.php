@@ -8,15 +8,6 @@
                         <div class="wizard-container">
                             <div class="card wizard-card active" data-color="blue" id="wizardProfile">
                                 <div class="wizard-header">
-                                    <!--
-                                    <div class="picture-container candidate-preview">
-                                        <div class="picture">
-                                            <img src="http://demos.creative-tim.com/material-dashboard-pro/assets/img/default-avatar.png" class="picture-src" id="wizardPicturePreview" title="">
-                                        </div>
-                                    </div>
-
-                                    <h3 class="wizard-title">Info</h3>
-                                    -->
                                     <h2>{{$candidate->fio}}</h2>
                                 </div>
                                 <div class="wizard-navigation">
@@ -42,7 +33,11 @@
                                                         </tr>
                                                         <tr>
                                                             <td><b>Stack:</b></td>
-                                                            <td>{{$candidate->stack}}</td>
+                                                            <td>
+                                                                @php
+                                                                    echo \App\Traits\CandidatesHelper::convertTypes($candidate->stack, 'stack');
+                                                                @endphp
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td><b>Skills:</b></td>
@@ -56,21 +51,38 @@
                                                         </tr>
                                                         <tr>
                                                             <td><b>Salary/Rate:</b></td>
-                                                            <td><b>
-                                                                    @if($candidate->salary !== null)
-                                                                        {{ $candidate->salary }} {{ $candidate->currency }}
-                                                                    @else
-                                                                        {{ $candidate->currency }}
-                                                                    @endif
-                                                                </b></td>
+                                                            <td>
+                                                                {{$candidate->salary}}
+                                                                <b>
+                                                                    @php
+                                                                        echo \App\Traits\CandidatesHelper::convertTypes($candidate->currency, 'currency');
+                                                                    @endphp
+                                                                </b>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td><b>CV file:</b></td>
-                                                            <td>{{ $candidate->cvs !== null ? '<a href=\"'.$candidate->cvs.'\" target=\"_blank\">'.$candidate->cvs.'</a>' : 'Not matched yest...' }}</td>
+                                                            <td>
+                                                                @if($candidate->cvs !== null)
+                                                                    <a href="{{$candidate->cvs}}" target="_blank">{{$candidate->cvs}}</a>
+                                                                @else
+                                                                    Not matched yest...
+                                                                @endif
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td><b>Uploaded CV:</b></td>
                                                             <td>{{ $candidate->upload_cvs ? $candidate->upload_cvs : 'Not uploaded yet...' }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <span class="d-block pull-left">
+                                                                    <a href="{{route('admin.candidates')}}" class="btn btn-default">Back</a>
+                                                                </span>
+                                                                <span class="d-block pull-right">
+                                                                    <a href="{{route('admin.candidates.edit.id', $candidate->id)}}" class="btn btn-warning">Edit</a>
+                                                                </span>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

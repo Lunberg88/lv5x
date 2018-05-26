@@ -82,28 +82,31 @@
                 </div>
             </div>
             <ul class="nav">
-                <li class="active">
+                <!-- Homepage -->
+                <li @if(request()->path() == 'admin') class="active" @endif>
                     <a href="{{route('admin.index')}}">
                         <i class="material-icons">dashboard</i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li>
-                    <a data-toggle="collapse" href="#pagesExamples">
+
+                <!-- Candidates -->
+                <li @if(request()->path() == 'admin/candidates') class="active" @endif>
+                    <a data-toggle="collapse" href="#" onclick="window.location.href = '{{route('admin.candidates')}}';" @if(request()->path() == 'admin/candidates') aria-expanded="true" @endif aria-expanded="true">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         <p>Candidates
-                            <b class="caret"></b>
+                            @php
+                                $newCandidates = App\Candidate::where('viewed', '=', '0')->get();
+                                $newCandidates == $newCandidates->isEmpty() ? false : count($newCandidates);
+                            @endphp
+                            @if(count($newCandidates) > 0)
+                                <span class="label label-danger label-danger-notifys small-label">{{count($newCandidates)}}</span>
+                            @endif
                         </p>
                     </a>
-                    <div class="collapse" id="pagesExamples">
+                    <div class="collapsed" @if(request()->path() == 'admin/candidates') aria-expanded="true" class="collapse in" style="height: auto;" @endif>
                         <ul class="nav">
-                            <li>
-                                <a href="{{route('admin.candidates')}}">
-                                    <span class="sidebar-mini">&nbsp;</span>
-                                    <span class="sidebar-normal"><i class="fa fa-users" aria-hidden="true"></i> Show all</span>
-                                </a>
-                            </li>
-                            <li>
+                            <li @if(request()->path() == 'admin/candidates/new') class="active" @endif>
                                 <a href="{{route('admin.candidates.create')}}">
                                     <span class="sidebar-mini">&nbsp;</span>
                                     <span class="sidebar-normal"><i class="fa fa-user-plus" aria-hidden="true"></i> Add new</span>
@@ -112,22 +115,15 @@
                         </ul>
                     </div>
                 </li>
-                <li>
-                    <a data-toggle="collapse" href="#formsExamples">
+                <!-- Openings -->
+                <li @if(request()->path() == 'admin/openings') class="active" @endif>
+                    <a data-toggle="collapse" href="#" onclick="window.location.href = '{{route('admin.openings')}}';">
                         <i class="material-icons">content_paste</i>
-                        <p>Openings
-                            <b class="caret"></b>
-                        </p>
+                        <p>Openings</p>
                     </a>
-                    <div class="collapse" id="formsExamples">
+                    <div class="collapsed">
                         <ul class="nav">
-                            <li>
-                                <a href="{{route('admin.openings')}}">
-                                    <span class="sidebar-mini">&nbsp;</span>
-                                    <span class="sidebar-normal"><i class="fa fa-list-alt" aria-hidden="true"></i> Openings list</span>
-                                </a>
-                            </li>
-                            <li>
+                            <li @if(request()->path() == 'admin/openings/new') class="active" @endif>
                                 <a href="{{route('admin.openings.create')}}">
                                     <span class="sidebar-mini">&nbsp;</span>
                                     <span class="sidebar-normal"><i class="fa fa-file-text" aria-hidden="true"></i> Add opening</span>
@@ -136,24 +132,26 @@
                         </ul>
                     </div>
                 </li>
-                <li>
-                    <a data-toggle="collapse" href="#blogsSection">
+
+                <!-- Opening Offer -->
+                <li @if(request()->path() == 'admin/opening_offer') class="active" @endif>
+                    <a href="{{route('admin.opening_offer.main')}}">
+                        <i class="fa fa-briefcase"></i>
+                        <p>Opening offer</p>
+                    </a>
+                </li>
+
+                <!-- Blog -->
+                <li @if(request()->path() == 'admin/blog') class="active" @endif>
+                    <a data-toggle="collapse" href="#" onclick="window.location.href = '{{route('admin.blog.dashboard')}}';">
                         <i class="fa fa-file-text"></i>
                         <p>Blog
                             <b class="caret"></b>
                         </p>
                     </a>
-                    <div class="collapse" id="blogsSection">
+                    <div class="collapsed">
                         <ul class="nav">
-                            <li>
-                                <a href="{{route('admin.blog.dashboard')}}">
-                                    <span class="sidebar-mini">&nbsp;</span>
-                                    <span class="sidebar-normal">
-                                        <i class="fa fa-newspaper-o" aria-hidden="true"></i> News list
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
+                            <li @if(request()->path() == 'admin/blog/create') class="active" @endif>
                                 <a href="{{route('admin.blog.create')}}">
                                     <span class="sidebar-mini">&nbsp;</span>
                                     <span class="sidebar-normal">
@@ -164,23 +162,49 @@
                         </ul>
                     </div>
                 </li>
-                <li>
+
+                <!-- History -->
+                <li @if(request()->path() == 'admin/history') class="active" @endif>
                     <a href="{{route('admin.history')}}">
                         <i class="fa fa-history"></i>
                         <p>History</p>
                     </a>
                 </li>
-                <li>
+
+                <!-- Messages -->
+                <li @if(request()->path() == 'admin/msg') class="active" @endif>
                     <a href="{{route('admin.msg.list')}}">
                         <i class="fa fa-envelope" aria-hidden="true"></i>
-                        <p>Messages</p>
+                        <p>Messages&nbsp;
+                            @php
+                                $newMsg = App\Messages::where('viewed', '=', '0')->get();
+                                $newMsg == $newMsg->isEmpty() ? false : count($newMsg);
+                            @endphp
+                            @if(count($newMsg) > 0)
+                            <span class="label label-danger label-danger-notifys small-label">{{count($newMsg)}}</span>
+                            @endif
+                        </p>
                     </a>
                 </li>
-                <li>
+
+                <!-- Settings -->
+                <li @if(request()->path() == 'admin/settings') class="active" @endif>
                     <a href="{{route('admin.settings')}}">
                         <i class="fa fa-cogs" aria-hidden="true"></i>
                         <p>Settings</p>
                     </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('/logout') }}"
+                       onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();" class="logout--link">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        <p><b>LOGOUT ({{ Auth::user()->name }})</b></p>
+                    </a>
+                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                 </li>
             </ul>
         </div>
@@ -198,7 +222,7 @@
                         <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
                             Notifications
                             @if(count($newCandidates) > 0)
-                                <span class="btn btn-danger btn-round btn-fab btn-fab-mini notif-mini">{{count($newCandidates)}}</span>
+                                <span class="btn btn-danger btn-round btn-fab btn-fab-mini notif-mini label-danger-notifys">{{count($newCandidates)}}</span>
 
                                 <i class="material-icons">notifications</i>
                                 <b class="caret"></b>
@@ -299,6 +323,7 @@
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="/dashboard/assets/js/custom.js"></script>
 <script src="/dashboard/assets/js/toastr.min.js"></script>
+<script src="/dashboard/assets/js/mine.js"></script>
 <script>
     @if(Session::has('message'))
     var type = "{{ Session::get('alert-type', 'info') }}";

@@ -7,6 +7,7 @@ use App\Policies\CandidatePolicy;
 use App\Policies\OpeningsPolicy;
 use App\User;
 use App\Candidate;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -20,7 +21,6 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        //'App\Model' => 'App\Policies\ModelPolicy',
         Candidate::class => CandidatePolicy::class,
 	    Openings::class => OpeningsPolicy::class,
     ];
@@ -56,5 +56,7 @@ class AuthServiceProvider extends ServiceProvider
                 });
                 */
         Passport::routes();
+        Passport::tokensExpireIn(Carbon::now()->addDays(1));
+        Passport::refreshTokensExpireIn(Carbon::now()->addDays(2));
     }
 }

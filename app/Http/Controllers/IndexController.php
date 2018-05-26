@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\CandidateToOpening;
+use Log;
 use App\Candidate;
 use App\CoreSettings;
 use App\Messages;
@@ -85,12 +87,16 @@ class IndexController extends Controller
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
 	 */
-    public function showOpening(Request $request, $id)
+    public function showOpening($slug)
     {
-    	if(!$opening = Openings::find($id)) {
-		    return abort(403, 'Unauthorized');
+    	if(!$opening = Openings::where('slug', '=', $slug)->first()) {
+		    return abort(404, 'Not found');
 	    } else {
-		    return view('frontend.pages.opening', ['opening' => $opening]);
+            $applied = CandidateToOpening::where([
+                ['user_id', '=', Auth::id()],
+                ['opening_id', '=', $opening->id],
+            ])->get();
+		    return view('frontend.pages.opening', ['opening' => $opening, 'applied' => $applied]);
 	    }
     }
 
@@ -169,5 +175,15 @@ class IndexController extends Controller
 	    $send->save();
 
 	    return redirect('/')->with(['message' => 'Your message successfully send!', 'alert-type' => 'success']);
+    }
+
+    public function userProfile()
+    {
+        return view('frontend.user.profile');
+    }
+
+    public function userAppliedOpenings()
+    {
+
     }
 }

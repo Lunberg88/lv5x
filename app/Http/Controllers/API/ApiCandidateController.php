@@ -14,8 +14,14 @@ class ApiCandidateController extends Controller
 	 */
 	public function showAllCandidatesList()
 	{
-		$candidateList = Candidate::orderBy('id', 'desc')->get();
-		return !$candidateList->isEmpty() ? response()->json($candidateList, 200) : response()->json(['message' => 'Error occurred...'], 200);
+	    if(Auth::check() && Auth::user()->admin == 1) {
+            $candidateList = Candidate::orderBy('id', 'desc')->get();
+            return !$candidateList->isEmpty() ?
+                response()->json($candidateList, 200) :
+                response()->json(['message' => 'Error occurred...'], 200);
+        } else {
+	        return response()->json(['message' => 'Error, not Authorized'], 401);
+        }
 	}
 	/**
 	 * @param Request $request
@@ -24,12 +30,13 @@ class ApiCandidateController extends Controller
 	 */
     public function createNewCandidate(Request $request)
     {
-    	if(Auth::check() && Auth::user()->admin === 1) {
+    	if(Auth::check() && Auth::user()->admin == 1) {
     		$candidate = new Candidate();
     		$candidate->create($request->all());
+    		$testCVS = $candidate->upload_cvs;
     		return response()->json(['message' => 'Candidate successfully added!'], 200);
 	    } else {
-    		return response()->json(['message' => 'Error, 401 Unauthorized'], 200);
+    		return response()->json(['message' => 'Error, 401 Unauthorized - backend response'], 200);
 	    }
     }
 

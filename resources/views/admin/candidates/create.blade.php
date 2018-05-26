@@ -68,16 +68,18 @@
                                             <span class="material-input"></span>
                                         </div>
                                         <div class="form-group label-floating is-empty">
-                                            <label class="control-label">
-                                                Stack
-                                                <small>*</small>
-                                            </label>
-                                            <input class="form-control" name="stack" type="text" required="true" aria-required="true">
-                                            <span class="material-input"></span>
+                                            <select class="form-control" name="stack">
+                                                <option disabled="disabled" selected="selected">Choose stack</option>
+                                                @if($stacks)
+                                                    @foreach($stacks as $i => $stack)
+                                                        <option value="{{$i + 1}}">{{$stack}}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
                                         </div>
                                         <div class="form-group label-floating is-empty">
                                             <label class="control-label">
-                                                Tags
+                                                Skills
                                                 <small>*</small>
                                             </label>
                                             <div class="col-md-10">
@@ -87,25 +89,46 @@
                                                 <input type="text" name="tags" class="tagsinput" data-role="tagsinput" data-color="rose" style="display: none;" placeholder="tags...">
                                             </div>
                                         </div>
-                                        <div class="form-group label-floating is-empty">
-                                            <div class="col-md-2 col-sm-2">
-                                                <label class="control-label">
-                                                    Salary
-                                                    <small>*</small>
-                                                </label>
-                                                <input class="form-control" name="salary" type="text" required="true" aria-required="true">
-                                                <span class="material-input"></span>
+                                        <div class="row">
+                                            <hr>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group label-floating is-empty col-md-6">
+                                                <div class="col-md-9">
+                                                    <label class="control-label">
+                                                        Salary
+                                                        <small>*</small>
+                                                    </label>
+                                                    <input class="form-control" name="salary" type="text">
+                                                    <span class="material-input"></span>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <select name="currency" class="form-control">
+                                                        <option value="1">&dollar;</option>
+                                                        <option value="2">&euro;</option>
+                                                        <option value="3">&#8381;</option>
+                                                        <option value="4">&#8372;</option>
+                                                    </select>
+                                                </div>
+
                                             </div>
-                                            <div class="col-md-2 col-sm-2">
-                                                <select name="currency" class="form-control">
-                                                    <option value="1">&dollar;</option>
-                                                    <option value="2">&euro;</option>
-                                                    <option value="3">руб.</option>
-                                                    <option value="4">грн.</option>
-                                                </select>
+                                            <div class="form-group label-floating is-empty col-md-6">
+                                                <div class="col-md-offset-1">
+                                                    <div class="input-group">
+                                                        <label class="control-label">
+                                                            Rate <small>*</small>
+                                                        </label>
+                                                        <input type="text" name="rate" class="form-control">
+                                                        <span class="material-input"></span>
+                                                        <span class="input-group-addon">&dollar;</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-footer text-right">
+                                        <div class="row">
+                                            <hr>
+                                        </div>
+                                        <div class="row form-footer text-right">
                                             <a href="{{route('admin.candidates')}}" class="btn btn-default pull-left">Back</a>
                                             <button name="add" type="submit" class="btn btn-success btn-fill">Create...</button>
                                         </div>

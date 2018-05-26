@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\CoreSettings;
+use App\Traits\CandidatesHelper;
 use App\Candidate;
 use App\Profile;
 use Auth;
@@ -14,6 +16,7 @@ use Illuminate\Http\Request;
 
 class CandidateController extends Controller
 {
+    use CandidatesHelper;
 	/**
 	 * Statuses:
 	 * 0 - inactive
@@ -31,25 +34,15 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        $candidates = Candidate::latest()->get();
-	    $tags = [
-		    'HTML',
-		    'JS',
-		    'PHP',
-		    'MySQL',
-		    'JAVA',
-		    'AngularJS',
-		    'Angular (2.x/4.x)',
-		    'ReactJS',
-		    'VueJS',
-		    'iOS',
-		    'Android',
-		    'PS'
-	    ];
+        $candidates = Candidate::paginate(15);
+        $tags_all = CoreSettings::where('key', '=', 'main_stacks')->first();
+        $tags = explode(', ', $tags_all->value);
+        $newCandidates = CandidatesHelper::showNewNotif('candidates');
 
         return view('admin.dashboard', [
         	'candidates' => $candidates,
 	        'tags' => $tags,
+            'newCandidates' => $newCandidates
         ]);
     }
 
@@ -61,9 +54,12 @@ class CandidateController extends Controller
     public function create()
     {
         $candidate = new Candidate();
+        $stacks_all = CoreSettings::where('key', '=', 'main_stacks')->first();
+        $stacks = explode(', ', $stacks_all->value);
 
         return view('admin.candidates.create', [
         	'candidate' => $candidate,
+            'stacks' => $stacks
         ]);
     }
 
@@ -135,9 +131,12 @@ class CandidateController extends Controller
     public function edit($id)
     {
 	    if($candidate = Candidate::find($id)) {
+            $stacks_all = CoreSettings::where('key', '=', 'main_stacks')->first();
+            $stacks = explode(', ', $stacks_all->value);
 
 		    return view('admin.candidates.edit', [
 			    'candidate' => $candidate,
+                'stacks' => $stacks
 		    ]);
 	    } else {
 		    return redirect('admin/candidates')->with(['message' => 'Profile with this ID: '.$id.' not exists!', 'alert-type' => 'danger']);

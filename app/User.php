@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\AdminNotifications;
 use App\History;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -48,4 +49,9 @@ class User extends Authenticatable
 	{
 		return $this->admin ? true : false; // this looks for an admin column in your users table
 	}
+
+	public function userfavs()
+    {
+        return $this->belongsToMany('App\Openings','userfavs','user_id', 'opening_id','user_id');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Candidate;
 use Auth;
 use App\Messages;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class ApiMessagesController extends Controller
     public function showAllMessages()
     {
     	if(Auth::user() && Auth::user()->admin == 1) {
-    		return ($messages = Messages::orderBy('id', 'desc')->get()) ?
+    		return ($messages = Messages::orderBy('id', 'desc')->paginate(15)) ?
 			    response()->json($messages, 200) :
 			    response()->json(['message' => 'Empty...'], 200);
 	    }
@@ -29,10 +30,16 @@ class ApiMessagesController extends Controller
 	 */
     public function readInboxMessage($id)
     {
-    	$readMsg = Messages::find($id);
-    	return $readMsg ?
-		    response()->json($readMsg, 200) :
-		    response(['message' => 'Error, message not found'], 404);
+        if(Auth::check() && Auth::user()->admin == '1') {
+            if($readMsg = Messages::find($id)) {
+                $readMsg->viewed = 1;
+                $readMsg->save();
+            }
+            return $readMsg ?
+                response()->json($readMsg, 200) :
+                response(['message' => 'Error, message not found'], 404);
+        }
+        return response()->json(['message' => 'Error, 401'], 401);
     }
 
 	/**

@@ -14,8 +14,13 @@ class ApiOpeningsController extends Controller
 	 */
     public function showAllOpeningsList()
     {
-    	$openingsList = Openings::orderBy('id', 'desc')->get();
-    	return !$openingsList->isEmpty() ? response()->json($openingsList, 200) : response()->json(['messsage' => 'Error while fetching.'], 200);
+        if(Auth::check() && Auth::user()->admin == '1') {
+            $openingsList = Openings::orderBy('id', 'desc')->paginate(9);
+            return !$openingsList->isEmpty() ?
+                response()->json($openingsList, 200) :
+                response()->json(['message' => 'Error while fetching.'], 200);
+        }
+    	return response()->json(['message' => 'Unauthorized!'], 401);
     }
 
 	/**
@@ -25,8 +30,11 @@ class ApiOpeningsController extends Controller
 	 */
     public function viewOpeningsDetail($id)
     {
-    	return ($openingsDetail = Openings::find($id)) ?
-		    response()->json(['data' => $openingsDetail], 200) :
-		    response()->json(['message' => 'Error, opening not found.'], 200);
+        if(Auth::check() && Auth::user()->admin == '1') {
+            return ($openingsDetail = Openings::find($id)) ?
+                response()->json(['data' => $openingsDetail], 200) :
+                response()->json(['message' => 'Error, opening not found.'], 200);
+        }
+        return response()->json(['message' => 'Unauthorized!'], 401);
     }
 }

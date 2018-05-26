@@ -16,7 +16,7 @@
             @if($candidate)
                 @foreach($candidate as $p)
                     @include('admin.grid_tb')
-                @endforeach()
+                @endforeach
             @else
                 <tr>
                     <td><span class="alert alert-warning">No matches found!</span></td>

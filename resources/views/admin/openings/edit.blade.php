@@ -3,7 +3,7 @@
 @section('content')
         @can('updateO', $openings)
             <div class="row">
-                <div class="col-md-offset-2 col-md-8">
+                <div class="col-md-offset-1 col-md-10">
                     <!-- -->
                     <div class="card">
                         <form class="form-horizontal" method="POST" action="{{ route('admin.openings.update', $openings->id) }}" enctype="multipart/form-data">
@@ -39,13 +39,22 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-sm-2 label-on-left candidate-edit">Salary</label>
-                                    <div class="col-md-10">
-                                        <div class="form-group label-floating is-empty">
+                                    <label class="col-md-2 label-on-left candidate-edit">Salary</label>
+                                    <div class="col-md-3">
+                                        <div class="form-group input-group label-floating is-empty">
                                             <label class="control-label"></label>
                                             <input class="form-control" name="salary" type="text" value="{{$openings->salary}}">
                                             <span class="material-input"></span>
+                                            <span class="input-group-addon">&dollar;</span>
                                         </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                    <label class="col-md-1 label-on-right candidate-edit">Rate</label>
+                                    <div class="form-group input-group label-floating is-empty col-md-3">
+                                        <label class="control-label"></label>
+                                        <input type="text" class="form-control" name="rate" value="{{$openings->rate}}">
+                                        <span class="material-input"></span>
+                                        <span class="input-group-addon">&dollar;</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -53,20 +62,23 @@
                                         <label class="col-sm-2 label-on-left candidate-edit">Description</label>
                                         <div class="form-group label-floating is-empty">
                                             <div class="col-md-10">
-                                                <textarea class="form-control" rows="6" name="description">{{$openings->description}}</textarea>
+                                                <textarea class="form-control blog-field" rows="6" name="description">{{$openings->description}}</textarea>
                                                 <span class="material-input"></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <hr>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <div class="form-group label-floating is-empty">
-                                            <label class="col-sm-2 label-on-left candidate-edit">
+                                            <label class="col-md-3 label-on-left candidate-edit">
                                                 Status
                                                 <small>*</small>
                                             </label>
-                                        <div class="col-md-10">
+                                        <div class="col-md-3">
                                             <div class="checkbox-radios">
                                                 @if(isset($openings->status) && $openings->status > 0)
                                                     <div class="radio">
@@ -103,6 +115,54 @@
                                                         </label>
                                                     </div>
                                                 @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="col-md-2 label-on-left candidate-edit">
+                                                Type
+                                                <small>*</small>
+                                            </label>
+                                            <div class="col-md-4">
+                                                <div class="checkbox-radios">
+                                                    @if(isset($openings->type) && $openings->type > 0)
+                                                        <div class="radio">
+                                                            <label class="op-status">
+                                                                <input type="radio" name="type" value="1" checked="true">
+                                                                <span class="circle"></span>
+                                                                <span class="check"></span>
+                                                                Relocate
+                                                            </label>
+                                                        </div>
+                                                        <div class="radio">
+                                                            <label class="op-status">
+                                                                <input type="radio" name="type" value="0">
+                                                                <span class="circle"></span>
+                                                                <span class="check"></span>
+                                                                Remote
+                                                            </label>
+                                                        </div>
+                                                    @else
+                                                        <div class="radio">
+                                                            <label>
+                                                                <input type="radio" name="type" value="1">
+                                                                <span class="circle"></span>
+                                                                <span class="check"></span>
+                                                                Relocate
+                                                            </label>
+                                                        </div>
+                                                        <div class="radio">
+                                                            <label>
+                                                                <input type="radio" name="type" value="0" checked="true">
+                                                                <span class="circle"></span>
+                                                                <span class="check"></span>
+                                                                Remote
+                                                            </label>
+                                                        </div>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -164,7 +224,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                        </div>
                         </form>
                     </div>
                     <!-- //-->

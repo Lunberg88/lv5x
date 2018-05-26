@@ -30,7 +30,7 @@ trait UserProfileInfo
 	{
 		if(Auth::check()) {
 			$user_profile = Candidate::where('email', '=', Auth::user()->email)
-			                         ->get();
+			                         ->first();
 			return $user_profile;
 		} else {
 			return null;

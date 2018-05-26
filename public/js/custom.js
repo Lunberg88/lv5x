@@ -1,18 +1,4 @@
-; var url = 'http://ajax_lv/openings/addfav';
-
-function addToFav(val) {
-
-    $.post(url, {
-        '_token': $('meta[name="csrf-token"]').attr('content'),
-        'id': val.id
-    }).done(function (data) {
-        var selId = $('#' + val.id + ' > i');
-        var text = $('#' + val.id + ' > small');
-        selId.hasClass('fa-star') ? selId.removeClass('fa-star').addClass('fa-star-o') + toastr.error("Removed") : selId.removeClass('fa-star-o').addClass('fa-star') + toastr.success("Success");
-    }).fail(function(data) {
-        toastr.error(data.statusText);
-    })
-};
+; const url = 'http://ajax-lv/openings/';
 
 $('button#get_openings1').click(function() {
     var url = '/openings/get_openings';
@@ -31,3 +17,20 @@ $("#more-tags").on("hide.bs.collapse", function(){
 $("#more-tags").on("show.bs.collapse", function(){
     $("div.more-tags").html('<span class="fa fa-chevron-up"></span> Hide');
 });
+
+function applyNow(val) {
+    $.post(url + 'apply_opening', {
+        '_token': $('meta[name="csrf-token"]').attr('content'),
+        'id': val.id
+    })
+    .done(function(data) {
+        $('button[uid="op-'+ val.id +'"]').removeClass('btn-warning').addClass('btn-success').text('Applied') + (data.success ? toastr.success(data.success) : toastr.error(data.error));
+    })
+    .fail({
+
+    })
+};
+
+function showRegisterForm() {
+    window.location.href = '/login';
+};

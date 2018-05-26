@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Candidate;
+use App\CandidateToOpening;
+use App\Notifications\CandidateAppliedToOpening;
+use App\User;
 use Auth;
 use Gate;
 use Event;
@@ -54,16 +58,20 @@ class OpeningsController extends Controller
 	    $openings = new Openings();
 	    if($request->user()->can('createO', $openings)){
 		    $openings->title = $request->title;
+		    $openings->slug = str_slug($request->title, '-');
 		    $openings->location = $request->location;
 		    $openings->salary = $request->salary;
+		    $openings->rate = $request->rate;
 		    $openings->description = $request->description;
 		    $openings->status = $request->status;
+		    $openings->type = $request->type;
 		    $openings->user_id = Auth::id();
 		    if($request->file('imgFile')) {
 		    	$image = $request->file('imgFile');
 		    	$filename = time().'.'.$image->getClientOriginalExtension();
 		    	$path = public_path('images/openings/'.$filename);
-		    	$imgPoster = Image::make($image->getRealPath())->resize(320, 180)->save($path);
+		    	//$imgPoster = Image::make($image->getRealPath())->resize(320, 180)->save($path);
+                $imgPoster = Image::make($image->getRealPath())->resize(300)->save($path);
 		    	$openings->img = $filename;
 		    }
 		    $openings->save();
@@ -145,16 +153,19 @@ class OpeningsController extends Controller
 			    $data = $request->except('_token');
 
 			    $openings->title = $data['title'];
+			    $openings->slug = str_slug($data['title'], '-');
 			    $openings->location = $data['location'];
 			    $openings->salary = $data['salary'];
+			    $openings->rate = $data['rate'];
 			    $openings->description = $data['description'];
 			    $openings->status = $data['status'];
+			    $openings->type = $data['type'];
 			    $openings->user_id = Auth::id();
 			    if($request->file('editImgFile') && $request->file('editImgFile') != '') {
 				    $image = $request->file('editImgFile');
 				    $filename = time().'-'.$openings->id.'.'.$image->getClientOriginalExtension();
 				    $path = public_path('images/openings/'.$filename);
-				    $imgPoster = Image::make($image->getRealPath())->resize(320, 180)->save($path);
+				    $imgPoster = Image::make($image->getRealPath())->save($path);
 				    $openings->img = $filename;
 			    }
 
@@ -252,6 +263,11 @@ class OpeningsController extends Controller
 		}
 	}
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
 	public function removeFav(Request $request)
 	{
 		$delete = UserFavs::where('user_id', '=', Auth::user()->id)
@@ -267,4 +283,52 @@ class OpeningsController extends Controller
 		}
 
 	}
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+	public function applyOpening(Request $request)
+    {
+        if(Auth::check()) {
+            if((int)$request->id && (int)$request->id != '') {
+                $ifexist = CandidateToOpening::where([
+                    ['user_id', '=', Auth::id()],
+                    ['opening_id', '=', $request->id],
+                ])->get();
+                if($ifexist->isEmpty()) {
+                    $fav = new CandidateToOpening();
+                    $fav->user_id = Auth::id();
+                    $fav->opening_id = $request->id;
+                    $fav->save();
+
+                    ($user = User::findOrFail(1))->notify(new CandidateAppliedToOpening(Auth::id(), Auth::user()->name, ($title = Openings::findOrFail($request->id))->title, $request->id));
+
+                    return response()->json(['success' => 'You successfully applied!']);
+                } else {
+                    return response()->json(['error' => 'You are already applied to this Opening!'], 201);
+                }
+            }
+
+            return response()->json(['error' => 'Opening or OpeningID not found!'], 404);
+        }
+
+        return response()->json(['error' => 'Not Authorized'],401);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function rejectCandidate(Request $request)
+    {
+        $rejected = CandidateToOpening::where([['user_id', '=', $request->rejected_user], ['opening_id', '=', $request->rejected_opening]])->first();
+        if($rejected !== null) {
+            $rejected->delete();
+            return back();
+        }
+        return back()->with(['error' => 'Candidate or Opening not found.']);
+    }
 }

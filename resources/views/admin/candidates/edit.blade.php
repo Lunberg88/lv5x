@@ -51,19 +51,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <label class="col-sm-2 label-on-left candidate-edit">Stack</label>
-                                        <div class="col-md-10">
-                                            <div class="form-group label-floating is-empty">
-                                                <label class="control-label"></label>
-                                                <input class="form-control" name="stack" type="text" value="{{$candidate->stack}}">
-                                                <span class="material-input"></span>
-                                            </div>
-                                        </div>
+                                    <div class="form-group label-floating is-empty">
+                                        <select class="form-control" name="stack">
+                                            <option disabled="disabled" selected="selected">Choose stack</option>
+                                            @if($stacks)
+                                                @foreach($stacks as $i => $stack)
+                                                    <option value="{{$i + 1}}" {{($candidate->stack == ($i + 1) ? 'selected' : '')}}>{{$stack}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
                                     </div>
-
                                     <div class="row">
-                                        <label class="col-sm-2 label-on-left candidate-edit">Tags</label>
+                                        <label class="col-sm-2 label-on-left candidate-edit">Skills</label>
                                         <div class="col-md-10">
                                             <div class="bootstrap-tagsinput">
                                                 <input type="text" placeholder="" size="1">
@@ -72,24 +71,41 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <label class="col-sm-2 label-on-left candidate-edit">Salary</label>
-                                        <div class="col-md-2 col-sm-2">
-                                            <div class="form-group label-floating is-empty">
-                                                <label class="control-label"></label>
-                                                <input class="form-control" name="salary" type="text" value="{{$candidate->salary}}">
-                                                <span class="material-input"></span>
+                                        <hr>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="col-md-3 label-on-left candidate-edit">Salary</label>
+                                            <div class="col-md-5">
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label"></label>
+                                                    <input class="form-control" name="salary" type="text" value="{{$candidate->salary}}">
+                                                    <span class="material-input"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <select name="currency" class="form-control">
+                                                    @php
+                                                        $curr = [1 =>'&dollar;', 2 =>'&euro;', 3=> '&#8381;', 4=> '&#8372;'];
+                                                        for($i = 1; $i<5; $i++) {
+                                                            echo '<option value='.$i.' '.($candidate->currency == $i ? "selected": "").'>'.$curr[$i].'</option>';
+                                                        }
+                                                    @endphp
+                                                </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 col-sm-2">
-                                            <select name="currency" class="form-control">
-                                                @php
-                                                    $curr = [1 =>'&dollar;', 2 =>'&euro;', 3=> 'руб.', 4=> 'грн.'];
-                                                    for($i = 1; $i<5; $i++) {
-                                                        echo '<option value='.$i.' '.($candidate->currency == $i ? "selected": "").'>'.$curr[$i].'</option>';
-                                                    }
-                                                @endphp
-                                            </select>
+                                        <div class="col-md-6">
+                                            <label class="col-md-4 label-on-left candidate-edit">Rate</label>
+                                            <div class="form-group input-group label-floating is-empty col-md-8">
+                                                <label class="control-label"></label>
+                                                <input class="form-control" name="rate" type="text" value="{{$candidate->rate}}">
+                                                <span class="material-input"></span>
+                                                <span class="input-group-addon">&dollar;</span>
+                                            </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <hr>
                                     </div>
                                     <div class="row" data-info="upload_cvs">
                                         <label class="col-sm-2 label-on-left candidate-edit"><small><b>Sticky CV's</b></small></label>
@@ -99,8 +115,8 @@
                                                 @if(isset($candidate->upload_cvs) && $candidate->upload_cvs !== null)
                                                 <input style="background: #eee; text-align: left;" disabled class="col-md-4 form-control" type="text" name="existing_cvs" value="
                                                 @php if(isset($candidate->upload_cvs) && $candidate->upload_cvs !== null) {
-                                                       $candidate->upload_cvs = explode('/', $candidate->upload_cvs);
-                                                       echo $candidate->upload_cvs[1];
+                                                       //$candidate->upload_cvs = explode('/', $candidate->upload_cvs);
+                                                       echo $candidate->upload_cvs;
                                                 }
                                                 @endphp
                                                 ">
@@ -117,7 +133,9 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div class="row">
+                                        <hr>
+                                    </div>
                                     <div class="row" data-info="edit_upload_cvs">
                                         <div class="col-md-offset-2 col-md-10">
                                             <div id="edit-upload-cvs" class="form-group label-floating is-empty hidden">

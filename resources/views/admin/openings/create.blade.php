@@ -3,7 +3,7 @@
 @section('content')
         @can('createO', $openings)
             <div class="row">
-                <div class="col-md-offset-2 col-md-8">
+                <div class="col-md-offset-1 col-md-10">
                     <!-- -->
                     <div class="card">
                         <form class="form-horizontal" method="POST" action="{{ route('admin.openings.store') }}" enctype="multipart/form-data">
@@ -36,20 +36,42 @@
                                                 Location
                                                 <small>*</small>
                                             </label>
-                                            <input class="form-control" name="location" type="text" required="true" aria-required="true">
+                                            <input class="form-control" name="location">
                                             <span class="material-input"></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group label-floating is-empty">
-                                            <label class="control-label">
-                                                Salary
-                                                <small>*</small>
-                                            </label>
-                                            <input class="form-control" name="salary" type="text" required="true" aria-required="true">
-                                            <span class="material-input"></span>
+                                            <div class="col-md-8 col-sm-8">
+                                                <label class="control-label">
+                                                    Salary
+                                                    <small>*</small>
+                                                </label>
+                                                <input class="form-control" name="salary" type="text">
+                                                <span class="material-input"></span>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                <select name="currency" class="form-control">
+                                                    <option value="1">&dollar;</option>
+                                                    <option value="2">&euro;</option>
+                                                    <option value="3">&#8381;</option>
+                                                    <option value="4">&#8372;</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group label-floating is-empty col-md-8">
+                                            <div class="input-group">
+                                                <label class="control-label">
+                                                    Rate <small>*</small>
+                                                </label>
+                                                <input type="text" name="rate" class="form-control">
+                                                <span class="material-input"></span>
+                                                <span class="input-group-addon">&dollar;</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -60,14 +82,17 @@
                                                 Description
                                                 <small>*</small>
                                             </label>
-                                            <textarea class="form-control" rows="6" name="description" required="true" aria-required="true"></textarea>
+                                            <textarea class="form-control blog-field" rows="6" name="description" required="true" aria-required="true"></textarea>
                                             <span class="material-input"></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group label-floating is-empty">
+                                    <hr>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group is-empty">
                                             <label class="control-label">
                                                 Status
                                                 <small>*</small>
@@ -86,6 +111,28 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group is-empty">
+                                            <label class="control-label">
+                                                Type <small>*</small>
+                                            </label>
+                                            <div class="checkbox-radios">
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="type" value="0" checked="true"><span class="circle"></span><span class="check"></span>Remote
+                                                    </label>
+                                                </div>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="type" value="1"><span class="circle"></span><span class="check"></span>Relocate
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <hr>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">

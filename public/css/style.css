@@ -37,15 +37,15 @@ html {
 
 body {
     font-size: 16px;
-    font-family: Montserrat, Helvetica Neue ,Arial, sans-serif;
-    font-weight: 400;
+    font-family: 'Open Sans', Sans-serif;
+    font-weight: 200;
     line-height: 24px;
     background-color: #fff;
     color: #333;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: Montserrat, Helvetica Neue, Arial, sans-serif;
+    /*font-family: Montserrat, Helvetica Neue, Arial, sans-serif;*/
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -73,7 +73,7 @@ h2.section-title {
 }
 
 .section-bg {
-    margin-top: 50px;
+    margin-top: 30px;
     height: 350px;
     background-image: linear-gradient(to top, transparent 5%, #1f1f1f 100%),
     url('../img/Slide10.jpg');
@@ -330,6 +330,10 @@ section.section-about-graph {
     font-size: 13px;
 }
 
+h4.card-title a, h4.font-weight-bold > strong {
+    font-family: Montserrat, "Helvetica Neue", Arial, sans-serif;
+}
+
 .login-form .md-form small {
     margin-top: -10px;
     color: #000;
@@ -492,33 +496,6 @@ h4,
     border-radius: .25em;
 }
 
-section.section-about-graph .row .col-md-3:nth-child(1) > div.info:nth-child(1):after,
-section.section-about-graph .row .col-md-3:nth-child(2) > div.info:nth-child(1):after,
-section.section-about-graph .row .col-md-3:nth-child(3) > div.info:nth-child(1):after
-{
-    content: "\f178";
-    position: absolute;
-    top: 16%;
-    right: 0;
-    display: block;
-    width: 35px;
-    height: 35px;
-    font-family: FontAwesome;
-    font-size: 85px;
-    color: #dee2e6;
-    opacity: .73;
-    -webkit-transition: -webkit-transform .4s,-webkit-box-shadow .4s;
-    transition: -webkit-transform .4s,-webkit-box-shadow .4s;
-    transition: transform .4s,text-shadow .4s;
-    transition: transform .4s,text-shadow .4s,-webkit-transform .4s,-webkit-text-shadow .4s;
-}
-
-section.section-about-graph .row .col-md-3 > div.info:hover:after {
-    text-shadow: 3px 3px 3px #969696;
-    transition: transform .4s,text-shadow .4s;
-    transition: transform .4s,text-shadow .4s,-webkit-transform .4s,-webkit-text-shadow .4s;
-}
-
 /***************************/
 
 span.labels.warning {
@@ -566,6 +543,52 @@ h5.modal-opening-title {
 
 .opening-list-img {
     background: linear-gradient(to bottom, transparent 20%, red 80%) !important;
+}
+
+.fixed-img {
+    width: 322px;
+    height: 188px;
+}
+
+a[uid="opening--link"] {
+    margin-top: 0 !important;
+}
+
+i.home--opening--seperator {
+    padding-left: 17px;
+}
+
+.form--register__user {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    padding: 0;
+}
+
+.form--register__user h3.form--register__title {
+    padding: .4rem;
+    font-size: 22px;
+}
+
+.form--register__body .md-form .prefix~label {
+    margin-left: 4rem !important;
+}
+
+.form--register__body .md-form label {
+    top: 1.5rem !important;
+    font-size: .7rem !important;
+}
+
+.form--register__body div.mdb-select input.select-dropdown,
+.form--register__body div.mdb-select span.caret {
+    color: #fff !important;
+}
+
+.form--register__body div.mdb-select select.mdb-select > option {
+    color: #000 !important;
+}
+
+.link--dashboard {
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.83) !important;
 }
 
 .modal-opening-body .opening-list-date {
@@ -628,6 +651,52 @@ h5.modal-opening-title {
     line-height: 20px !important;
 }
 
+.op-h4 {
+    font-family: Roboto, sans-serif !important;
+    font-size: 16px !important;
+}
+
+.active-link-route {
+    color: red !important;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.83) !important;
+}
+
+.font-ms {
+    font-family: Montserrat, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+.badge-small {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 200;
+}
+
+.opening--title {
+    font-size: 14px !important;
+}
+
+.related--openings h3 {
+    font-size: 18px;
+}
+
+.opening--box .opening--box__poster {
+    max-width: 120px;
+    border-radius: 4px;
+    box-shadow: 0 4px 4px rgba(170,170,170,.85);
+}
+
+.opening--box a {
+    color: rgba(20, 109, 169, 0.75);
+}
+
+
+span.opening--type {
+    padding-left: 0 !important;
+}
+
+span.badge a.share-social {
+    color: white !important;
+}
+
 footer.new-foot {
     margin-top: 0;
 }
@@ -646,6 +715,35 @@ footer.new-foot {
     .img-fluid {
         width: 100%;
         height: auto;
+    }
+}
+
+@media (min-width: 1024px) {
+    section.section-about-graph .row .col-md-3:nth-child(1) > div.info:nth-child(1):after,
+    section.section-about-graph .row .col-md-3:nth-child(2) > div.info:nth-child(1):after,
+    section.section-about-graph .row .col-md-3:nth-child(3) > div.info:nth-child(1):after
+    {
+        content: "\f178";
+        position: absolute;
+        top: 16%;
+        right: 0;
+        display: block;
+        width: 35px;
+        height: 35px;
+        font-family: FontAwesome;
+        font-size: 85px;
+        color: #dee2e6;
+        opacity: .73;
+        -webkit-transition: -webkit-transform .4s,-webkit-box-shadow .4s;
+        transition: -webkit-transform .4s,-webkit-box-shadow .4s;
+        transition: transform .4s,text-shadow .4s;
+        transition: transform .4s,text-shadow .4s,-webkit-transform .4s,-webkit-text-shadow .4s;
+    }
+
+    section.section-about-graph .row .col-md-3 > div.info:hover:after {
+        text-shadow: 3px 3px 3px #969696;
+        transition: transform .4s,text-shadow .4s;
+        transition: transform .4s,text-shadow .4s,-webkit-transform .4s,-webkit-text-shadow .4s;
     }
 }
 
