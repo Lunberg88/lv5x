@@ -1,21 +1,10 @@
 ; const url = 'http://ajax-lv/openings/';
 
-$('button#get_openings1').click(function() {
-    var url = '/openings/get_openings';
-   $.post(url, {
-       '_token': $('meta[name="csrf-token"]').attr('content'),
-       'type': $('input[type=radio]:checked').val()
-   }).done(function() {})
-   .fail(function(data) {
-       console.log('Error message: ' + data.statusText);
-   })
+$("#more-openings").on("hide.bs.collapse", function(){
+    $("button#more").html('<span class="fa fa-chevron-down"></span> show more');
 });
-
-$("#more-tags").on("hide.bs.collapse", function(){
-    $("div.more-tags").html('<span class="fa fa-chevron-down"></span> More');
-});
-$("#more-tags").on("show.bs.collapse", function(){
-    $("div.more-tags").html('<span class="fa fa-chevron-up"></span> Hide');
+$("#more-openings").on("show.bs.collapse", function(){
+    $("button#more").html('<span class="fa fa-chevron-up"></span> hide list');
 });
 
 function applyNow(val) {

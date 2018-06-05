@@ -10,6 +10,7 @@ Route::post('/send-msg', 'IndexController@sendMessage')->name('index.send.msg');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/profile', 'IndexController@userProfile')->name('user.profile');
+    Route::post('/profile/update', 'IndexController@updateUserProfile')->name('user.profile.update');
     Route::get('/profile/applied', 'IndexController@userAppliedOpenings')->name('user.applied.openings');
 	Route::post('/openings/addfav', 'OpeningsController@addfav');
 	Route::get('/myfavs', 'IndexController@myfavourites')->name('index.profile.favs');

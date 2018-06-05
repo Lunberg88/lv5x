@@ -13,7 +13,7 @@
     <meta name="og:title" content="Recruiteriia">
     <meta name="og:description" content="@yield('og-description')">
     <meta name="og:image" content="{{asset('css/ri_logo_web.jpg')}}">
-    <meta name="og:url" content="https://recruiteriia.net">
+    <meta name="og:url" content="https://recruiteriia.com">
     <meta name="og:site_name" content="Recruiteriia">
     <meta name="og:type" content="website">
     <meta name="twitter:title" content="Recruiteriia">
@@ -31,7 +31,7 @@
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/core.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
-    <link rel="canonical" href="http://recruiter-iia.net<?php echo $_SERVER['REQUEST_URI']; ?>" />
+    <link rel="canonical" href="http://recruiteriia.com<?php echo $_SERVER['REQUEST_URI']; ?>" />
     @yield('css-links')
     <style type="text/css">
         #preloader>p{

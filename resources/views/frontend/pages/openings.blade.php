@@ -37,17 +37,17 @@
                             <a href="{{route('index.show.opening', $open->slug)}}" class="btn btn-info btn-sm waves-effect waves-light">view opening</a>
                             <span class="pull-right">
                                 <span class="badge indigo">
-                                    <a href="https://www.facebook.com/sharer.php?u=http://13.229.222.14/openings/{{$open->slug}}" target="_blank" class="share-social">
+                                    <a href="https://www.facebook.com/sharer.php?u=https://recuiteriia.com/openings/{{$open->slug}}" target="_blank" class="share-social">
                                         <i class="fa fa-facebook"></i>
                                     </a>
                                 </span>
                                 <span class="badge badge-danger">
-                                    <a href="https://plus.google.com/share?url=http://13.229.222.14/openings/{{$open->slug}}" target="_blank" class="share-social">
+                                    <a href="https://plus.google.com/share?url=https://recuiteriia.com/openings/{{$open->slug}}" target="_blank" class="share-social">
                                         <i class="fa fa-google-plus"></i>
                                     </a>
                                 </span>
                                 <span class="badge badge-info">
-                                    <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://13.229.222.14/openings/{{$open->slug}}&title=Opening&summary=" target="_blank" class="share-social">
+                                    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://recuiteriia.com/openings/{{$open->slug}}&title=Opening&summary=" target="_blank" class="share-social">
                                         <i class="fa fa-linkedin"></i>
                                     </a>
                                 </span>

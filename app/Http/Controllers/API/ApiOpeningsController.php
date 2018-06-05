@@ -37,4 +37,28 @@ class ApiOpeningsController extends Controller
         }
         return response()->json(['message' => 'Unauthorized!'], 401);
     }
+
+    /**
+     * Fetch last Openings for frontend homepage
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function frontShowLastOpenings()
+    {
+        $openingsList = Openings::orderBy('id', 'desc')->take(3)->get();
+        return !$openingsList->isEmpty() ?
+            response()->json($openingsList, 200) :
+            response()->json(['message' => 'Error while fetching.'], 200);
+    }
+
+    /**
+     * Fetch All Openings for frontend side
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function frontShowOpenings()
+    {
+        $openingsList = Openings::orderBy('id', 'desc')->paginate(9);
+        return !$openingsList->isEmpty() ?
+            response()->json($openingsList, 200) :
+            response()->json(['message' => 'Error while fetching.'], 200);
+    }
 }

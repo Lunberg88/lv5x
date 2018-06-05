@@ -93,11 +93,9 @@
         <div class="logo-bg">
             <div class="container">
                 <div class="row new-container">
-                    <h1>welcome to recruiter-iia</h1>
+                    <h1>{!! \App\CoreSettings::where('key', 'homepage_headline_text')->pluck('value')->first() !!}</h1>
                     <p class="logo-description d-none d-md-block">
-                        <b>
-                            Most Popular's Front-end Technologic's: AngularJS, Angular 2, ReactJS, VueJS, HTML5/CSS3, Bootstrap, Java, CoffeScript, TypeScript end ect.
-                        </b>
+                        {!! \App\CoreSettings::where('key', 'homepage_headline_description')->pluck('value')->first() !!}
                     </p>
                 </div>
             </div>

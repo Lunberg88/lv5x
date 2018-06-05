@@ -96,7 +96,11 @@ class IndexController extends Controller
                 ['user_id', '=', Auth::id()],
                 ['opening_id', '=', $opening->id],
             ])->get();
-		    return view('frontend.pages.opening', ['opening' => $opening, 'applied' => $applied]);
+		    return view('frontend.pages.opening', [
+		        'opening' => $opening,
+                'applied' => $applied,
+                'user_profile' => UserProfileInfo::userProfile(),
+            ]);
 	    }
     }
 
@@ -177,13 +181,46 @@ class IndexController extends Controller
 	    return redirect('/')->with(['message' => 'Your message successfully send!', 'alert-type' => 'success']);
     }
 
+    /**
+     * Show user profile
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function userProfile()
     {
-        return view('frontend.user.profile');
+        if(Auth::id() == 1) {
+            return redirect('/admin');
+        }
+        $user = User::find(Auth::id());
+        $subscribe = Candidate::where('email', $user->email)->pluck('subscribe')->first();
+        return view('frontend.user.profile', ['user' => $user, 'subscribe' => $subscribe]);
     }
 
-    public function userAppliedOpenings()
+    /**
+     * Update user information
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateUserProfile(Request $request)
     {
+        $user = User::find(Auth::id());
+        $candidate = Candidate::where('email', $user->email)->first();
 
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        $candidate->email = $user->email;
+
+        if($request->subscribe !== null && $request->subscribe != '') {
+            $candidate->subscribe = $request->subscribe;
+        }
+        $candidate->save();
+
+        if(($request->password !== null && $request->password != '') && ($request->new_password !== null && $request->new_password != '')) {
+            $user->password = bcrypt(trim($request->new_password));
+        }
+        $user->save();
+
+        return back()->with('message', 'Your profile updated!');
     }
+
 }

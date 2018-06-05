@@ -61,17 +61,17 @@
                             <div class="mt-4 pt-3 w-100">
                                 <span class="d-block float-right">
                                     <span class="badge indigo">
-                                    <a href="https://www.facebook.com/sharer.php?u=http://13.229.222.14/openings/{{$opening->slug}}" target="_blank" class="share-social">
+                                    <a href="https://www.facebook.com/sharer.php?u=https://recuiteriia.com/openings/{{$opening->slug}}" target="_blank" class="share-social">
                                         <i class="fa fa-facebook"></i>
                                     </a>
                                 </span>
                                 <span class="badge badge-danger">
-                                    <a href="https://plus.google.com/share?url=http://13.229.222.14/openings/{{$opening->slug}}" target="_blank" class="share-social">
+                                    <a href="https://plus.google.com/share?url=https://recuiteriia.com/openings/{{$opening->slug}}" target="_blank" class="share-social">
                                         <i class="fa fa-google-plus"></i>
                                     </a>
                                 </span>
                                 <span class="badge badge-info">
-                                    <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://13.229.222.14/openings/{{$opening->slug}}&title=Opening&summary=" target="_blank" class="share-social">
+                                    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://recuiteriia.com/openings/{{$opening->slug}}&title=Opening&summary=" target="_blank" class="share-social">
                                         <i class="fa fa-linkedin"></i>
                                     </a>
                                 </span>
@@ -93,26 +93,31 @@
                     <span class="d-block">
                         <h3>Related openings</h3>
                     </span>
-                    <div class="opening--box">
+                    <div class="opening--box d-none d-lg-block">
                         @php
-                            $related = App\Openings::where('status', '>', '0')->take(5)->get();
+                            $related = App\Openings::where('status', '>', '0')->latest()->take(5)->get();
                         @endphp
                         @foreach($related as $open)
                             <div class="pb-4">
                                 <div class="row">
                                     <div class="col-md-5">
-                                        <img class="opening--box__poster" src="{{route('main')}}/images/openings/{{ $open->img }}" alt="{{ $open->title }}">
+                                        <div class="view overlay rounded z-depth-1">
+                                            <div style="background: url({{route('main')}}/images/openings/{{$open->img}}) no-repeat; width: 120px; height: 80px; background-position: center; background-size: cover"></div>
+                                            <a href="{{route('index.show.opening', $open->slug)}}">
+                                                <div class="mask rgba-white-slight waves-effect waves-light"></div>
+                                            </a>
+                                        </div>
                                     </div>
                                     <div class="col-md-7">
-                                        <span class="d-block pl-3">
+                                        <span class="d-block">
                                             <a href="{{route('index.show.opening', $open->slug)}}">{{ $open->title }}</a>
                                         </span>
-                                        <span class="d-block pl-3">
+                                        <span class="d-block">
                                             <small>
                                                 <span class="badge badge-{{$open->type === 1 ? 'success' : 'warning'}}">{{$open->type === 1 ? 'remote' : 'relocate'}}</span>
                                             </small>
                                         </span>
-                                        <span class="d-block pl-3">
+                                        <span class="d-block">
                                             <small>
                                                 <b>&dollar;</b> {{$open->salary}}
                                             </small>

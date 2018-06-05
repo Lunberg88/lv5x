@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware('api')->get('/test', 'API\ApiHistoryController@showHistory');
+Route::middleware('api')->get('/front/openings', 'API\ApiOpeningsController@frontShowLastOpenings');
+Route::middleware('api')->get('/front/openings/all', 'API\ApiOpeningsController@frontShowOpenings');
 
 Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/user/permission', function(Request $request) {

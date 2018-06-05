@@ -13,6 +13,10 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/dashboard/assets/css/toastr.css">
+    <link rel="shortcut icon" href="{{asset('css/favicon.ico')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('css/favicon.ico')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('css/favicon_32.png')}}" sizes="32x32" />
+    <link rel="icon" href="{{asset('css/favicon_192.png')}}" sizes="192x192" />
     <style type="text/css">
         .doc {
             width: 100%;
@@ -358,6 +362,8 @@
     var editor_config = {
         //path_absolute : "{{ URL::to('/') }}/",
         path_absolute: "/",
+        forced_root_block : false,
+        statusbar: false,
         selector : "textarea.blog-field",
         plugins: [
             "advlist autolink lists link image charmap print preview hr anchor pagebreak",

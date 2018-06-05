@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\User;
 use App\CandidateToOpening;
 use Exception;
 use App\Messages;
@@ -102,7 +103,7 @@ trait CandidatesHelper
             $applieds = [];
             $allCandidates = CandidateToOpening::where('opening_id', '=', $id)->get();
             foreach($allCandidates as $users) {
-                $user = Candidate::findOrFail($users->user_id);
+                $user = User::findOrFail($users->user_id);
                 array_push($applieds, $user);
             }
             return $applieds;

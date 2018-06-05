@@ -60,7 +60,8 @@
                                                 <td colspan="2">
                                                     @foreach(\App\Traits\CandidatesHelper::showAppliedOpenings($openings->id, 1) as $candidates)
                                                     <div class="pb-2">
-                                                            {{$candidates->fio}} / {{$candidates->email}} / <span class="label label-default">{{\App\Traits\CandidatesHelper::convertTypes($candidates->stack, 'stack')}}</span>
+                                                            {{-- {{$candidates->fio}} / {{$candidates->email}} / <span class="label label-default">{{\App\Traits\CandidatesHelper::convertTypes($candidates->stack, 'stack')}}</span>--}}
+                                                        <b>{{$candidates->name}}</b> / {{$candidates->email}}
                                                         <span class="applied--box__actions">
                                                            <button type="submit" class="label label-success btn-small">Approve</button>
                                                             <form action="{{route('openings.applied.reject')}}" method="post" style="display: inline-block">

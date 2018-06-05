@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-offset-1 col-md-10">
-            <form action="{{route('admin.settings.update')}}" method="post" name="settings" class="form-horizontal">
+            <form action="{{route('admin.settings.update')}}" method="post" name="settings" class="form-horizontal" role="form">
                 <input name="_method" type="hidden" value="PUT">
                 {{ csrf_field() }}
                 <div class="card">
@@ -12,13 +12,12 @@
                     </div>
                     <div class="card-content">
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
                             @if(isset($settings) && $settings != null)
                                 @foreach($settings as $k => $option)
                                 <div class="panel panel-default">
                                     <div class="panel-heading" role="tab" id="option-{{ $option->id }}">
                                         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#{{ $option->id }}" aria-expanded="false" aria-controls="{{ $option->id }}" class="collapsed">
-                                            <h4 class="panel-title">
+                                            <h4 class="panel-title text-capitalize font-weight-bold">
                                                {{ $option->key }}
                                                 <i class="material-icons">keyboard_arrow_down</i>
                                             </h4>
@@ -26,13 +25,20 @@
                                     </div>
                                     <div id="{{ $option->id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{ $option->key }}" aria-expanded="false" style="height: 0px;">
                                         <div class="panel-body">
-                                            <textarea name="{{ $option->key }}" class="form-control" rows="3">{{ $option->value }}</textarea>
+                                            <textarea name="{{ $option->key }}" class="form-control blog-field" rows="3">{{ $option->value }}</textarea>
                                         </div>
                                     </div>
                                 </div>
                                 @endforeach
                             @endif
                         </div>
+                        <br>
+                        <button type="submit" class="btn btn-info">
+                            <span class="btn-label" style="margin-right: 6px;">
+                                <i class="material-icons">check</i>
+                            </span>
+                            Save
+                        </button>
                     </div>
                 </div>
             </form>

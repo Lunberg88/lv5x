@@ -172,15 +172,11 @@ class AdminController extends Controller
      */
     public function settingsUpdate(Request $request)
     {
-        $newrequest = $request->only('name', 'val');
-    	$settings = CoreSettings::find(1);
-    	if(!$settings->isEmpty()) {
-    		$settings->name = $newrequest->newValName;
-    		$settings->value = $newrequest->newValVal;
-    		$settings->save();
-	    } else {
-    		return redirect('/settings')->with(['message' => 'Settings not found', 'alert-type' => 'danger']);
-	    }
+        $newrequest = $request->except('_method', '_token');
+
+    	foreach($newrequest as $key => $value) {
+    	    CoreSettings::where('key', $key)->update(['value' => $value]);
+        }
 
 	    return redirect('/admin/settings')->with(['message' => 'Settings updated!', 'alert-type' => 'info']);
     }

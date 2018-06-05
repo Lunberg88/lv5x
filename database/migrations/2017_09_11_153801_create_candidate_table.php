@@ -28,6 +28,7 @@ class CreateCandidateTable extends Migration
         	$table->integer('viewed')->default(0);
         	$table->integer('user_id')->unsigned()->default(1);
         	$table->foreign('user_id')->references('id')->on('users');
+        	$table->integer('subscribe')->default(0);
             $table->timestamps();
         });
     }

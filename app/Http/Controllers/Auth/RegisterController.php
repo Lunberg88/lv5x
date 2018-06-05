@@ -79,6 +79,7 @@ class RegisterController extends Controller {
 			'status' => 1,
 			'viewed' => 0,
 			'user_id' => 3,
+            'subscribe' => 0,
 		]);
 
 		return $user;

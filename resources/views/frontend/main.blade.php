@@ -5,20 +5,15 @@
     <div class="row">
         <div class="col-12 col-sm-12 col-md-12">
             <h2 id="about" class="text-center h1 my-5 section-title">
-                <span>about me</span>
+                <span>about us</span>
             </h2>
         </div>
         <section class="section-about">
             <div class="row">
                 <div class="col-md-6">
-                    <!--
-                    <span class="about-btns">
-                        <a class="btn btn-info waves-effect waves-light btn-md"><b>upload cv</b></a>
-                        <a class="btn btn-danger waves-effect waves-light scroll btn-md" href="#contact" data-speed="1600"><b>contact me</b></a>
-                    </span>
-                    -->
-                    <p class="px-5 mb-5 pb-3 text-center">Lorem ipsum ly LY lymo dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam.</p>
+                    <p class="px-5 mb-5 pb-3 text-center">
+                        {!! \App\CoreSettings::where('key', 'homepage_aboutme_text')->pluck('value')->first() !!}
+                    </p>
                 </div>
                 <div class="col-md-6">
                     <div class="card card-cascade narrower mb-r hp-card-form">
