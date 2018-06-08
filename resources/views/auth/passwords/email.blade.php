@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('og-description', 'Send verify code via email')
 
 @section('content')
 <div class="container">

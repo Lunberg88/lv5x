@@ -1,5 +1,6 @@
 @extends('frontend.index')
 @section('title', '::'.$opening->title)
+@section('og-description', $opening->title)
 @section('body')
     <div class="container">
         <div class="row">

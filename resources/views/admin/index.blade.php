@@ -9,7 +9,7 @@
     <title>Recruiter-Iia @yield('title')</title>
     <link href="{{asset('dashboard/assets/css/bootstrap.min.css')}}" rel="stylesheet" />
     <link href="{{asset('dashboard/assets/css/ri-core.css')}}" rel="stylesheet" />
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('dashboard/assets/css/toastr.css')}}">
@@ -42,11 +42,11 @@
 <div class="wrapper">
     <div class="sidebar" data-active-color="green" data-background-color="black" data-image="{{asset('dashboard/assets/img/sidebar-2.jpg')}}">
         <div class="logo">
-            <a href="#" class="simple-text logo-mini">
+            <a href="{{route('main')}}" class="simple-text logo-mini" target="_blank">
                 RI
             </a>
-            <a href="#" class="simple-text logo-normal">
-                recuiter-iia
+            <a href="{{route('main')}}" class="simple-text logo-normal" target="_blank">
+                Recruiteriia
             </a>
         </div>
         <div class="sidebar-wrapper">
@@ -65,13 +65,13 @@
                     <div class="collapse" id="collapseExample">
                         <ul class="nav">
                             <li>
-                                <a href="#">
+                                <a href="{{route('admin.profile.index')}}">
                                     <span class="sidebar-mini">MP</span>
                                     <span class="sidebar-normal">My Profile</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{route('admin.profile.index')}}">
                                     <span class="sidebar-mini">EP</span>
                                     <span class="sidebar-normal">Edit Profile</span>
                                 </a>

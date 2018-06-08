@@ -1,5 +1,6 @@
 @extends('frontend.auth')
 @section('title', ':: Sign Up')
+@section('og-description', 'Sign Up')
 @section('content')
 <header>
     <section class="view intro-2 hm-stylish-strong">

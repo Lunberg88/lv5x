@@ -1,6 +1,5 @@
 @extends('index')
 @section('title', ' :: Homepage')
-@section('og-description', 'This is the homepage')
 @section('content')
 <header id="home">
     <nav class="effect mb-1 fixed-top navbar navbar-expand-lg navbar-dark bg-dark scrolling-navbar top-nav-collapse">
@@ -92,11 +91,15 @@
     <div class="section-bg">
         <div class="logo-bg">
             <div class="container">
-                <div class="row new-container">
-                    <h1>{!! \App\CoreSettings::where('key', 'homepage_headline_text')->pluck('value')->first() !!}</h1>
-                    <p class="logo-description d-none d-md-block">
-                        {!! \App\CoreSettings::where('key', 'homepage_headline_description')->pluck('value')->first() !!}
-                    </p>
+                <div class="row new-container pt-5">
+                    <div class="col-md-8">
+                        <h1>{!! \App\CoreSettings::where('key', 'homepage_headline_text')->pluck('value')->first() !!}</h1>
+                    </div>
+                    <div class="col-md-12 d-block text-center">
+                        <p class="logo-description d-none d-md-block">
+                            {!! \App\CoreSettings::where('key', 'homepage_headline_description')->pluck('value')->first() !!}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -112,9 +115,9 @@
             <div class="col-md-4 col-lg-3 ml-lg-0">
                 <div class="social-section text-center text-md-left">
                     <ul>
-                        <li><a class="btn-floating btn-sm rgba-white-slight mr-xl-4"><i class="fa fa-facebook bg-primary d-block pb-1"></i></a></li>
-                        <li><a class="btn-floating btn-sm rgba-white-slight mr-xl-4"><i class="fa fa-google-plus bg-danger d-block pb-1"></i></a></li>
-                        <li><a class="btn-floating btn-sm rgba-white-slight mr-xl-4"><i class="fa fa-linkedin bg-info d-block pb-1"></i></a></li>
+                        <li><a href="#" class="btn-floating btn-sm rgba-white-slight mr-xl-4" target="_blank"><i class="fa fa-facebook bg-primary d-block pb-1"></i></a></li>
+                        <li><a href="#" class="btn-floating btn-sm rgba-white-slight mr-xl-4" target="_blank"><i class="fa fa-google-plus bg-danger d-block pb-1"></i></a></li>
+                        <li><a href="#" class="btn-floating btn-sm rgba-white-slight mr-xl-4" target="_blank"><i class="fa fa-linkedin bg-info d-block pb-1"></i></a></li>
                     </ul>
                 </div>
             </div>

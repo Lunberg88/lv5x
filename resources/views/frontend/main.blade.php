@@ -1,5 +1,6 @@
 @extends('frontend.index')
 @section('title', ' :: Homepage')
+@section('og-description', 'Recruiteriia homepage')
 @section('body')
 <div class="container container-fluid">
     <div class="row">

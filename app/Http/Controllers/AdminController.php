@@ -180,4 +180,10 @@ class AdminController extends Controller
 
 	    return redirect('/admin/settings')->with(['message' => 'Settings updated!', 'alert-type' => 'info']);
     }
+
+    public function showAdminProfile()
+    {
+        $user = User::findOrFail(Auth::id());
+        return view('admin.profile.profile', compact('user'));
+    }
 }
