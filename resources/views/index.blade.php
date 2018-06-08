@@ -13,7 +13,7 @@
     <meta name="og:title" content="Recruiteriia">
     <meta name="og:description" content="@yield('og-description')">
     <meta name="og:image" content="{{asset('css/ri_logo_web.jpg')}}">
-    <meta name="og:url" content="https://recruiteriia.com">
+    <meta name="og:url" content="{{config('app.url')}}<?php echo $_SERVER['REQUEST_URI']; ?>">
     <meta name="og:site_name" content="Recruiteriia">
     <meta name="og:type" content="website">
     <meta name="twitter:title" content="Recruiteriia">
@@ -31,7 +31,7 @@
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/core.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
-    <link rel="canonical" href="http://recruiteriia.com<?php echo $_SERVER['REQUEST_URI']; ?>" />
+    <link rel="canonical" href="{{config('app.url')}}<?php echo $_SERVER['REQUEST_URI']; ?>" />
     @yield('css-links')
     <style type="text/css">
         #preloader>p{
@@ -73,13 +73,6 @@
     </script>
 </head>
 <body class="fixed-sn white-skin">
-<div class="preloader-con">
-    <div class="preloader center">
-        <span class="ball"></span>
-        <span class="ball"></span>
-        <span class="ball"></span>
-    </div>
-</div>
 <a href="#home" class="scroll scroll-up costum-bg effect response" data-speed="1800">
     <i class="fa fa-chevron-up"></i>
 </a>
