@@ -11,7 +11,7 @@
                     <div class="card wow fadeIn sign--section__form--box sign--mask" data-wow-delay="0.3s">
                         <div class="card-body">
                             <div class="form-header btn-info form--register__user">
-                                <h3>
+                                <h3 class="sign--form">
                                     <i class="fa fa-user mt-2 mb-2"></i> Sign In:</h3>
                             </div>
 
