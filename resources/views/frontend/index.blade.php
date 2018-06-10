@@ -16,7 +16,7 @@
                     <a class="nav-link scroll waves-effect waves-light @if(request()->path() == '/') active-link-route @endif" href="/"> Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link scroll effect waves-effect waves-light @if(request()->path() == '#about') active-link-route @endif" href="/#about" data-speed="1200"> About</a>
+                    <a class="nav-link scroll effect waves-effect waves-light @if(request()->path() == 'about') active-link-route @endif" href="/about" data-speed="1200"> About</a>
                 </li>
                 <!--
                 <li class="nav-item">
@@ -95,8 +95,8 @@
                     <div class="col-md-8">
                         <h1>{!! \App\CoreSettings::where('key', 'homepage_headline_text')->pluck('value')->first() !!}</h1>
                     </div>
-                    <div class="col-md-12 d-block text-center">
-                        <p class="logo-description d-none d-md-block">
+                    <div class="col-md-8 d-block">
+                        <p class="logo-description d-none d-md-block text-center">
                             {!! \App\CoreSettings::where('key', 'homepage_headline_description')->pluck('value')->first() !!}
                         </p>
                     </div>

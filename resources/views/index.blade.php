@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" @if($_SERVER['REQUEST_URI'] == "/login" || $_SERVER['REQUEST_URI'] == '/register') class="full-height" @endif>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <meta name="description" content="Offering a full range of recruitment services, we competently deal with all issues in the field of human resources management, which allows our clients to focus on their core businesses.">
+    <meta name="keywords" content="recruiteriia, recruitment, hunting, hiring, web, it, hire, remote, job, relocate, vacancy, work, remote job, work remotely, middle, senior, junior, html, css, js, javascript, java, react, reactjs, angular, angularJs, angular 2, angular 5, angular 6, ruby, ruby on rails, python, devops, vue, vueJs, coffeeScript, typescript, designer, designer 3d, game, game-dev, game dev, gamedev, gambling, php, mysql, sql, c, c++, c#, .net, asp.net, project manager, product manager, sales manager, sales force, aws, qa, tdd, bdd, unitTest, unity, unreal, android, ios, mobile, accounting, business analyst, ит, веб, работа удаленно, вакансии, разработчики, поиск разработчиков, рекрутинг">
     <meta name="copyright" content="Recruiteriia © 2018">
     <meta name="robots" content="INDEX,FOLLOW">
     <meta name="csrf-token" content="{{ csrf_token() }}">

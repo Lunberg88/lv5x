@@ -3,6 +3,7 @@
  * Guest routes
  */
 Route::get('/', 'IndexController@index')->name('main');
+Route::get('/about', 'IndexController@aboutPage')->name('main.about');
 Route::get('/openings', 'IndexController@openings')->name('index.openings');
 Route::get('/openings/{slug}', 'IndexController@showOpening')->name('index.show.opening');
 Route::post('/openings', 'IndexController@openings')->name('index.sort.opening');
@@ -82,11 +83,13 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 
 	//Admin profile
     Route::get('/admin/profile', 'AdminController@showAdminProfile')->name('admin.profile.index');
+    Route::post('/admin/profile/update', 'AdminController@adminProfileUpdate')->name('admin.profile.update');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
 
 
 

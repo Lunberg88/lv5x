@@ -52,7 +52,11 @@
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    <img src="{{asset('dashboard/assets/img/faces/avatar.jpg')}}" />
+                    @if(Auth::user()->avatar !== null)
+                        <img class="img" src="{{asset('images/avatars/'.Auth::user()->avatar)}}" />
+                    @else
+                        <img src="{{asset('dashboard/assets/img/placeholder.jpg')}}" />
+                    @endif
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
@@ -407,10 +411,19 @@
         $('button[data-original-title="Edit"]').click(function(e) {
             e.preventDefault();
             $('div[data-info="upload_cvs"]').fadeOut('slider');
-            $('div[ data-info="edit_upload_cvs"]').fadeIn('slider');
+            $('div[data-info="edit_upload_cvs"]').fadeIn('slider');
             $('div#edit-upload-cvs').removeClass('hidden');
             $('div#edit-upload-cvs').addClass('visible');
             $('div.opening-edit-tbs').addClass('hidden');
+        });
+
+        $('button[data-original-title="EditAvatar"]').click(function(e) {
+            e.preventDefault();
+            $('div[data-info="upload_avatar"]').fadeOut('slider');
+            $('div[data-info="edit_upload_avatar"]').fadeIn('slider');
+            $('div#edit-upload-avatar').removeClass('hidden');
+            $('div#edit-upload-avatar').addClass('visible');
+            $('div.profile-edit-tbs').addClass('hidden');
         });
 
         $('button[data-original-title="Remove"]').click(function() {

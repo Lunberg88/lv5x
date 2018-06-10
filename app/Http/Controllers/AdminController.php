@@ -181,9 +181,61 @@ class AdminController extends Controller
 	    return redirect('/admin/settings')->with(['message' => 'Settings updated!', 'alert-type' => 'info']);
     }
 
+    /**
+     * Show Admin Profile
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showAdminProfile()
     {
         $user = User::findOrFail(Auth::id());
         return view('admin.profile.profile', compact('user'));
+    }
+
+    /**
+     * Update Admin Profile
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function adminProfileUpdate(Request $request)
+    {
+        $profile = User::find(Auth::id());
+
+        if($request->hasFile('edit_upload_avatar')) {
+
+            $request->validate([
+                'edit_upload_avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            if($request->file('edit_upload_avatar') != '' || $request->file('edit_upload_avatar') !== null) {
+
+                if($profile->avatar !== null) {
+                    $path = 'images/avatars/'.$profile->avatar;
+                    if(file_exists($path))
+                    {
+                        if(!is_dir(unlink($path)));
+                    }
+                }
+
+                $profile->avatar = uniqid().'.'.$request->file('edit_upload_avatar')->getClientOriginalExtension();
+                $request->file('edit_upload_avatar')->move('images/avatars/', $profile->avatar);
+                $profile->save();
+            }
+
+            return back()->with(['message' => 'Your avatar updated', 'alert-type' => 'info']);
+        }
+
+        if(($request->name != null || $request->email != null) && ($request->name != Auth::user()->name || $request->email != Auth::user()->email)) {
+            $profile->update(['name' => trim($request->name), 'email' => trim($request->email)]);
+            return back()->with(['message' => 'You info updated', 'alert-type' => 'info']);
+        }
+
+        if($request->has('old_password') && $request->has('new_password')) {
+            if(bcrypt($request->old_password) == Auth::user()->password) {
+                $profile->update(['password' => bcrypt(trim($request->new_password))]);
+            }
+            return back()->with(['error' => 'Old password was incorrect', 'alert-type' => 'error']);
+        }
+
+        return back()->with(['error' => 'Nothing to update', 'alert-type' => 'error']);
     }
 }

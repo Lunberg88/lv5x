@@ -115,7 +115,6 @@
                                                 @if(isset($candidate->upload_cvs) && $candidate->upload_cvs !== null)
                                                 <input style="background: #eee; text-align: left;" disabled class="col-md-4 form-control" type="text" name="existing_cvs" value="
                                                 @php if(isset($candidate->upload_cvs) && $candidate->upload_cvs !== null) {
-                                                       //$candidate->upload_cvs = explode('/', $candidate->upload_cvs);
                                                        echo $candidate->upload_cvs;
                                                 }
                                                 @endphp
@@ -144,7 +143,7 @@
                                                 </label><br/>
                                                 <div class="fileinput text-center fileinput-new" data-provides="fileinput">
                                                     <div class="fileinput-new thumbnail">
-                                                        <img src="/dashboard/assets/img/placeholder.jpg" style="width:80px;" alt="Upload File">
+                                                        <img src="{{asset('dashboard/assets/img/placeholder.jpg')}}" style="width:80px;" alt="Upload File">
                                                     </div>
                                                     <div class="fileinput-preview fileinput-exists thumbnail" style=" padding: 10px 15px;"></div>
                                                     <div>

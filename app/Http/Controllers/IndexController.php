@@ -38,6 +38,14 @@ class IndexController extends Controller
 
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function aboutPage()
+    {
+        return view('frontend.pages.about');
+    }
+
 	/**
 	 * Display openings for auth, guests
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

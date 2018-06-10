@@ -14071,6 +14071,24 @@ span.modal--msg__btn {
     margin-top: 50px;
 }
 
+.py-2 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.py-3 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.pt-1 {
+    padding-top: 10px;
+}
+
+.pt-2 {
+    padding-top: 20px;
+}
+
 @media (min-width: 992px) {
     nav.nav-admin {
         display: none;
