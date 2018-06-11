@@ -2,7 +2,6 @@
 @section('title', ' :: Homepage')
 @section('og-description', 'Recruiteriia homepage')
 @section('body')
-<div class="container container-fluid">
     <div class="row">
         <div class="col-12 col-sm-12 col-md-12">
             <h2 id="about" class="text-center h1 my-5 section-title">
@@ -105,7 +104,6 @@
                 </div>
             </div>
         </section>
-
     </div>
     <div class="row">
         <div class="col-12 col-sm-12 col-md-12">
@@ -135,5 +133,4 @@
             </div>
         @endforeach
     </div>
-</div>
 @endsection

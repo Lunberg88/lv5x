@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -11,22 +10,21 @@
     <meta name="robots" content="INDEX,FOLLOW">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="@yield('og-description')">
-    <meta name="image" content="{{asset('css/ri_logo_web.jpg')}}">
+    <meta name="image" content="@yield('main-image', asset('css/ri_logo_web.jpg'))">
     <meta itemprop="name" content="Recruiteriia">
     <meta itemprop="description" content="@yield('og-description')">
-    <meta itemprop="image" content="{{asset('css/ri_logo_web.jpg')}}">
+    <meta itemprop="image" content="@yield('itemprop-image', asset('css/ri_logo_web.jpg'))">
     <meta name="og:title" content="Recruiteriia">
     <meta name="og:description" content="@yield('og-description')">
-    <meta name="og:image" content="{{asset('css/ri_logo_web.jpg')}}">
+    <meta name="og:image" content="@yield('og:image', asset('css/ri_logo_web.jpg'))">
     <meta name="og:url" content="{{config('app.url')}}<?php echo $_SERVER['REQUEST_URI']; ?>">
     <meta name="og:site_name" content="Recruiteriia">
     <meta name="og:type" content="website">
     <meta name="twitter:title" content="Recruiteriia">
     <meta name="twitter:description" content="@yield('og-description')">
-    <meta name="twitter:image" content="{{asset('css/ri_logo_web.jpg')}}">
+    <meta name="twitter:image" content="@yield('twitter:image', asset('css/ri_logo_web.jpg'))">
     <title>Recruiteriia @yield('title')</title>
     <link rel="shortcut icon" href="{{asset('css/favicon.ico')}}" type="image/x-icon">
-    <link rel="icon" href="{{asset('css/favicon.ico')}}" type="image/x-icon">
     <link rel="icon" href="{{asset('css/favicon_32.png')}}" sizes="32x32" />
     <link rel="icon" href="{{asset('css/favicon_192.png')}}" sizes="192x192" />
     <link rel="apple-touch-icon-precomposed" href="{{asset('css/favicon_180.png')}}" />

@@ -82,7 +82,7 @@
                                                 Description
                                                 <small>*</small>
                                             </label>
-                                            <textarea class="form-control blog-field" rows="6" name="description" required="true" aria-required="true"></textarea>
+                                            <textarea class="form-control blog-field" rows="6" name="description"></textarea>
                                             <span class="material-input"></span>
                                         </div>
                                     </div>

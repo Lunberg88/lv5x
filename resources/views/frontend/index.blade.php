@@ -105,7 +105,9 @@
         </div>
     </div>
 </div>
-@yield('body')
+<div class="container container-fluid">
+    @yield('body')
+</div>
 <footer class="page-footer new-foot stylish-color-dark">
     <div class="container">
         <div class="row py-3 d-flex align-items-center">
