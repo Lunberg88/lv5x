@@ -2,17 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\CoreSettings;
+use App\Traits\CandidatesHelper;
 use App\Candidate;
 use App\Profile;
 use Auth;
 use Gate;
 use Event;
+use Illuminate\Support\Facades\Storage;
 use App\Events\onAddCandidateEvent;
 use App\Listeners\AddCandidateListener;
 use Illuminate\Http\Request;
 
 class CandidateController extends Controller
 {
+    use CandidatesHelper;
+	/**
+	 * Statuses:
+	 * 0 - inactive
+	 * 1 - pending
+	 * 2 - viewed
+	 * 3 - skype interview
+	 * 4 - client review
+	 * 5 - hired
+	 */
+
     /**
      * Display a listing of the resource.
      *
@@ -20,25 +34,15 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        $candidates = Candidate::get();
-	    $tags = [
-		    'HTML',
-		    'JS',
-		    'PHP',
-		    'MySQL',
-		    'JAVA',
-		    'AngularJS',
-		    'Angular (2.x/4.x)',
-		    'ReactJS',
-		    'VueJS',
-		    'iOS',
-		    'Android',
-		    'PS'
-	    ];
+        $candidates = Candidate::paginate(15);
+        $tags_all = CoreSettings::where('key', '=', 'main_stacks')->first();
+        $tags = explode(', ', $tags_all->value);
+        $newCandidates = CandidatesHelper::showNewNotif('candidates');
 
         return view('admin.dashboard', [
         	'candidates' => $candidates,
 	        'tags' => $tags,
+            'newCandidates' => $newCandidates
         ]);
     }
 
@@ -50,9 +54,12 @@ class CandidateController extends Controller
     public function create()
     {
         $candidate = new Candidate();
+        $stacks_all = CoreSettings::where('key', '=', 'main_stacks')->first();
+        $stacks = explode(', ', $stacks_all->value);
 
         return view('admin.candidates.create', [
         	'candidate' => $candidate,
+            'stacks' => $stacks
         ]);
     }
 
@@ -66,20 +73,29 @@ class CandidateController extends Controller
     {
 	    $candidate = new Candidate();
 	    if($request->user()->can('create', $candidate)){
+
 		    $candidate->fio = $request->fio;
 		    $candidate->email = $request->email;
 		    $candidate->stack = $request->stack;
 		    $candidate->tags = $request->tags;
 		    $candidate->salary = $request->salary;
+		    $candidate->currency = $request->currency;
+		    $candidate->cvs = $request->cvs ? $request->cvs : 'http://';
+		    $fileName = str_replace('.', '-', str_replace('@', '_', $request->email));
+		    if($request->hasFile('upload_cvs') && $request->file('upload_cvs') !== null) {
+			    $candidate->upload_cvs = $request->file('upload_cvs')->storeAs('doc', 'candidate-'.$fileName.'.'.$request->file('upload_cvs')->getClientOriginalExtension());
+		    }
+		    $candidate->status = '2';
+		    $candidate->viewed = '1';
 		    $candidate->user_id = Auth::id();
 		    $candidate->save();
 
 		    //Event::fire(new onAddCandidateEvent(Auth::user(), $candidate));
 		    Event::fire('onAddCandidate', [Auth::user(), $candidate]);
 
-		    return redirect('admin')->with('message', 'New candidate successfully added!');
+		    return redirect('admin/candidates')->with(['message' => 'New candidate successfully added!', 'alert-type' => 'success']);
 	    } else {
-		    return redirect('admin')->with('error', 'Access dined for you!');
+		    return redirect('admin/candidates')->with(['message' => 'Access dined for you!', 'alert-type' => 'danger']);
 	    }
     }
 
@@ -92,14 +108,17 @@ class CandidateController extends Controller
     public function show($id)
     {
 	    if($candidate = Candidate::find($id)) {
-		    $tags = explode(',', $candidate->tags);
-		    //Find Candidate Profile
-		    $profile = Profile::where('candidate_id', $id)->first();
+	    	if($candidate->viewed != 1) {
+			    $candidate->viewed = 1;
+			    $candidate->save();
+		    }
 
-		    return view('admin.candidates.show', ['candidate' => $candidate, 'tags' => $tags, 'profile' => $profile]);
+		    $tags = explode(',', $candidate->tags);
+
+		    return view('admin.candidates.show', ['candidate' => $candidate, 'tags' => $tags]);
 
 	    } else {
-		    return redirect('admin/candidates')->with('error', 'Profile with this ID: '.$id.' not found.');
+		    return redirect('admin/candidates')->with(['message' => 'Profile with this ID: '.$id.' not found.', 'alert-type' => 'danger']);
 	    }
     }
 
@@ -112,12 +131,15 @@ class CandidateController extends Controller
     public function edit($id)
     {
 	    if($candidate = Candidate::find($id)) {
+            $stacks_all = CoreSettings::where('key', '=', 'main_stacks')->first();
+            $stacks = explode(', ', $stacks_all->value);
 
 		    return view('admin.candidates.edit', [
 			    'candidate' => $candidate,
+                'stacks' => $stacks
 		    ]);
 	    } else {
-		    return redirect('admin/candidates')->with('error', 'Profile with this ID: '.$id.' not exists!');
+		    return redirect('admin/candidates')->with(['message' => 'Profile with this ID: '.$id.' not exists!', 'alert-type' => 'danger']);
 	    }
     }
 
@@ -136,21 +158,41 @@ class CandidateController extends Controller
 
 			    $data = $request->except('_token');
 
+			    if($request->delete_cvs == "true") {
+				    Storage::delete($candidate->upload_cvs);
+				    $candidate->upload_cvs = null;
+				    $candidate->save();
+
+				    return redirect('admin/candidates/edit/'.$id)->with(['message' => 'Candidate CV successfully deleted!']);
+			    }
+
 			    $candidate->fio = $data['fio'];
 			    $candidate->email = $data['email'];
 			    $candidate->stack = $data['stack'];
 			    $candidate->tags = $data['tags'];
 			    $candidate->salary = $data['salary'];
+			    $candidate->currency = $data['currency'];
 			    $candidate->user_id = Auth::id();
+			    if($candidate->viewed != '1') {
+			    	$candidate->viewed = 1;
+			    }
+			    $fileName = str_replace('.', '-', str_replace('@', '_', $candidate->email));
+			    if($request->hasFile('edit_upload_cvs') && $request->file('edit_upload_cvs') != '') {
+			    	$old_cvs = $candidate->upload_cvs;
+			    	if($new_cvs = $request->file('edit_upload_cvs')->storeAs('doc', 'candidate-'.$fileName.'.'.$request->file('edit_upload_cvs')->getClientOriginalExtension())) {
+			    		$candidate->upload_cvs = $new_cvs;
+			    		Storage::delete($old_cvs);
+				    }
+			    }
 
 			    $candidate->save();
 
-			    return redirect('admin/candidates')->with('message', 'Profile successfully updated!');
+			    return redirect('admin/candidates')->with(['message' => 'Profile successfully updated!', 'alert-type' => 'info']);
 		    }
 
-		    return redirect('admin/candidates')->with('error', 'Access denied, you don\'t have such permission!');
+		    return redirect('admin/candidates')->with(['message' => 'Access denied, you don\'t have such permission!', 'alert-type' => 'danger']);
 	    } else {
-		    return redirect('admin/candidates')->with('error', 'Profile with this ID: '.$id.' not exists!');
+		    return redirect('admin/candidates')->with(['message' => 'Profile with this ID: '.$id.' not exists!', 'alert-type' => 'danger']);
 	    }
     }
 
@@ -163,11 +205,12 @@ class CandidateController extends Controller
     public function destroy($id)
     {
 	    if($candidate = Candidate::find($id)) {
+	    	Storage::detele($candidate->upload_cvs);
 		    $candidate->delete();
 
-		    return redirect('admin/candidates')->with('message', 'The Candidate was deleted from DataBase.');
+		    return redirect('admin/candidates')->with(['message' => 'The Candidate was deleted from DataBase.', 'alert-type' => 'success']);
 	    } else {
-		    return redirect('admin/candidates')->with('error', 'This ID: '.$id.' not exists!');
+		    return redirect('admin/candidates')->with(['message' => 'This ID: '.$id.' not exists!', 'alert-type' => 'danger']);
 	    }
     }
 
@@ -179,14 +222,14 @@ class CandidateController extends Controller
 	 */
 	public function search(Request $request, $stext = null)
 	{
-		$stext = $request->only('search');
+		$stext = $request->only('search', 'stags');
 
 		if($stext == null) {
 			return view('admin.search-empty');
 		} else {
 			foreach($stext as $key => $value) {
 
-				$candidate = Candidate::where('stack', 'LIKE', '%'.$value.'%')->orWhere('tags', 'LIKE', '%'.$value.'%')->orWhere('salary', 'LIKE', '%'.$value.'%')->orWhere('fio', 'LIKE', '%'.$value.'%')->get();
+				$candidate = Candidate::where('stack', 'LIKE', '%'.$value.'%')->orWhere('tags', 'LIKE', '%'.$value.'%')->orWhere('salary', 'LIKE', '%'.$value.'%')->get();
 
 			}
 

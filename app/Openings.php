@@ -10,11 +10,11 @@ class Openings extends Model
 
     protected $fillable = [
     	'title',
+        'slug',
 	    'location',
 	    'salary',
+	    'type',
 	    'description',
 	    'status',
     ];
-
-    public $timestamps = false;
 }

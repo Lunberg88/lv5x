@@ -1,7 +1,3 @@
-a[href="https://www.000webhost.com/?utm_source=000webhostapp&utm_campaign=000_logo&utm_medium=website_dahim&utm_content=footer_img"] {
-    display: none;
-}
-
 body, html, ol, ul {
     margin: 0;
     padding: 0;
@@ -142,6 +138,14 @@ img {
     background-color: #ff3737;
 }
 
+.costum-bg-blue {
+    background: #1da1f2;
+}
+
+.costum-bg-blue:hover {
+    background: #1d7ecb;
+}
+
 .button:active, .button:focus {
     color: #fff;
 }
@@ -224,7 +228,6 @@ span.ball:nth-child(2) {
     position: fixed;
     top: 0;
     z-index: 33;
-    background: linear-gradient(to bottom, transparent 10%, #1f1f1f 90%);
 }
 .nav-wrapper .navbar-toggle .icon-bar {
     background-color: #fff;
@@ -235,9 +238,8 @@ span.ball:nth-child(2) {
 }
 
 .home-1, .home-2 {
-    min-height: 480px;
-    /*background-image: url('../img/logo/main_logo2.jpg');*/
-    background-image: linear-gradient(to top, transparent 5%, #1f1f1f 100%), url('../img/logo/main_logo2.jpg');
+    height: 360px;
+    background-image: linear-gradient(to top, transparent 5%, #1f1f1f 100%), url('http://jobcareer.chimpgroup.com/nextjob/wp-content/uploads/revslider/homepage2/Slide10.jpg');
     background-size: cover;
 }
 
@@ -275,7 +277,7 @@ span.ball:nth-child(2) {
 }
 
 .nav-sticky {
-    background-color: black !important;
+    background-color: #fff !important;
     padding: 6px 0;
     color: white;
     -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
@@ -283,25 +285,20 @@ span.ball:nth-child(2) {
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
 }
 .nav-sticky .navbar-brand {
-    /*color: #232323;*/
-    color: white;
+    color: #232323;
 }
 .nav-sticky .navbar-toggle .icon-bar {
-    /*background-color: #232323;*/
-    color: white;
+    background-color: #232323;
 }
 .nav-sticky .nav > li {
-    /*color: #585858;*/
-    color: white;
+    color: #585858;
 }
 .nav-sticky .nav > li > a:active, .nav-sticky .nav > li > a:focus, .nav-sticky .nav > li > a:hover {
-    /*color: #232323;*/
-    color: white;
+    color: #232323;
 }
 
 .nav-wrapper .nav li a.active {
-    /*color: #e74c3c;*/
-    color: #ac2925;
+    color: #e74c3c;
 }
 
 @media screen and (max-width: 768px) {
@@ -349,7 +346,7 @@ span.ball:nth-child(2) {
     -moz-background-size: cover;
     -ms-background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 0 -170px;
     background-attachment: fixed;
 }
 
@@ -370,6 +367,7 @@ span.ball:nth-child(2) {
     vertical-align: middle;
     position: relative;
     z-index: 8;
+    padding-top: 60px;
 }
 
 .home-2:after, .home-3:after, .home-4:after, .home-5:after {
@@ -381,18 +379,20 @@ span.ball:nth-child(2) {
     font-size: 50px;
     line-height: 50px;
     color: #fff;
-    margin: 10px 0;
+    margin: 10px 0 0;
+    text-shadow: 0 0 3px rgba(0,0,0,.83);
 }
 .home-cell p {
     max-width: 900px;
-    margin: 0 auto 26px;
+    margin: 0 auto 0;
     padding: 26px;
     color: #fff;
+    text-shadow: 0 0 3px rgba(0,0,0,.83);
 }
 
 .home-2 {
     position: relative;
-    height: 70%;
+    /*height: 70%;*/
     background-size: cover;
 }
 .home-2:after {
@@ -914,7 +914,8 @@ span.ball:nth-child(2) {
 }
 
 .footer {
-    background: #222328;
+    background: #f7f7f7;
+    border-top: 2px solid #ebebeb;
     padding: 60px 0;
 }
 
@@ -929,8 +930,8 @@ span.ball:nth-child(2) {
     line-height: 38px;
     font-size: 18px;
     text-align: center;
-    color: #c7c7c7;
-    border: 1px solid #c7c7c7;
+    color: #2e3436;
+    border: 1px solid #cecece;
 }
 .social-icons .fa:hover {
     color: #fff;
@@ -962,7 +963,7 @@ span.ball:nth-child(2) {
 .footer p {
     margin-bottom: 0;
     margin-top: 10px;
-    color: #ddd;
+    color: #232323;
 }
 
 .work-modal .modal-content {
@@ -1130,6 +1131,25 @@ span.ball:nth-child(2) {
     margin-top: 9px;
     outline: 0;
     border: none;
+}
+
+section.blogs_lists, section.openings_lists {
+    padding: 40px 10px;
+}
+
+.modal-content .modal-body .blog-box:hover {
+    box-shadow: none !important;
+}
+
+.modal-content .modal-footer span.favs {
+    text-align: left !important;
+    color: #00a5bb;
+}
+
+.admin-dashboard-lnk {
+    position: absolute;
+    top: 55%;
+    right: 0;
 }
 
 @-webkit-keyframes juggler {

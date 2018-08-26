@@ -1,24 +1,25 @@
-function sh(event,t,d,u,p,g){
-    var h=document.getElementById('hint1');
+; const url = 'http://ajax-lv/openings/';
 
-    h.className="hint";
+$("#more-openings").on("hide.bs.collapse", function(){
+    $("button#more").html('<span class="fa fa-chevron-down"></span> show more');
+});
+$("#more-openings").on("show.bs.collapse", function(){
+    $("button#more").html('<span class="fa fa-chevron-up"></span> hide list');
+});
 
-    var s='<table style="font-size:11px;" cellpadding=2 cellspacing=0><tr><td align=center><b>'+t+'</b></td></tr>';
-    if(u!='') s+='<tr><td><small>Удар: '+u+'</small></td></tr>';
-    if(p.length!=''){
-        st=p.split(',');
-        if(p.indexOf('•')>0) s+='<tr><td><small><b>Действие предмета:</b><br>';
-        else s+='<tr><td><small><b>Параметры:</b><br>';
-        for(i=1;i<st.length;i++) s+='&nbsp;'+st[i]+'<br>';
-        s+='</small></td></tr>';
-    }
-    if(d!='') s+='<tr><td><small>Долговечность: '+d+'</small></td></tr>';
-    if(g!='') s+='<tr><td><small>Гравировка: <font color=red>'+g+'</font></small></td></tr>';
-    s+='</table>';
+function applyNow(val) {
+    $.post(url + 'apply_opening', {
+        '_token': $('meta[name="csrf-token"]').attr('content'),
+        'id': val.id
+    })
+    .done(function(data) {
+        $('button[uid="op-'+ val.id +'"]').removeClass('btn-warning').addClass('btn-success').text('Applied') + (data.success ? toastr.success(data.success) : toastr.error(data.error));
+    })
+    .fail({
 
-    h.innerHTML=s;
-    setpos(event);
-    h.style.visibility='visible';
-}
+    })
+};
 
-function hh(){document.getElementById('hint1').style.visibility='hidden';}
+function showRegisterForm() {
+    window.location.href = '/login';
+};

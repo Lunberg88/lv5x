@@ -11,6 +11,6 @@ class OpeningsTableSeeder extends Seeder
      */
     public function run()
     {
-	    factory( App\Openings::class, 15 )->create();
+	    factory( App\Openings::class, 45 )->create();
     }
 }

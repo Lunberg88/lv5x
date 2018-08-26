@@ -28,7 +28,7 @@ class OpeningsPolicy
 	public function createO(User $user)
 	{
 		foreach($user->roles as $role){
-			if($role->id === 5) {
+			if($role->id === 4) {
 				return true;
 			}
 		}
@@ -44,7 +44,7 @@ class OpeningsPolicy
 	public function updateO(User $user, Openings $openings)
 	{
 		foreach($user->roles as $role){
-			if($role->id === 5) {
+			if($role->id === 4) {
 				if ($user->id == $openings->user_id) {
 					return true;
 				}
@@ -61,7 +61,7 @@ class OpeningsPolicy
 	public function before(User $user)
 	{
 		foreach($user->roles as $role){
-			if($role->id === 5) {
+			if($role->id === 4) {
 				return true;
 			}
 		}

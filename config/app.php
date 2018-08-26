@@ -163,6 +163,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 	    Barryvdh\Cors\ServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+	    Laravel\Passport\PassportServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -180,6 +182,10 @@ return [
 
         //App\Providers\AnnotationsServiceProvider::class
         Collective\Html\HtmlServiceProvider::class,
+
+	    Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+	    Intervention\Image\ImageServiceProvider::class,
+	    Jorenvh\Share\Providers\ShareServiceProvider::class,
 
     ],
 
@@ -232,6 +238,12 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Share' => Jorenvh\Share\ShareFacade::class,
+
 
     ],
 
