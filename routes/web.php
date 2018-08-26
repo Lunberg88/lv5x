@@ -1,6 +1,9 @@
 <?php
-
+/**
+ * Guest routes
+ */
 Route::get('/', 'IndexController@index')->name('main');
+Route::get('/about', 'IndexController@aboutPage')->name('main.about');
 Route::get('/openings', 'IndexController@openings')->name('index.openings');
 Route::get('/openings/{slug}', 'IndexController@showOpening')->name('index.show.opening');
 Route::post('/openings', 'IndexController@openings')->name('index.sort.opening');
@@ -8,6 +11,9 @@ Route::get('/blog', 'IndexController@blog')->name('index.blog');
 Route::get('/blog/{slug}', 'IndexController@showblog')->name('index.blog.show');
 Route::post('/send-msg', 'IndexController@sendMessage')->name('index.send.msg');
 
+/**
+ * Auth user routes
+ */
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/profile', 'IndexController@userProfile')->name('user.profile');
     Route::post('/profile/update', 'IndexController@updateUserProfile')->name('user.profile.update');
@@ -17,8 +23,12 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('/openings/apply_opening', 'OpeningsController@applyOpening')->name('user.apply.opening');
 });
 
+/**
+ * Admin routes
+ */
 Route::group(['middleware' => ['auth', 'admin']], function() {
     Route::get('/admin', 'AdminController@indexPage')->name('admin.main');
+    //Candidates
 	Route::get('/admin/candidates', 'CandidateController@index')->name('admin.candidates');
 	Route::get('/admin/candidates/new', 'CandidateController@create')->name('admin.candidates.create');
 	Route::post('/admin/candidates/new', 'CandidateController@store')->name('admin.candidates.store');
@@ -28,6 +38,7 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 	Route::delete('/admin/candidates/destroy/{id}', 'CandidateController@destroy')->name('admin.candidates.destroy');
 	Route::get('/admin/candidates/search', 'CandidateController@search')->name('admin.candidates.search');
 
+	//Openings
 	Route::get('/admin/openings', 'OpeningsController@index')->name('admin.openings');
 	Route::get('/admin/openings/new', 'OpeningsController@create')->name('admin.openings.create');
 	Route::post('/admin/openings/new', 'OpeningsController@store')->name('admin.openings.store');
@@ -38,12 +49,14 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 	Route::delete('/admin/openings/destroy/{id}', 'OpeningsController@destroy')->name('admin.openings.destroy');
 	Route::delete('/admin/openings/reject', 'OpeningsController@rejectCandidate')->name('openings.applied.reject');
 
+	//Index
 	Route::get('/admin', 'AdminController@index')->name('admin.index');
 
 	Route::get('/admin/candidate/{id}', 'AdminController@show')->name('admin.candidate.show');
 	Route::get('/admin/search', 'AdminController@search')->name('admin.search');
 	Route::get('/admin/profile/{name}', 'AdminController@profile')->name('admin.profile');
 
+	//Blog
 	Route::get('/admin/blog', 'BlogController@dashboard')->name('admin.blog.dashboard');
 	Route::get('/admin/blog/create', 'BlogController@create')->name('admin.blog.create');
 	Route::post('/admin/blog/create', 'BlogController@store')->name('admin.blog.store');
@@ -52,57 +65,32 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 	Route::get('/admin/blog/view-{id}', 'BlogController@view')->name('admin.blog.view');
 	Route::delete('/admin/blog/destroy/{id}', 'BlogController@destroy')->name('admin.blog.destroy');
 
+	//Opening offers
 	Route::get('/admin/opening_offer', 'HotOpeningOfferController@index')->name('admin.opening_offer.main');
     Route::post('/admin/opening_offer/send_mail', 'HotOpeningOfferController@sendMail')->name('admin.opening_offer.send_mail');
 
+    //History
 	Route::get('/admin/history', 'AdminController@history')->name('admin.history');
 
+	//Messages
 	Route::get('/admin/msg', 'AdminController@msg')->name('admin.msg.list');
 	Route::post('/admin/msg/read', 'AdminController@msgRead')->name('msg.read.msg');
 	Route::post('/admin/msg/reply', 'AdminController@replyToCandidate')->name('msg.reply');
 
+	//Core Settings
 	Route::get('/admin/settings', 'AdminController@settings')->name('admin.settings');
 	Route::put('/admin/settings/update', 'AdminController@settingsUpdate')->name('admin.settings.update');
+
+	//Admin profile
+    Route::get('/admin/profile', 'AdminController@showAdminProfile')->name('admin.profile.index');
+    Route::post('/admin/profile/update', 'AdminController@adminProfileUpdate')->name('admin.profile.update');
 });
-
-Route::group(['middleware' => ['auth']], function() {
-	Route::get('/group', 'GroupController@index')->name('group');
-	Route::post('/group/delete', 'GroupController@delete')->name('delete');
-	Route::get('/group/create', 'GroupController@create')->name('create');
-	Route::post('/group/store', 'GroupController@store')->name('store');
-	Route::post('/group/update', 'GroupController@update')->name('update');
-	Route::get('/group/{id}', 'GroupController@group');
-	Route::post('/group/invite', 'GroupController@invite')->name('invite');
-	Route::post('/group/kill', 'GroupController@kill')->name('kill');
-	Route::post('/group/changeowner', 'GroupController@changeowner')->name('changeowner');
-});
-
-/*
-Route::group(['middleware' => ['auth']], function(){
-	Route::resource('posts', 'PostsController');
-});
-
-Route::post('posts/changeStatus', array('as' => 'changeStatus', 'uses' => 'PostsController@changeStatus'))->middleware('auth');
-
-*/
-/*
-Route::get('login', 'Auth\LoginController@showLoginForm');
-Route::post('login', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout');
-*/
-
-Route::get('auth/fb', 'FbController@redirectToProvider');
-Route::get('auth/fb/callback', 'FbController@handleProviderCallback');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::group(['middleware' => ['auth']], function() {
-	Route::get('/test', 'ModerController@index')->name('index.moder.index');
-	Route::get('/test/add', 'ModerController@create')->name('index.moder.add');
-	Route::post('/test/add', 'ModerController@add')->name('index.moder.store');
-});
+
 
 
 

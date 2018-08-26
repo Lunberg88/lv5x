@@ -1,4 +1,9 @@
 @extends('frontend.index')
+@section('main-image', route('main').'/images/openings/'.$opening->img)
+@section('itemprop-image', route('main').'/images/openings/'.$opening->img)
+@section('og:image', route('main').'/images/openings/'.$opening->img)
+@section('twitter:image', route('main').'/images/openings/'.$opening->img)
+@section('og-description', $opening->title)
 @section('title', '::'.$opening->title)
 @section('body')
     <div class="container">
@@ -61,17 +66,17 @@
                             <div class="mt-4 pt-3 w-100">
                                 <span class="d-block float-right">
                                     <span class="badge indigo">
-                                    <a href="https://www.facebook.com/sharer.php?u=https://recuiteriia.com/openings/{{$opening->slug}}" target="_blank" class="share-social">
+                                    <a href="https://www.facebook.com/sharer.php?u=https://www.recruiteriia.com/openings/{{$opening->slug}}" target="_blank" class="share-social">
                                         <i class="fa fa-facebook"></i>
                                     </a>
                                 </span>
                                 <span class="badge badge-danger">
-                                    <a href="https://plus.google.com/share?url=https://recuiteriia.com/openings/{{$opening->slug}}" target="_blank" class="share-social">
+                                    <a href="https://plus.google.com/share?url=https://www.recruiteriia.com/openings/{{$opening->slug}}" target="_blank" class="share-social">
                                         <i class="fa fa-google-plus"></i>
                                     </a>
                                 </span>
                                 <span class="badge badge-info">
-                                    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://recuiteriia.com/openings/{{$opening->slug}}&title=Opening&summary=" target="_blank" class="share-social">
+                                    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.recruiteriia.com/openings/{{$opening->slug}}&title=Opening&summary=" target="_blank" class="share-social">
                                         <i class="fa fa-linkedin"></i>
                                     </a>
                                 </span>
@@ -95,7 +100,7 @@
                     </span>
                     <div class="opening--box d-none d-lg-block">
                         @php
-                            $related = App\Openings::where('status', '>', '0')->latest()->take(5)->get();
+                            $related = App\Openings::where([['status', '>', '0'], ['id', '!=', $opening->id]])->latest()->take(5)->get();
                         @endphp
                         @foreach($related as $open)
                             <div class="pb-4">

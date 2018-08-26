@@ -1,27 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" @if($_SERVER['REQUEST_URI'] == "/login" || $_SERVER['REQUEST_URI'] == '/register') class="full-height" @endif>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Offering a full range of recruitment services, we competently deal with all issues in the field of human resources management, which allows our clients to focus on their core businesses.">
+    <meta name="keywords" content="recruiteriia, recruitment, hunting, hiring, web, it, hire, remote, job, relocate, vacancy, work, remote job, work remotely, middle, senior, junior, html, css, js, javascript, java, react, reactjs, angular, angularJs, angular 2, angular 5, angular 6, ruby, ruby on rails, python, devops, vue, vueJs, coffeeScript, typescript, nodejs, node js, designer, designer 3d, game, game-dev, game dev, gamedev, gambling, php, mysql, sql, c, c++, c#, .net, asp.net, project manager, product manager, sales manager, sales force, aws, qa, tdd, bdd, unitTest, unity, unreal, android, ios, mobile, accounting, business analyst, ит, веб, работа удаленно, вакансии, разработчики, поиск разработчиков, рекрутинг">
+    <meta name="copyright" content="Recruiteriia © 2018">
+    <meta name="robots" content="INDEX,FOLLOW">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="@yield('og-description')">
-    <meta name="image" content="{{asset('css/ri_logo_web.jpg')}}">
+    <meta name="image" content="@yield('main-image', asset('css/ri_logo_web.jpg'))">
     <meta itemprop="name" content="Recruiteriia">
     <meta itemprop="description" content="@yield('og-description')">
-    <meta itemprop="image" content="{{asset('css/ri_logo_web.jpg')}}">
+    <meta itemprop="image" content="@yield('itemprop-image', asset('css/ri_logo_web.jpg'))">
     <meta name="og:title" content="Recruiteriia">
     <meta name="og:description" content="@yield('og-description')">
-    <meta name="og:image" content="{{asset('css/ri_logo_web.jpg')}}">
-    <meta name="og:url" content="https://recruiteriia.com">
+    <meta name="og:image" content="@yield('og:image', asset('css/ri_logo_web.jpg'))">
+    <meta name="og:url" content="{{config('app.url')}}<?php echo $_SERVER['REQUEST_URI']; ?>">
     <meta name="og:site_name" content="Recruiteriia">
     <meta name="og:type" content="website">
     <meta name="twitter:title" content="Recruiteriia">
     <meta name="twitter:description" content="@yield('og-description')">
-    <meta name="twitter:image" content="{{asset('css/ri_logo_web.jpg')}}">
+    <meta name="twitter:image" content="@yield('twitter:image', asset('css/ri_logo_web.jpg'))">
     <title>Recruiteriia @yield('title')</title>
     <link rel="shortcut icon" href="{{asset('css/favicon.ico')}}" type="image/x-icon">
-    <link rel="icon" href="{{asset('css/favicon.ico')}}" type="image/x-icon">
     <link rel="icon" href="{{asset('css/favicon_32.png')}}" sizes="32x32" />
     <link rel="icon" href="{{asset('css/favicon_192.png')}}" sizes="192x192" />
     <link rel="apple-touch-icon-precomposed" href="{{asset('css/favicon_180.png')}}" />
@@ -31,7 +34,7 @@
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/core.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
-    <link rel="canonical" href="http://recruiteriia.com<?php echo $_SERVER['REQUEST_URI']; ?>" />
+    <link rel="canonical" href="{{config('app.url')}}<?php echo $_SERVER['REQUEST_URI']; ?>" />
     @yield('css-links')
     <style type="text/css">
         #preloader>p{
@@ -73,13 +76,6 @@
     </script>
 </head>
 <body class="fixed-sn white-skin">
-<div class="preloader-con">
-    <div class="preloader center">
-        <span class="ball"></span>
-        <span class="ball"></span>
-        <span class="ball"></span>
-    </div>
-</div>
 <a href="#home" class="scroll scroll-up costum-bg effect response" data-speed="1800">
     <i class="fa fa-chevron-up"></i>
 </a>

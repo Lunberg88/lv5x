@@ -24,6 +24,7 @@ class CreateOpeningsTable extends Migration
             $table->integer('salary')->default(0);
             $table->string('rate')->nullable();
             $table->text('description')->nullable();
+            $table->integer('active')->default(1);
             $table->integer('status')->default(0);
             $table->integer('user_id')->unsigned()->default(1);
             $table->foreign('user_id')->references('id')->on('users');

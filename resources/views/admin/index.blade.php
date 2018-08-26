@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="canonical" href="http://recruiter-iia.net<?php echo $_SERVER['REQUEST_URI']; ?>" />
+    <link rel="canonical" href="{{config('app.url')}}<?php echo $_SERVER['REQUEST_URI']; ?>" />
     <title>Recruiter-Iia @yield('title')</title>
-    <link href="/dashboard/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/dashboard/assets/css/ri-core.css" rel="stylesheet" />
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{asset('dashboard/assets/css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('dashboard/assets/css/ri-core.css')}}" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/dashboard/assets/css/toastr.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('dashboard/assets/css/toastr.css')}}">
     <link rel="shortcut icon" href="{{asset('css/favicon.ico')}}" type="image/x-icon">
     <link rel="icon" href="{{asset('css/favicon.ico')}}" type="image/x-icon">
     <link rel="icon" href="{{asset('css/favicon_32.png')}}" sizes="32x32" />
@@ -34,30 +34,29 @@
         }
     </style>
     <!--[if lt IE 9]>
-    <script src="js/ie/html5shiv.min.js"></script>
-    <script src="js/ie/respond.min.js"></script>
+    <script src="{{asset('js/ie/html5shiv.min.js')}}"></script>
+    <script src="{{asset('js/ie/respond.min.js')}}"></script>
     <![endif]-->
-    <script>
-        window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-        ]) !!};
-    </script>
 </head>
 <body>
 <div class="wrapper">
-    <div class="sidebar" data-active-color="green" data-background-color="black" data-image="/dashboard/assets/img/sidebar-2.jpg">
+    <div class="sidebar" data-active-color="green" data-background-color="black" data-image="{{asset('dashboard/assets/img/sidebar-2.jpg')}}">
         <div class="logo">
-            <a href="#" class="simple-text logo-mini">
+            <a href="{{route('main')}}" class="simple-text logo-mini" target="_blank">
                 RI
             </a>
-            <a href="#" class="simple-text logo-normal">
-                recuiter-iia
+            <a href="{{route('main')}}" class="simple-text logo-normal" target="_blank">
+                Recruiteriia
             </a>
         </div>
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    <img src="/dashboard/assets/img/faces/avatar.jpg" />
+                    @if(Auth::user()->avatar !== null)
+                        <img class="img" src="{{asset('images/avatars/'.Auth::user()->avatar)}}" />
+                    @else
+                        <img src="{{asset('dashboard/assets/img/placeholder.jpg')}}" />
+                    @endif
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
@@ -70,13 +69,13 @@
                     <div class="collapse" id="collapseExample">
                         <ul class="nav">
                             <li>
-                                <a href="#">
+                                <a href="{{route('admin.profile.index')}}">
                                     <span class="sidebar-mini">MP</span>
                                     <span class="sidebar-normal">My Profile</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{route('admin.profile.index')}}">
                                     <span class="sidebar-mini">EP</span>
                                     <span class="sidebar-normal">Edit Profile</span>
                                 </a>
@@ -291,43 +290,43 @@
 </div>
 </body>
 <!--   Core JS Files   -->
-<script src="/dashboard/assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
-<script src="/dashboard/assets/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="/dashboard/assets/js/material.min.js" type="text/javascript"></script>
-<script src="/dashboard/assets/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+<script src="{{asset('dashboard/assets/js/jquery-3.2.1.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('dashboard/assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('dashboard/assets/js/material.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('dashboard/assets/js/perfect-scrollbar.jquery.min.js')}}" type="text/javascript"></script>
 <!-- Library for adding dinamically elements -->
-<script src="/dashboard/assets/js/arrive.min.js" type="text/javascript"></script>
+<script src="{{asset('dashboard/assets/js/arrive.min.js')}}" type="text/javascript"></script>
 <!-- Forms Validations Plugin -->
-<script src="/dashboard/assets/js/jquery.validate.min.js"></script>
+<script src="{{asset('dashboard/assets/js/jquery.validate.min.js')}}"></script>
 <!-- Promise Library for SweetAlert2 working on IE -->
-<script src="/dashboard/assets/js/es6-promise-auto.min.js"></script>
+<script src="{{asset('dashboard/assets/js/es6-promise-auto.min.js')}}"></script>
 <!--  Plugin for Date Time Picker and Full Calendar Plugin-->
-<script src="/dashboard/assets/js/moment.min.js"></script>
-<script src="/dashboard/assets/js/jquery.bootstrap-wizard.js"></script>
+<script src="{{asset('dashboard/assets/js/moment.min.js')}}"></script>
+<script src="{{asset('dashboard/assets/js/jquery.bootstrap-wizard.js')}}"></script>
 <!--  Notifications Plugin, full documentation here: http://bootstrap-notify.remabledesigns.com/    -->
-<script src="/dashboard/assets/js/bootstrap-notify.js"></script>
+<script src="{{asset('dashboard/assets/js/bootstrap-notify.js')}}"></script>
 <!--   Sharrre Library    -->
-<script src="/dashboard/assets/js/jquery.sharrre.js"></script>
+<script src="{{asset('dashboard/assets/js/jquery.sharrre.js')}}"></script>
 <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-<script src="/dashboard/assets/js/bootstrap-datetimepicker.js"></script>
-<script src="/dashboard/assets/js/nouislider.min.js"></script>
-<script src="/dashboard/assets/js/jquery.select-bootstrap.js"></script>
+<script src="{{asset('dashboard/assets/js/bootstrap-datetimepicker.js')}}"></script>
+<script src="{{asset('dashboard/assets/js/nouislider.min.js')}}"></script>
+<script src="{{asset('dashboard/assets/js/jquery.select-bootstrap.js')}}"></script>
 <!--  DataTables.net Plugin, full documentation here: https://datatables.net/    -->
-<script src="/dashboard/assets/js/jquery.datatables.js"></script>
+<script src="{{asset('dashboard/assets/js/jquery.datatables.js')}}"></script>
 <!-- Sweet Alert 2 plugin, full documentation here: https://limonte.github.io/sweetalert2/ -->
-<script src="/dashboard/assets/js/sweetalert2.js"></script>
+<script src="{{asset('dashboard/assets/js/sweetalert2.js')}}"></script>
 <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-<script src="/dashboard/assets/js/jasny-bootstrap.min.js"></script>
+<script src="{{asset('dashboard/assets/js/jasny-bootstrap.min.js')}}"></script>
 <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-<script src="/dashboard/assets/js/fullcalendar.min.js"></script>
+<script src="{{asset('dashboard/assets/js/fullcalendar.min.js')}}"></script>
 <!-- Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-<script src="/dashboard/assets/js/jquery.tagsinput.js"></script>
+<script src="{{asset('dashboard/assets/js/jquery.tagsinput.js')}}"></script>
 <!-- Material Dashboard javascript methods -->
-<script src="/dashboard/assets/js/material-dashboard.js"></script>
+<script src="{{asset('dashboard/assets/js/material-dashboard.js')}}"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-<script src="/dashboard/assets/js/custom.js"></script>
-<script src="/dashboard/assets/js/toastr.min.js"></script>
-<script src="/dashboard/assets/js/mine.js"></script>
+<script src="{{asset('dashboard/assets/js/custom.js')}}"></script>
+<script src="{{asset('dashboard/assets/js/toastr.min.js')}}"></script>
+<script src="{{asset('dashboard/assets/js/mine.js')}}"></script>
 <script>
     @if(Session::has('message'))
     var type = "{{ Session::get('alert-type', 'info') }}";
@@ -412,10 +411,19 @@
         $('button[data-original-title="Edit"]').click(function(e) {
             e.preventDefault();
             $('div[data-info="upload_cvs"]').fadeOut('slider');
-            $('div[ data-info="edit_upload_cvs"]').fadeIn('slider');
+            $('div[data-info="edit_upload_cvs"]').fadeIn('slider');
             $('div#edit-upload-cvs').removeClass('hidden');
             $('div#edit-upload-cvs').addClass('visible');
             $('div.opening-edit-tbs').addClass('hidden');
+        });
+
+        $('button[data-original-title="EditAvatar"]').click(function(e) {
+            e.preventDefault();
+            $('div[data-info="upload_avatar"]').fadeOut('slider');
+            $('div[data-info="edit_upload_avatar"]').fadeIn('slider');
+            $('div#edit-upload-avatar').removeClass('hidden');
+            $('div#edit-upload-avatar').addClass('visible');
+            $('div.profile-edit-tbs').addClass('hidden');
         });
 
         $('button[data-original-title="Remove"]').click(function() {

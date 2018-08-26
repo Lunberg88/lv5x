@@ -1,5 +1,6 @@
 @extends('frontend.index')
 @section('title', ' :: '.Auth::user()->name.' - Profile')
+@section('og-description', Auth::user()->name.' - Profile')
 @section('body')
     <div class="container">
         <div class="row">

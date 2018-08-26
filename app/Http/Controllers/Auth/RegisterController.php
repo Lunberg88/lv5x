@@ -78,7 +78,7 @@ class RegisterController extends Controller {
 			'cvs' => $data['cv'],
 			'status' => 1,
 			'viewed' => 0,
-			'user_id' => 3,
+			'user_id' => $user->id,
             'subscribe' => 0,
 		]);
 

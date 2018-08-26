@@ -33,10 +33,17 @@ class IndexController extends Controller
 
 		    return view('frontend.main', [
 		    	'openings' => $openings,
-			    'user_favs' => UserProfileInfo::userFavs(),
 			    'user_profile' => UserProfileInfo::userProfile(),
 		    ]);
 
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function aboutPage()
+    {
+        return view('frontend.pages.about');
     }
 
 	/**
@@ -63,7 +70,6 @@ class IndexController extends Controller
     		'openings' => $openings,
 		    'user_profile' => UserProfileInfo::userProfile(),
 		    'social_links' => $social_links,
-		    //'user_favs' => UserProfileInfo::userFavs(),
 	    ]);
     }
 
@@ -115,7 +121,6 @@ class IndexController extends Controller
 
 		return view('index.pages.blog', [
 			'blogs' => $blogs,
-			'user_favs' => UserProfileInfo::userFavs(),
 			'user_profile' => UserProfileInfo::userProfile(),
 		]);
 	}
@@ -147,7 +152,6 @@ class IndexController extends Controller
     		return view('index.pages.myfav', [
     			'myfavs' => $myfavs,
 			    'user_profile' => UserProfileInfo::userProfile(),
-			    'user_favs' => UserProfileInfo::userFavs(),
 		    ]);
 	    } else {
     		return redirect('/');
