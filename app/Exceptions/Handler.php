@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -42,10 +43,31 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
-    {
-        return parent::render($request, $exception);
-    }
+	public function render($request, Exception $exception)
+	{
+		return parent::render($request, $exception);
+	}
+
+	/**
+	 * @param \Illuminate\Http\Request $request
+	 * @param Exception $e
+	 *
+	 * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
+	 */
+	/*
+	public function render($request, Exception $e)
+	{
+		if ($this->isHttpException($e))
+		{
+			if($e instanceof NotFoundHttpException)
+			{
+				return response()->view('index.pages.error', [], 404);
+			}
+			return $this->renderHttpException($e);
+		}
+		return parent::render($request, $e);
+	}
+	*/
 
     /**
      * Convert an authentication exception into an unauthenticated response.
@@ -60,6 +82,6 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        return redirect()->guest(route('login'));
+        return redirect()->guest('login');
     }
 }

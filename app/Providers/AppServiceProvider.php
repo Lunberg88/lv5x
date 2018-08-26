@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use Log;
+use App\Candidate;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Schema::defaultStringLength(191);
+
+        Candidate::updated(function(Candidate $candidate) {
+           Log::info('Updated candidate-info: ', [$candidate->user->name => $candidate->fio]);
+        });
     }
 
     /**

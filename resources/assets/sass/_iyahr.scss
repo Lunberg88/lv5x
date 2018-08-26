@@ -1,0 +1,70 @@
+.login {
+  //margin: 200px 0;
+  height: auto;
+  background: url('../img/logo/main_logo2.jpg') no-repeat;
+
+  .login-container {
+    position: relative;
+    margin: 340px 0 400px;
+    background: transparent;
+    border: 0;
+    color: #fff;
+    text-shadow: 0 0 3px rgba(0,0,0,.8);
+
+    input[type=email], input[type=password] {
+      background: transparent;
+      border-radius: 0;
+    }
+
+    a, a:link, a:visited {
+      color: #1da1f2;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #fff;
+      text-shadow: 0 0 3px rgba(0,0,0,.8);
+      text-decoration: none;
+    }
+  }
+}
+
+.nav-wrapper {
+  padding: 0 !important;
+}
+
+.hollyday-date {
+  position: absolute;
+  width: 200px;
+  right: 280px;
+  top: 185px;
+  z-index: 15;
+  //box-shadow: 0 5px 5px rgba(255, 255, 255, 0.5);
+}
+
+.hollyday-datel {
+  position: absolute;
+  left: 0;
+  width: 230px;
+  top: 160px;
+  z-index: 16;
+}
+
+@media (max-width: 1440px) {
+
+}
+
+///// Dashboard link-button //////
+.admin-dashboard-lnk {
+  position: fixed;
+  top: 40%;
+  right: 0;
+  padding: 5px 10px;
+  z-index: 99;
+}
+
+////////
+
+.user-profile {
+  margin: 35px auto 45px;
+}
