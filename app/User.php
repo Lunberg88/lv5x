@@ -2,8 +2,7 @@
 
 namespace App;
 
-use App\Notifications\AdminNotifications;
-use App\History;
+use App\Http\Requests\AdminProfileRequest;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -76,5 +75,58 @@ class User extends Authenticatable
     public function openings()
     {
         return $this->hasMany('App\CandidateToOpening');
+    }
+
+    /**
+     * Model custom methods
+     */
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getCurrentUserId($id)
+    {
+        return $this->find((int)$id);
+    }
+
+    /**
+     * @param AdminProfileRequest $adminProfileRequest
+     * @param $admin_id
+     */
+    public function updateAdminProfile(AdminProfileRequest $adminProfileRequest, $admin_id)
+    {
+        if($adminProfileRequest->validated()) {
+            $adminProfileRequest->new_password = bcrypt($adminProfileRequest->new_password);
+            $profile = $this->find((int)$admin_id);
+            $profile->update($adminProfileRequest->except('_token'));
+            if($adminProfileRequest->hasFile('edit_upload_avatar')) {
+                if($profile->avatar !== null) {
+                    $path = 'images/avatars/'.$profile->avatar;
+                    if(file_exists($path))
+                    {
+                        if(!is_dir(unlink($path)));
+                    }
+                }
+
+                $profile->update(['avatar' => uniqid().'.'.$adminProfileRequest->file('edit_upload_avatar')->getClientOriginalExtension()]);
+                $adminProfileRequest->file('edit_upload_avatar')->move('images/avatars/', $profile->avatar);
+            }
+            if($adminProfileRequest->old_password != null && $adminProfileRequest->new_password != null) {
+                if($adminProfileRequest->old_password == $profile->password) {
+                    $profile->update(['password' => $adminProfileRequest->new_password]);
+                }
+            }
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getAllNotifications($id)
+    {
+        $user = $this->find((int)$id);
+        return $user->unreadNotifications;
     }
 }

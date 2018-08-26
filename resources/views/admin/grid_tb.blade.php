@@ -7,9 +7,9 @@
     <td>{{$p->fio}}</td>
     <td>{{$p->email}}</td>
     <td>
-        @php
-            echo \App\Traits\CandidatesHelper::convertTypes($p->stack, 'stack');
-        @endphp
+        @if($candidateHelper)
+            {!! $candidateHelper->convertTypes($p->stack, 'stack') !!}
+        @endif
     </td>
     <td>
         @if($p->tags)
@@ -21,11 +21,11 @@
             @endforeach
         @endif
     </td>
-    <td>{{$p->salary}}
+    <td>{{$p->rate === null ? '' : $p->rate}} {{$p->salary}}
         <b>
-            @php
-                echo \App\Traits\CandidatesHelper::convertTypes($p->currency, 'currency');
-            @endphp
+            @if($candidateHelper)
+                {!! $candidateHelper->convertTypes($p->currency, 'currency') !!}
+            @endif
         </b>
     </td>
     <td>

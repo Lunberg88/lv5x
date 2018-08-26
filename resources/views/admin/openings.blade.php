@@ -38,7 +38,7 @@
                                 <button type="button" class="btn btn-danger btn-simple"
                                         onclick="event.preventDefault();
                                             demo.showSwal('warning-message-and-cancel')
-                                            //document.getElementById('delete').submit();
+
                                     ">
                                     <i class="material-icons">close</i>
                                 </button>
@@ -50,11 +50,6 @@
                             <h4 class="card-title">
                                 <a href="{{route('admin.openings.show.id', $open->id)}}">{{ str_limit($open->title, 15)}}</a>
                             </h4>
-                            {{--
-                            <div class="card-description">
-                                {!! str_limit($open->description, 25) !!}
-                            </div>
-                            --}}
                             <div class="pull-right">
                                 @if($open->status == 1)
                                     <span class="label label-success">open</span>
@@ -65,13 +60,17 @@
                         </div>
                         <div class="card-footer">
                             <div class="price">
-                                <h4>${{$open->salary}}</h4>
+                                <h4>{{$open->salary ? '$ '.$open->salary : ''}} {{$open->rate ? '$ '.$open->rate : ''}}</h4>
                             </div>
                             <div class="stats pull-right">
                                 <p class="category"><i class="material-icons">place</i> {{$open->location}}</p>
                             </div>
                         </div>
-                        @php if(count(\App\Traits\CandidatesHelper::showAppliedOpenings($open->id)) > 0) { echo '<div class="label label-warning applied__openings">applied: '.count(\App\Traits\CandidatesHelper::showAppliedOpenings($open->id)).'</div>'; } @endphp
+                        @if($service)
+                            @if(count($service->showAppliedOpenings($open->id)) > 0)
+                                <div class="label label-warning applied__openings">applied: {{count($service->showAppliedOpenings($open->id))}}</div>
+                            @endif
+                        @endif
                     </div>
                 </div>
             @endforeach

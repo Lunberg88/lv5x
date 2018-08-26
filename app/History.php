@@ -6,5 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class History extends Model
 {
-    protected $fillable = ['name', 'actions'];
+    /**
+     * @var array
+     */
+    protected $fillable = ['name', 'actions', 'type'];
+
+    /**
+     * @param $limit
+     * @return mixed
+     */
+    public function getLatestByLimit($limit)
+    {
+        return $this->orderBy('id', 'DESC')->paginate((int)$limit);
+    }
 }

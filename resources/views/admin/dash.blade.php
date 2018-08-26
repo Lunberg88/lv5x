@@ -24,7 +24,7 @@
                                     <i class="fa fa-user-plus"></i>
                                 </div>
                                 <p class="card-category">New Candidates</p>
-                                <h3 class="card-title">+{{count($newCandidates)}}</h3>
+                                <h3 class="card-title">+{{count($adminService->notifyNewCandidates())}}</h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
@@ -40,7 +40,7 @@
                                     <i class="fa fa-envelope"></i>
                                 </div>
                                 <p class="card-category">New Messages</p>
-                                <h3 class="card-title">+{{count($newMessages)}}</h3>
+                                <h3 class="card-title">+{{count($adminService->notifyNewMessages())}}</h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
@@ -87,10 +87,10 @@
                         <div class="col-md-10">
                             <div class="card card-stats">
                                 <div class="card-header card-header-info card-header-icon" style="text-align: left; width: 100%;">
-                                    @foreach(($user = \App\User::find(1))->notifications as $notif)
+                                    @foreach($user->unreadNotifications as $notif)
                                     <div class="alert alert-success">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <i class="material-icons">close</i>
+                                            <i class="material-icons" id="{{$notif->id}}">close</i>
                                         </button>
                                         <span>Candidate <b><a href="{{route('admin.candidates.show.id', $notif->data['candidate_id'])}}">{{$notif->data['candidate_fio']}}</a></b> applied for #Opening - <a href="{{route('admin.openings.show.id', $notif->data['opening_id'])}}">{{$notif->data['opening_title']}}</a>  [{{$notif->created_at}}]<br>
                                     </span>

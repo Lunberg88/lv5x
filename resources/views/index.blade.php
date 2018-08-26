@@ -28,12 +28,12 @@
     <link rel="icon" href="{{asset('css/favicon_32.png')}}" sizes="32x32" />
     <link rel="icon" href="{{asset('css/favicon_192.png')}}" sizes="192x192" />
     <link rel="apple-touch-icon-precomposed" href="{{asset('css/favicon_180.png')}}" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700|Roboto:300,400,500,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;subset=cyrillic" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('css/core.min.css')}}" rel="stylesheet">
-    <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700|Roboto:300,400,500,700" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;subset=cyrillic" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="none" onload="if(media!='all')media='all'">
+    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
+    <link href="{{asset('css/core.min.css')}}" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
     <link rel="canonical" href="{{config('app.url')}}<?php echo $_SERVER['REQUEST_URI']; ?>" />
     @yield('css-links')
     <style type="text/css">
@@ -71,7 +71,7 @@
         window.onload = function(){
             setTimeout(function(){
                 fadeOutnojquery(preloader);
-                },1000);
+                },500);
         };
     </script>
 </head>

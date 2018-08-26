@@ -33,10 +33,6 @@
                             </span>
                         </span>
 
-                        {{--<div class="d-block mt-2 normal-text">
-                            <p>{!! str_limit($open->description, 85) !!}</p>
-                        </div>--}}
-
                         <a href="{{route('index.show.opening', $open->slug)}}" class="btn btn-info btn-sm waves-effect waves-light">view opening</a>
                         <span class="pull-right">
                             <span class="badge indigo">

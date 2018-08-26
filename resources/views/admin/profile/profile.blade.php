@@ -2,6 +2,19 @@
 @section('title', ':: '.Auth::user()->name.' - profile')
 @section('content')
     <div class="row">
+        <div class="col-md-12">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li><b>{{ $error }}</b></li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
+    </div>
+    <div class="row">
         <form class="form-horizontal" action="{{route('admin.profile.update')}}" method="post" enctype="multipart/form-data" role="form" >
             {{csrf_field()}}
             <div class="col-md-8">
@@ -24,7 +37,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group label-floating is-empty">
                                         <label class="control-label"></label>
-                                        <input type="text" class="form-control" name="name" value="{{Auth::user()->name}}">
+                                        <input type="text" class="form-control" name="name" value="{{$user->name}}">
                                         <span class="material-input"></span>
                                     </div>
                                 </div>
@@ -34,7 +47,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group label-floating is-empty">
                                         <label class="control-label"></label>
-                                        <input type="email" class="form-control" name="email" value="{{Auth::user()->email}}">
+                                        <input type="email" class="form-control" name="email" value="{{$user->email}}">
                                         <span class="material-input"></span>
                                     </div>
                                 </div>
@@ -72,8 +85,8 @@
                 <div class="card card-profile card-mt-5">
                     <div class="card-avatar">
                         <a href="#">
-                            @if(Auth::user()->avatar !== null)
-                                <img class="img" src="{{asset('images/avatars/'.Auth::user()->avatar)}}">
+                            @if($user->avatar !== null)
+                                <img class="img" src="{{asset('images/avatars/'.$user->avatar)}}">
                             @else
                                 <img src="{{asset('dashboard/assets/img/placeholder.jpg')}}">
                             @endif

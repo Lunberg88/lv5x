@@ -54,10 +54,11 @@
                                             </div>
                                             <div class="col-md-4 col-sm-4">
                                                 <select name="currency" class="form-control">
-                                                    <option value="1">&dollar;</option>
-                                                    <option value="2">&euro;</option>
-                                                    <option value="3">&#8381;</option>
-                                                    <option value="4">&#8372;</option>
+                                                    @if($service)
+                                                        @foreach($service->getCurrency() as $i => $item)
+                                                            <option value="{{$i + 1}}">{!!$item!!}</option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </div>
                                         </div>
@@ -82,7 +83,7 @@
                                                 Description
                                                 <small>*</small>
                                             </label>
-                                            <textarea class="form-control blog-field" rows="6" name="description"></textarea>
+                                            <textarea class="form-control blog-field" rows="15" name="description"></textarea>
                                             <span class="material-input"></span>
                                         </div>
                                     </div>
@@ -138,7 +139,7 @@
                                     <div class="col-md-12">
                                         <div class="fileinput text-center fileinput-new" data-provides="fileinput">
                                             <div class="fileinput-new thumbnail">
-                                                <img src="/dashboard/assets/img/placeholder.jpg" style="width:80px;" alt="Upload File">
+                                                <img src="{{asset('dashboard/assets/img/placeholder.jpg')}}" style="width:80px;" alt="Upload File">
                                             </div>
                                             <div class="fileinput-preview fileinput-exists thumbnail" style=" padding: 10px 15px;"></div>
                                             <div>

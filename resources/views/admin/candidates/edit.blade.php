@@ -86,9 +86,8 @@
                                             <div class="col-md-4">
                                                 <select name="currency" class="form-control">
                                                     @php
-                                                        $curr = [1 =>'&dollar;', 2 =>'&euro;', 3=> '&#8381;', 4=> '&#8372;'];
-                                                        for($i = 1; $i<5; $i++) {
-                                                            echo '<option value='.$i.' '.($candidate->currency == $i ? "selected": "").'>'.$curr[$i].'</option>';
+                                                        for($i = 1; $i<(count($currency) + 1); $i++) {
+                                                            echo '<option value='.$i.' '.($candidate->currency == $i ? "selected": "").'>'.$currency[$i].'</option>';
                                                         }
                                                     @endphp
                                                 </select>
@@ -148,7 +147,7 @@
                                                     <div class="fileinput-preview fileinput-exists thumbnail" style=" padding: 10px 15px;"></div>
                                                     <div>
                                                     <span class="btn btn-rose btn-round btn-file">
-                                                        <span class="fileinput-new">Select image</span>
+                                                        <span class="fileinput-new">Select CVS file</span>
                                                         <span class="fileinput-exists">Change</span>
                                                         <input type="hidden" value="" name="edit_upload_cvs">
                                                         <input type="file" name="edit_upload_cvs" id="edit_upload_cvs">
@@ -161,6 +160,13 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Custom information</label><br>
+                                        <textarea name="custom_info" cols="10" rows="5"
+                                                  class="form-control">{{$candidate->custom_info}}</textarea>
+                                    </div>
+
                                     <div class="form-footer text-right">
                                         <a href="{{route('admin.candidates')}}" class="btn btn-default pull-left">Back</a>
                                         <button name="add" type="submit" class="btn btn-success btn-fill">Update...</button>

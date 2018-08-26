@@ -23,6 +23,7 @@
                                             <div class="col-md-10 col-md-offset-1">
                                                 <table class="table candidate-info-table">
                                                     <tbody>
+                                                        @if($service)
                                                         <tr>
                                                             <td><b>Name:</b></td>
                                                             <td>{{$candidate->fio}}</td>
@@ -34,9 +35,7 @@
                                                         <tr>
                                                             <td><b>Stack:</b></td>
                                                             <td>
-                                                                @php
-                                                                    echo \App\Traits\CandidatesHelper::convertTypes($candidate->stack, 'stack');
-                                                                @endphp
+                                                                {!! $service->convertTypes($candidate->stack, 'stack') !!}
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -52,11 +51,9 @@
                                                         <tr>
                                                             <td><b>Salary/Rate:</b></td>
                                                             <td>
-                                                                {{$candidate->salary}}
+                                                                {{$candidate->rate === null ? '' : $candidate->rate}} {{$candidate->salary}}
                                                                 <b>
-                                                                    @php
-                                                                        echo \App\Traits\CandidatesHelper::convertTypes($candidate->currency, 'currency');
-                                                                    @endphp
+                                                                    {!! $service->convertTypes($candidate->currency, 'currency') !!}
                                                                 </b>
                                                             </td>
                                                         </tr>
@@ -75,6 +72,14 @@
                                                             <td>{{ $candidate->upload_cvs ? $candidate->upload_cvs : 'Not uploaded yet...' }}</td>
                                                         </tr>
                                                         <tr>
+                                                            <td><b>Custom Info:</b></td>
+                                                            <td>
+                                                                <div class="form-group label-floating is-empty">
+                                                                    {{$candidate->custom_info}}
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
                                                             <td colspan="2">
                                                                 <span class="d-block pull-left">
                                                                     <a href="{{route('admin.candidates')}}" class="btn btn-default">Back</a>
@@ -84,6 +89,7 @@
                                                                 </span>
                                                             </td>
                                                         </tr>
+                                                        @endif
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -96,6 +102,14 @@
                                 </div>
                             </div>
                         </div>
+
+                        @if($candidate->upload_cvs !== null)
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <iframe src="https://docs.google.com/gview?url=https://www.recruiteriia.com/storage/{{str_replace('public/', '', $candidate->upload_cvs)}}&embedded=true" class="cv_frame"></iframe>
+                                </div>
+                            </div>
+                        @endif
                         <!-- //-->
                         {{--
                         <div class="row">
@@ -121,7 +135,6 @@
                                 </div>
                             </div>
                           --}}
-
             </div>
                 @else
                     <div class="alert alert-danger">

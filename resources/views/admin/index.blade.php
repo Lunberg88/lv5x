@@ -98,12 +98,8 @@
                     <a data-toggle="collapse" href="#" onclick="window.location.href = '{{route('admin.candidates')}}';" @if(request()->path() == 'admin/candidates') aria-expanded="true" @endif aria-expanded="true">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         <p>Candidates
-                            @php
-                                $newCandidates = App\Candidate::where('viewed', '=', '0')->get();
-                                $newCandidates == $newCandidates->isEmpty() ? false : count($newCandidates);
-                            @endphp
-                            @if(count($newCandidates) > 0)
-                                <span class="label label-danger label-danger-notifys small-label">{{count($newCandidates)}}</span>
+                            @if(count($adminService->notifyNewCandidates()) > 0)
+                                <span class="label label-danger label-danger-notifys small-label">{{$adminService->notifyNewCandidates()}}</span>
                             @endif
                         </p>
                     </a>
@@ -179,12 +175,8 @@
                     <a href="{{route('admin.msg.list')}}">
                         <i class="fa fa-envelope" aria-hidden="true"></i>
                         <p>Messages&nbsp;
-                            @php
-                                $newMsg = App\Messages::where('viewed', '=', '0')->get();
-                                $newMsg == $newMsg->isEmpty() ? false : count($newMsg);
-                            @endphp
-                            @if(count($newMsg) > 0)
-                            <span class="label label-danger label-danger-notifys small-label">{{count($newMsg)}}</span>
+                            @if(count($adminService->notifyNewMessages()) > 0)
+                            <span class="label label-danger label-danger-notifys small-label">{{count($adminService->notifyNewMessages())}}</span>
                             @endif
                         </p>
                     </a>
@@ -215,36 +207,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-md-offset-2 col-sm-offset-2 notification-button-devices pull-left">
-                @php
-                use App\Candidate;
-                    $newCandidates = Candidate::where('viewed', '=', '0')->get();
-                @endphp
-                @if(isset($newCandidates) && $newCandidates !== null)
-                    @if(count($newCandidates) > 0)
-                    <div class="dropdown">
-                        <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
-                            Notifications
-                            @if(count($newCandidates) > 0)
-                                <span class="btn btn-danger btn-round btn-fab btn-fab-mini notif-mini label-danger-notifys">{{count($newCandidates)}}</span>
-
-                                <i class="material-icons">notifications</i>
-                                <b class="caret"></b>
-                                <div class="ripple-container"></div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-left">
-                            @foreach($newCandidates as $new)
-                                <li>
-                                    <a href="{{route('admin.candidates.show.id', $new->id)}}">
-                                        {!! $new->fio !!}<br>
-                                        <small>({!! $new->email !!})</small>
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                            @endif
-                    </div>
-                        @endif
-                @endif
             </div>
         </div>
     </div>
@@ -361,9 +323,10 @@
     var editor_config = {
         //path_absolute : "{{ URL::to('/') }}/",
         path_absolute: "/",
-        forced_root_block : false,
-        statusbar: false,
+        //forced_root_block : false,
+        statusbar: true,
         selector : "textarea.blog-field",
+        resize: true,
         plugins: [
             "advlist autolink lists link image charmap print preview hr anchor pagebreak",
             "searchreplace wordcount visualblocks visualchars code fullscreen",
@@ -428,6 +391,17 @@
 
         $('button[data-original-title="Remove"]').click(function() {
             $(this).val('true');
+        });
+
+        $('button.close i').click(function(e) {
+           e.preventDefault();
+           let notif_id = $(this).attr('id');
+           $.post('{{route('admin.read.notification')}}', {'uid': notif_id, '_token': $('meta[name="csrf-token"]').attr('content')}).done(function(data) {
+               data.status == 'success' ? toastr.info(data.message) : toastr.error(data.message);
+           })
+           .fail(function() {
+               toastr.error('Error while reading notification :/');
+           });
         });
     });
 </script>

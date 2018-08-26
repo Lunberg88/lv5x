@@ -2,21 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\CoreSettings;
-use App\Traits\CandidatesHelper;
-use App\Candidate;
-use App\Profile;
-use Auth;
+use App\Http\Requests\CandidateRequest;
 use Gate;
-use Event;
 use Illuminate\Support\Facades\Storage;
-use App\Events\onAddCandidateEvent;
-use App\Listeners\AddCandidateListener;
 use Illuminate\Http\Request;
 
-class CandidateController extends Controller
+class CandidateController extends BaseController
 {
-    use CandidatesHelper;
 	/**
 	 * Statuses:
 	 * 0 - inactive
@@ -27,6 +19,7 @@ class CandidateController extends Controller
 	 * 5 - hired
 	 */
 
+
     /**
      * Display a listing of the resource.
      *
@@ -34,15 +27,11 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        $candidates = Candidate::paginate(15);
-        $tags_all = CoreSettings::where('key', '=', 'main_stacks')->first();
-        $tags = explode(', ', $tags_all->value);
-        $newCandidates = CandidatesHelper::showNewNotif('candidates');
-
         return view('admin.dashboard', [
-        	'candidates' => $candidates,
-	        'tags' => $tags,
-            'newCandidates' => $newCandidates
+        	'candidates' => $this->candidate->getLatestByLimit(15),
+	        'tags' => $this->coreSettings->getCoreSettingsMainStacks(),
+            'newCandidates' => $this->candidateHelperService->showNewNotif('candidates'),
+            'candidateHelper' => $this->candidateHelperService
         ]);
     }
 
@@ -53,50 +42,27 @@ class CandidateController extends Controller
      */
     public function create()
     {
-        $candidate = new Candidate();
-        $stacks_all = CoreSettings::where('key', '=', 'main_stacks')->first();
-        $stacks = explode(', ', $stacks_all->value);
-
         return view('admin.candidates.create', [
-        	'candidate' => $candidate,
-            'stacks' => $stacks
+            'candidate' => $this->candidate,
+            'stacks' => $this->coreSettings->getCoreSettingsMainStacks(),
+            'currency' => $this->candidateHelperService->getCurrency()
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\CandidateRequest
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CandidateRequest $candidateRequest)
     {
-	    $candidate = new Candidate();
-	    if($request->user()->can('create', $candidate)){
-
-		    $candidate->fio = $request->fio;
-		    $candidate->email = $request->email;
-		    $candidate->stack = $request->stack;
-		    $candidate->tags = $request->tags;
-		    $candidate->salary = $request->salary;
-		    $candidate->currency = $request->currency;
-		    $candidate->cvs = $request->cvs ? $request->cvs : 'http://';
-		    $fileName = str_replace('.', '-', str_replace('@', '_', $request->email));
-		    if($request->hasFile('upload_cvs') && $request->file('upload_cvs') !== null) {
-			    $candidate->upload_cvs = $request->file('upload_cvs')->storeAs('doc', 'candidate-'.$fileName.'.'.$request->file('upload_cvs')->getClientOriginalExtension());
-		    }
-		    $candidate->status = '2';
-		    $candidate->viewed = '1';
-		    $candidate->user_id = Auth::id();
-		    $candidate->save();
-
-		    //Event::fire(new onAddCandidateEvent(Auth::user(), $candidate));
-		    Event::fire('onAddCandidate', [Auth::user(), $candidate]);
-
-		    return redirect('admin/candidates')->with(['message' => 'New candidate successfully added!', 'alert-type' => 'success']);
-	    } else {
-		    return redirect('admin/candidates')->with(['message' => 'Access dined for you!', 'alert-type' => 'danger']);
-	    }
+        if($candidateRequest->user()->can('create', $this->candidate)) {
+            if($this->candidateService->createNewCandidate($candidateRequest)) {
+                return redirect('admin/candidates')->with(['message' => 'New candidate successfully added!', 'alert-type' => 'success']);
+            }
+        }
+        return redirect('admin/candidates')->with(['message' => 'Access dined for you!', 'alert-type' => 'danger']);
     }
 
     /**
@@ -107,16 +73,12 @@ class CandidateController extends Controller
      */
     public function show($id)
     {
-	    if($candidate = Candidate::find($id)) {
-	    	if($candidate->viewed != 1) {
-			    $candidate->viewed = 1;
-			    $candidate->save();
-		    }
-
-		    $tags = explode(',', $candidate->tags);
-
-		    return view('admin.candidates.show', ['candidate' => $candidate, 'tags' => $tags]);
-
+	    if($candidate = $this->candidate::find($id)) {
+	    	$candidate->viewed != 1 ? $candidate->update(['viewed' => 1]) : false;
+		    return view('admin.candidates.show', [
+		        'candidate' => $candidate,
+                'tags' => explode(',', $candidate->tags),
+                'service' => $this->candidateHelperService]);
 	    } else {
 		    return redirect('admin/candidates')->with(['message' => 'Profile with this ID: '.$id.' not found.', 'alert-type' => 'danger']);
 	    }
@@ -130,13 +92,11 @@ class CandidateController extends Controller
      */
     public function edit($id)
     {
-	    if($candidate = Candidate::find($id)) {
-            $stacks_all = CoreSettings::where('key', '=', 'main_stacks')->first();
-            $stacks = explode(', ', $stacks_all->value);
-
+	    if($candidate = $this->candidate::find($id)) {
 		    return view('admin.candidates.edit', [
 			    'candidate' => $candidate,
-                'stacks' => $stacks
+                'stacks' => $this->coreSettings->getCoreSettingsMainStacks(),
+                'currency' => $this->candidateHelperService->getCurrency()
 		    ]);
 	    } else {
 		    return redirect('admin/candidates')->with(['message' => 'Profile with this ID: '.$id.' not exists!', 'alert-type' => 'danger']);
@@ -144,52 +104,22 @@ class CandidateController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param CandidateRequest $candidateRequest
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(CandidateRequest $candidateRequest, $id)
     {
-	    if($candidate = Candidate::find($id)) {
-
-		    if ($request->user()->can('update', $candidate)) {
-
-			    $data = $request->except('_token');
-
-			    if($request->delete_cvs == "true") {
-				    Storage::delete($candidate->upload_cvs);
-				    $candidate->upload_cvs = null;
-				    $candidate->save();
-
-				    return redirect('admin/candidates/edit/'.$id)->with(['message' => 'Candidate CV successfully deleted!']);
-			    }
-
-			    $candidate->fio = $data['fio'];
-			    $candidate->email = $data['email'];
-			    $candidate->stack = $data['stack'];
-			    $candidate->tags = $data['tags'];
-			    $candidate->salary = $data['salary'];
-			    $candidate->currency = $data['currency'];
-			    $candidate->user_id = Auth::id();
-			    if($candidate->viewed != '1') {
-			    	$candidate->viewed = 1;
-			    }
-			    $fileName = str_replace('.', '-', str_replace('@', '_', $candidate->email));
-			    if($request->hasFile('edit_upload_cvs') && $request->file('edit_upload_cvs') != '') {
-			    	$old_cvs = $candidate->upload_cvs;
-			    	if($new_cvs = $request->file('edit_upload_cvs')->storeAs('doc', 'candidate-'.$fileName.'.'.$request->file('edit_upload_cvs')->getClientOriginalExtension())) {
-			    		$candidate->upload_cvs = $new_cvs;
-			    		Storage::delete($old_cvs);
-				    }
-			    }
-
-			    $candidate->save();
-
-			    return redirect('admin/candidates')->with(['message' => 'Profile successfully updated!', 'alert-type' => 'info']);
+	    if($candidate = $this->candidate::find((int)$id)) {
+		    if ($candidateRequest->user()->can('update', $candidate)) {
+		        if($candidateRequest->delete_cvs == 'true') {
+		            $this->candidateService->removeAttachedCvs($candidateRequest, (int)$id);
+                    return redirect('admin/candidates/edit/'.$candidate->id)->with(['message' => 'Candidate CV successfully deleted!']);
+                }
+		        if($this->candidateService->updateCandidateInfo($candidateRequest, (int)$id)) {
+                    return redirect('admin/candidates')->with(['message' => 'Profile successfully updated!', 'alert-type' => 'info']);
+                }
 		    }
-
 		    return redirect('admin/candidates')->with(['message' => 'Access denied, you don\'t have such permission!', 'alert-type' => 'danger']);
 	    } else {
 		    return redirect('admin/candidates')->with(['message' => 'Profile with this ID: '.$id.' not exists!', 'alert-type' => 'danger']);
@@ -204,20 +134,18 @@ class CandidateController extends Controller
      */
     public function destroy($id)
     {
-	    if($candidate = Candidate::find($id)) {
-	    	Storage::detele($candidate->upload_cvs);
+	    if($candidate = $this->candidate::find($id)) {
+	    	Storage::delete($candidate->upload_cvs);
 		    $candidate->delete();
-
 		    return redirect('admin/candidates')->with(['message' => 'The Candidate was deleted from DataBase.', 'alert-type' => 'success']);
 	    } else {
 		    return redirect('admin/candidates')->with(['message' => 'This ID: '.$id.' not exists!', 'alert-type' => 'danger']);
 	    }
     }
 
-
 	/**
 	 * @param Request $request
-	 *
+	 * @param $stext
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function search(Request $request, $stext = null)
@@ -228,13 +156,11 @@ class CandidateController extends Controller
 			return view('admin.search-empty');
 		} else {
 			foreach($stext as $key => $value) {
-
-				$candidate = Candidate::where('stack', 'LIKE', '%'.$value.'%')->orWhere('tags', 'LIKE', '%'.$value.'%')->orWhere('salary', 'LIKE', '%'.$value.'%')->get();
-
+				$candidate = $this->candidate->searchCandidateByDetails($value);
 			}
-
 			return view('admin.candidates.search_result', [
 				'candidate' => $candidate,
+                'candidateHelper' => $this->candidateHelperService
 			]);
 		}
 	}

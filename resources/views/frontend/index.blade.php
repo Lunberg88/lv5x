@@ -18,19 +18,12 @@
                 <li class="nav-item">
                     <a class="nav-link scroll effect waves-effect waves-light @if(request()->path() == 'about') active-link-route @endif" href="/about" data-speed="1200"> About</a>
                 </li>
-                <!--
-                <li class="nav-item">
-                    <a class="nav-link scroll waves-effect waves-light" href="/#contact"> Contact</a>
-                </li>
-                -->
                 <li class="nav-item">
                     <a class="nav-link waves-effect waves-light @if(request()->path() == 'openings') active-link-route @endif" href="/openings"> Openings</a>
                 </li>
-                <!--
                 <li class="nav-item">
-                    <a class="nav-link waves-effect waves-light" href="#"> Blog</a>
+                    <a class="nav-link waves-effect waves-light @if(request()->path() == 'notes') active-link-route @endif" href="/notes"> Notes</a>
                 </li>
-                -->
                 @if (Auth::guest())
                     <li class="nav-item">
                         <a class="nav-link waves-effect waves-light" href="{{ url('/login') }}"><i class="fa fa-sign-in"></i> Login</a>
@@ -43,27 +36,35 @@
                         <a class="nav-link dropdown-toggle waves-effect waves-light @if(request()->path() == 'profile') active-link-route @endif" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> Profile </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdownMenuLink-4">
                             <a class="dropdown-item waves-effect waves-light hover-darken" href="{{route('user.profile')}}">My profile</a>
-                            @if(isset($user_profile) && $user_profile !== null)
+                            @if(Auth::user()->admin != 1)
+                            <a class="dropdown-item waves-effect waves-light hover-darken" href="#">
+                                CV status:
+                            @switch($frontendService->getUserProfile()->status)
+                                @case(1)
+                                    <span class="labels warning"><b>Pending</b></span>
+                                    @break
 
+                                @case(2)
+                                    <span class="labels success"><b>Viewed</b></span>
+                                    @break
 
-                                    <a class="dropdown-item waves-effect waves-light hover-darken" href="#">
-                                    CV status:
-                                    @if($user_profile->status == 1)
-                                        <span class="labels warning"><b>Pending</b></span>
-                                    @elseif($user_profile->status == 2)
-                                        <span class="labels success"><b>Viewed</b></span>
-                                    @elseif($user_profile->status == 3)
-                                        <span class="labels info"><b style="font-size: 8px;">Skype interview</b></span>
-                                    @elseif($user_profile->status == 4)
-                                        <span class="labels primary"><b>Client review</b></span>
-                                    @elseif($user_profile->status == 5)
-                                        <span class="labels danger"><b>Hired</b></span>
-                                    @else
-                                        Inactive
-                                    @endif
-                                    </a>
+                                @case(3)
+                                    <span class="labels info"><b style="font-size: 8px;">Skype interview</b></span>
+                                    @break
 
+                                @case(4)
+                                    <span class="labels primary"><b>Client review</b></span>
+                                    @break
 
+                                @case(5)
+                                    <span class="labels danger"><b>Hired</b></span>
+                                    @break
+
+                                @default
+                                    Inactive
+
+                            @endswitch
+                            </a>
                             @endif
                         </div>
                     </li>
@@ -93,11 +94,11 @@
             <div class="container">
                 <div class="row new-container pt-5">
                     <div class="col-md-8">
-                        <h1>{!! \App\CoreSettings::where('key', 'homepage_headline_text')->pluck('value')->first() !!}</h1>
+                        <h1>{!! $frontendService->getSettingsValueByKey('homepage_headline_text') !!}</h1>
                     </div>
                     <div class="col-md-8 d-block">
                         <p class="logo-description d-none d-md-block text-center">
-                            {!! \App\CoreSettings::where('key', 'homepage_headline_description')->pluck('value')->first() !!}
+                            {!! $frontendService->getSettingsValueByKey('homepage_headline_description') !!}
                         </p>
                     </div>
                 </div>
@@ -112,14 +113,14 @@
     <div class="container">
         <div class="row py-3 d-flex align-items-center">
             <div class="col-md-8 col-lg-9">
-                <p class="text-center text-md-left grey-text">© 2018 <a href="{{route('main')}}"><small>Recuiter-Iia</small></a></p>
+                <p class="text-center text-md-left grey-text">© 2018 <a href="{{route('main')}}"><small>Recruiter-Iia</small></a></p>
             </div>
             <div class="col-md-4 col-lg-3 ml-lg-0">
                 <div class="social-section text-center text-md-left">
                     <ul>
-                        <li><a href="#" class="btn-floating btn-sm rgba-white-slight mr-xl-4" target="_blank"><i class="fa fa-facebook bg-primary d-block pb-1"></i></a></li>
-                        <li><a href="#" class="btn-floating btn-sm rgba-white-slight mr-xl-4" target="_blank"><i class="fa fa-google-plus bg-danger d-block pb-1"></i></a></li>
-                        <li><a href="#" class="btn-floating btn-sm rgba-white-slight mr-xl-4" target="_blank"><i class="fa fa-linkedin bg-info d-block pb-1"></i></a></li>
+                        <li><a href="https://www.facebook.com/profile.php?id=100005553609706" class="btn-floating btn-sm rgba-white-slight mr-xl-4" target="_blank"><i class="fa fa-facebook bg-primary d-block pb-1"></i></a></li>
+                        <li><a href="https://plus.google.com/u/0/105578728058530995572" class="btn-floating btn-sm rgba-white-slight mr-xl-4" target="_blank"><i class="fa fa-google-plus bg-danger d-block pb-1"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/iia-mizina-382b666b/" class="btn-floating btn-sm rgba-white-slight mr-xl-4" target="_blank"><i class="fa fa-linkedin bg-info d-block pb-1"></i></a></li>
                     </ul>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-; const url = 'http://ajax-lv/openings/';
+; const url = 'http://rii/openings/';
 
 $("#more-openings").on("hide.bs.collapse", function(){
     $("button#more").html('<span class="fa fa-chevron-down"></span> show more');

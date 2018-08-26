@@ -56,7 +56,7 @@
                                                 <div class="fileinput-preview fileinput-exists thumbnail" style=" padding: 10px 15px;"></div>
                                                 <div>
                                                     <span class="btn btn-rose btn-round btn-file">
-                                                        <span class="fileinput-new">Select image</span>
+                                                        <span class="fileinput-new">Select CVS file</span>
                                                         <span class="fileinput-exists">Change</span>
                                                         <input type="hidden" value="" name="upload_cvs">
                                                         <input type="file" name="upload_cvs" id="upload_cvs">
@@ -104,10 +104,11 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <select name="currency" class="form-control">
-                                                        <option value="1">&dollar;</option>
-                                                        <option value="2">&euro;</option>
-                                                        <option value="3">&#8381;</option>
-                                                        <option value="4">&#8372;</option>
+                                                        @if($currency)
+                                                            @foreach($currency as $i => $item)
+                                                                <option value="{{$i +1}}">{!! $item !!}</option>
+                                                            @endforeach
+                                                        @endif
                                                     </select>
                                                 </div>
 
@@ -125,6 +126,16 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <hr>
+                                        </div>
+
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Custom information</label>
+                                            <textarea name="custom_info" cols="10" rows="5"
+                                                      class="form-control"></textarea>
+                                        </div>
+
                                         <div class="row">
                                             <hr>
                                         </div>

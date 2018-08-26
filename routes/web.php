@@ -7,8 +7,8 @@ Route::get('/about', 'IndexController@aboutPage')->name('main.about');
 Route::get('/openings', 'IndexController@openings')->name('index.openings');
 Route::get('/openings/{slug}', 'IndexController@showOpening')->name('index.show.opening');
 Route::post('/openings', 'IndexController@openings')->name('index.sort.opening');
-Route::get('/blog', 'IndexController@blog')->name('index.blog');
-Route::get('/blog/{slug}', 'IndexController@showblog')->name('index.blog.show');
+Route::get('/notes', 'IndexController@notes')->name('index.notes');
+Route::get('/notes/{slug}', 'IndexController@showNote')->name('index.note.show');
 Route::post('/send-msg', 'IndexController@sendMessage')->name('index.send.msg');
 
 /**
@@ -84,6 +84,9 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 	//Admin profile
     Route::get('/admin/profile', 'AdminController@showAdminProfile')->name('admin.profile.index');
     Route::post('/admin/profile/update', 'AdminController@adminProfileUpdate')->name('admin.profile.update');
+
+    //Admin notifications
+    Route::post('/admin/notif/read', 'AdminController@markAsReadNotification')->name('admin.read.notification');
 });
 
 Auth::routes();
