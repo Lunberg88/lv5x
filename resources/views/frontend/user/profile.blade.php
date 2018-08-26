@@ -4,6 +4,19 @@
 @section('body')
     <div class="container">
         <div class="row">
+            <div class="col-md-12">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li><b>{{ $error }}</b></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-6">
                 <div class="d-block pt-5">
                     <h5 class="text-capitalize text-info font-weight-normal">Personal information:</h5>

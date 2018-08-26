@@ -24,6 +24,7 @@ class CreateCandidateTable extends Migration
         	$table->string('rate')->nullable();
         	$table->string('cvs')->default('http://');
         	$table->string('upload_cvs')->nullable();
+        	$table->text('custom_info')->nullable();
         	$table->integer('status')->default(0);
         	$table->integer('viewed')->default(0);
         	$table->integer('user_id')->unsigned()->default(1);

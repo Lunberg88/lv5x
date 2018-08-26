@@ -87,6 +87,5 @@ class BlogController extends Controller
     	$blog_view = Blog::find($id);
 
     	return view('admin.blog.blog_view', compact('blog_view'));
-    	//return response()->json(['status' => 'success', 'data' => $blog_view], 200);
     }
 }

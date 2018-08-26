@@ -20,6 +20,10 @@ class CandidatePolicy
         //
     }
 
+    /**
+     * @param User $user
+     * @return bool
+     */
     public function create(User $user)
     {
         foreach($user->roles as $role){
@@ -30,6 +34,11 @@ class CandidatePolicy
         return false;
     }
 
+    /**
+     * @param User $user
+     * @param Candidate $candidate
+     * @return bool
+     */
     public function update(User $user, Candidate $candidate)
     {
         foreach($user->roles as $role){
@@ -42,6 +51,10 @@ class CandidatePolicy
         return false;
     }
 
+    /**
+     * @param User $user
+     * @return bool
+     */
     public function before(User $user)
     {
         foreach($user->roles as $role){

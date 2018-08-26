@@ -37,12 +37,11 @@
                                 <div class="col-md-6">
                                     <select id="stack" class="mdb-select" name="stack" required>
                                         <option disabled="disabled" selected style="color: white !important;">Select your stack</option>
-                                        @php
-                                            use App\Traits\CandidatesHelper;
-                                                foreach(CandidatesHelper::showRegisterStack() as $key => $value) {
-                                                    echo "<option value=".($key+1).">".$value."</option>";
-                                                }
-                                        @endphp
+                                        @if($service)
+                                            @foreach($service as $i => $item)
+                                                <option value="{{$i + 1}}">{!!$item!!}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                 </div>
                                 <div class="col-md-6">

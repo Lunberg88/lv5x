@@ -13,7 +13,7 @@
                     <select class="form-control" name="stags">
                         <option disabled="disabled" selected="selected">Choose stack</option>
                         @if($tags)
-                            @foreach($tags as $i => $t)
+                            @foreach(str_replace('</p>', '', str_replace('<p>', '', $tags)) as $i => $t)
                                 <option value="{{$i + 1}}">{{$t}}</option>
                             @endforeach
                         @endif
